@@ -1,0 +1,69 @@
+name: Restore product images from ZIP
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  restore-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Create target directory
+        run: mkdir -p src/img
+
+      - name: Extract seven product images from ZIP
+        run: |
+          unzip -j podlookup-src-v2.zip \
+            img/xros-5.jpg \
+            img/xros-5-mini.jpg \
+            img/xlim-pro-2.jpg \
+            img/caliburn-g3.jpg \
+            img/xros-pods.jpg \
+            img/xlim-pods.jpg \
+            img/caliburn-pods.jpg \
+            -d src/img
+
+      - name: Verify JPEG signatures and file sizes
+        run: |
+          set -euo pipefail
+          files=(xros-5.jpg xros-5-mini.jpg xlim-pro-2.jpg caliburn-g3.jpg xros-pods.jpg xlim-pods.jpg caliburn-pods.jpg)
+          for f in "${files[@]}"; do
+            path=src/img/$f
+            if [ ! -f "$path" ]; then
+              echo "MISSING: $path"; exit 1
+            fi
+            if [ ! -s "$path" ]; then
+              echo "EMPTY: $path"; exit 1
+            fi
+            head_sig=$(xxd -p -l 2 "$path" | tr -d '\n' | tr '[:upper:]' '[:lower:]')
+            tail_sig=$(xxd -p -s -2 "$path" | tr -d '\n' | tr '[:upper:]' '[:lower:]')
+            if [ "$head_sig" != "ffd8" ]; then
+              echo "BAD HEADER: $path -> $head_sig"; exit 1
+            fi
+            if [ "$tail_sig" != "ffd9" ]; then
+              echo "BAD FOOTER: $path -> $tail_sig"; exit 1
+            fi
+            echo "OK: $path ($head_sig ... $tail_sig)"
+          done
+
+      - name: Commit and push only the seven images
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -- src/img/xros-5.jpg src/img/xros-5-mini.jpg src/img/xlim-pro-2.jpg src/img/caliburn-g3.jpg src/img/xros-pods.jpg src/img/xlim-pods.jpg src/img/caliburn-pods.jpg
+          if git diff --cached --quiet; then
+            echo "No changes detected for the seven images; nothing to commit."
+          else
+            git commit -m "Restore seven product images from podlookup-src-v2.zip"
+            git push origin HEAD:main
+          fi
