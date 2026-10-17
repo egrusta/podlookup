@@ -1509,9 +1509,9 @@ strong{font-weight:600; color:#fff}
 
   /* ==========================================================================
      MASTER VERIFIED DATASET (embedded)
-     The project's single factual source of truth is
-     src/data/master-verified-dataset.json. The storefront facts below are
-     reconciled to it; COMPATIBILITY is derived from MASTER.devices, and
+     The current factual source of truth is the embedded MASTER in index.html.
+     src/data/master-verified-dataset.json is a documented but currently absent
+     mirror; COMPATIBILITY is derived from MASTER.devices, and
      window.__masterDatasetAudit re-checks this page against it at load.
 
      DEVICE facts and POD facts are deliberately kept apart:
@@ -1520,8 +1520,8 @@ strong{font-weight:600; color:#fff}
      A device's supported set is never presented as the set of pods available.
      ========================================================================== */
   var MASTER = {
-    sourceOfTruth: "src/data/master-verified-dataset.json",
-    meta: { claimCount: 393, verified: 338, unknown: 24, notApplicable: 22, conflict: 6, partial: 3, sources: 20, devices: 14, pods: 6, platforms: 5, products: 7 },
+    sourceOfTruth: "index.html (embedded MASTER; JSON mirror absent)",
+    meta: { claimCount: 393, verified: 338, unknown: 24, notApplicable: 22, conflict: 6, partial: 3, sources: 20, devices: 13, pods: 6, platforms: 5, products: 7 },
     platforms: [
       { key: "XROS Pods", brand: "Vaporesso", podOhms: ["0.4Ω", "0.6Ω", "0.8Ω", "1.0Ω", "1.2Ω"] },
       { key: "Xlim Pods", brand: "OXVA", podOhms: ["0.4Ω", "0.6Ω", "0.8Ω", "1.2Ω"] },
@@ -1620,6 +1620,8 @@ strong{font-weight:600; color:#fff}
       { name: "Uwell Caliburn A3 Pods", brand: "Uwell", platformKey: "Caliburn A3 Pods" }
     ]
   };
+  // Derive the inventory count from the actual records to prevent future metadata drift.
+  MASTER.meta.devices = MASTER.devices.length;
   var MASTER_BY_DEVICE = {}, MASTER_PLATFORM = {}, MASTER_PODS_BY_PLATFORM = {};
   MASTER.devices.forEach(function(d){ MASTER_BY_DEVICE[d.brand + "|" + d.device] = d; });
   MASTER.platforms.forEach(function(p){ MASTER_PLATFORM[p.key] = p; });
@@ -4686,7 +4688,7 @@ strong{font-weight:600; color:#fff}
 
   /* ==========================================================================
      Master-dataset audit. Re-checks every rendered data structure against the
-     MASTER object mirroring src/data/master-verified-dataset.json. Reports
+     embedded MASTER object in index.html. Reports
      contradictions; never auto-fixes and never suppresses.
      ========================================================================== */
   function ohmsIn(text){
