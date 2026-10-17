@@ -3436,7 +3436,10 @@ strong{font-weight:600; color:#fff}
   var ENTITY = { brands: [], devices: [], platforms: [], errors: [], warnings: [] };
   var DEFAULT_TITLE = "", DEFAULT_DESC = "";
 
-  function pageBase(){ return "https://perchance.org/" + encodeURIComponent(window.generatorName || ""); }
+  function pageBase(){
+    var path = (window.location.pathname || "/").replace(/\/+$/, "");
+    return window.location.origin + (path || "/");
+  }
   function geoHref(path){ return pageBase() + "?p=" + path; }
   function parseQuery(search){
     var out = {};
