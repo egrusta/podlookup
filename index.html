@@ -716,6 +716,7 @@ strong{font-weight:600; color:#fff}
 
 /* ---- modal ---- */
 .modal{position:fixed; inset:0; z-index:110; display:grid; place-items:center; padding:20px}
+.modal[hidden]{display:none!important;}
 .modal-card{
   position:relative; width:min(980px,100%); background-color:var(--bg-elev); background-image:var(--sheen);
   border:1px solid var(--line-2); border-radius:var(--radius-lg); box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.06); max-height:90vh; overflow:auto;
