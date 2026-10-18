@@ -1512,7 +1512,7 @@ strong{font-weight:600; color:#fff}
      The current factual source of truth is the embedded MASTER in index.html.
      src/data/master-verified-dataset.json is a documented but currently absent
      mirror; COMPATIBILITY is derived from MASTER.devices, and
-     window.__masterDatasetAudit re-checks this page against it at load.
+     window.__masterDatasetAudit checks the embedded MASTER against the live compatibility and rendered data at load.
 
      DEVICE facts and POD facts are deliberately kept apart:
        ohms    = DEVICE-supported resistance options  (a device specification)
