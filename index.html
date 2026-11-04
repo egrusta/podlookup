@@ -4513,22 +4513,28 @@ strong{font-weight:600; color:#fff}
       rows = [
         ["Brand", esc(b.name)],
         ["Device family", esc(d.family)],
-        ["Pod platform", platformCell(d)],
+        [d.platformKey === "Xlim C Cartridge & Coil System" ? "Cartridge-and-coil system" : "Pod platform", platformCell(d)],
         ["Device resistance options", d.ohms.length ? ohmChips(d.ohms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
         ["Pod resistances available", d.podOhms.length ? ohmChips(d.podOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
         ["Replaceable coil resistance options", d.coilOhms && d.coilOhms.length ? ohmChips(d.coilOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
         ["Specifications", specsCell]
       ];
-      extraBlock = '<div class="geo-block"><h2>Replacement pods for the ' + esc(b.name + " " + d.device) + '</h2>'
+      extraBlock = '<div class="geo-block"><h2>' + (d.platformKey === "Xlim C Cartridge & Coil System" ? 'Replacement cartridge and coils for the ' : 'Replacement pods for the ') + esc(b.name + " " + d.device) + '</h2>'
         + (pods.length
             ? '<div class="fr-matches">' + pods.map(function(x){ return matchRow(x, "Fits"); }).join("") + '</div>'
             : '<p class="geo-note fr-missing">' + esc(UNKNOWN) + '</p>')
         + '</div>';
       fitBlock = devicePodsFitBlock(d, b);
-      h1 = "Pods for the " + b.name + " " + d.device;
-      lede = "The pod platform the " + b.name + " " + d.device + " runs, the pods that fit it and the replacement pods listed for it.";
-      metaTitle = b.name + " " + d.device + " compatible pods — which pods fit | PodLookup";
-      metaDesc = "Which pods fit the " + b.name + " " + d.device + ": the pod platform it runs, the resistances available and the replacement pods listed in the PodLookup reference.";
+      h1 = d.platformKey === "Xlim C Cartridge & Coil System" ? "Cartridge and coils for OXVA Xlim C" : "Pods for the " + b.name + " " + d.device;
+      lede = d.platformKey === "Xlim C Cartridge & Coil System"
+        ? "The dedicated 2 ml XLIM C cartridge, replaceable coils and manufacturer-listed coil resistance options."
+        : "The pod platform the " + b.name + " " + d.device + " runs, the pods that fit it and the replacement pods listed for it.";
+      metaTitle = d.platformKey === "Xlim C Cartridge & Coil System"
+        ? "OXVA Xlim C cartridge and coil compatibility | PodLookup"
+        : b.name + " " + d.device + " compatible pods — which pods fit | PodLookup";
+      metaDesc = d.platformKey === "Xlim C Cartridge & Coil System"
+        ? "OXVA Xlim C compatibility: dedicated 2 ml cartridge, replaceable XLIM C coils in 0.6Ω, 0.8Ω and 1.2Ω, separate from standard XLIM pods."
+        : "Which pods fit the " + b.name + " " + d.device + ": the pod platform it runs, the resistances available and the replacement pods listed in the PodLookup reference.";
     } else {
       compatBlock = compatFitBlock(d, b);
       extraBlock = '<div class="geo-block"><h2>Compatible products for the ' + esc(b.name + " " + d.device) + '</h2>'
@@ -4537,9 +4543,13 @@ strong{font-weight:600; color:#fff}
             : '<p class="geo-note fr-missing">' + esc(UNKNOWN) + '</p>')
         + '</div>';
       h1 = b.name + " " + d.device + " compatibility";
-      lede = "The compatibility record for the " + b.name + " " + d.device + ": what it is compatible with, the pods that record covers and the other devices that take the same pods.";
+      lede = d.platformKey === "Xlim C Cartridge & Coil System"
+        ? "The XLIM C uses its own 2 ml cartridge and replaceable coils in 0.6Ω, 0.8Ω and 1.2Ω; it is separate from standard XLIM integrated-coil pods."
+        : "The compatibility record for the " + b.name + " " + d.device + ": what it is compatible with, the pods that record covers and the other devices that take the same pods.";
       metaTitle = "What is the " + b.name + " " + d.device + " compatible with? | PodLookup";
-      metaDesc = b.name + " " + d.device + " compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.";
+      metaDesc = d.platformKey === "Xlim C Cartridge & Coil System"
+        ? "OXVA Xlim C compatibility: its dedicated cartridge-and-coil system, verified 0.6Ω, 0.8Ω and 1.2Ω coil options, and separation from standard XLIM pods."
+        : b.name + " " + d.device + " compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.";
     }
 
     var siblings = d.platformSlug ? ENTITY.devices.filter(function(x){
@@ -4547,11 +4557,11 @@ strong{font-weight:600; color:#fff}
     }) : [];
     var links = [];
     links.push(isDev
-      ? geoLink(geoHref("compatibility/" + b.slug + "/" + d.slug), "Full compatibility for the " + b.name + " " + d.device, "What it is compatible with, and the pods it takes", "data-geo")
-      : geoLink(geoHref("devices/" + b.slug + "/" + d.slug), "Pods and specifications for the " + b.name + " " + d.device, "The device page: pod platform, family and specifications", "data-geo"));
+      ? geoLink(geoHref("compatibility/" + b.slug + "/" + d.slug), d.platformKey === "Xlim C Cartridge & Coil System" ? "Full cartridge and coil compatibility for OXVA Xlim C" : "Full compatibility for the " + b.name + " " + d.device, "What it is compatible with, and the pods it takes", "data-geo")
+      : geoLink(geoHref("devices/" + b.slug + "/" + d.slug), d.platformKey === "Xlim C Cartridge & Coil System" ? "Cartridge and coil specifications for OXVA Xlim C" : "Pods and specifications for the " + b.name + " " + d.device, "The device page: platform, family and specifications", "data-geo"));
     if (d.pods){
       var plat = findPlatformBySlug(d.platformSlug);
-      links.push(geoLink(geoHref("platforms/" + d.platformSlug), d.pods + " pod platform",
+      links.push(geoLink(geoHref("platforms/" + d.platformSlug), d.pods + (d.platformKey === "Xlim C Cartridge & Coil System" ? " cartridge-and-coil system" : " pod platform"),
         plat ? plat.devices.length + (plat.devices.length === 1 ? " device on this platform" : " devices on this platform") : "", "data-geo"));
     }
     links.push(geoLink(geoHref("brands/" + b.slug), b.name + " device list", "", "data-geo"));
