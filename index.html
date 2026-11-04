@@ -2285,9 +2285,9 @@ strong{font-weight:600; color:#fff}
         mp ? "Verified" : missing
       ];
     });
-    /* The original Caliburn has no pod platform in the dataset, so every cell
-       keeps the UNKNOWN value — it is never given a G / G2 pod. */
-    rows.push(["Original Caliburn", missing, missing, missing, missing]);
+    /* Original Caliburn has its own dedicated refillable-pod platform; resistance
+       and cross-model fit remain UNKNOWN. */
+    rows.push(["Original Caliburn", "Caliburn Original Pods", "Uwell Caliburn Original Pods", missing, "Dedicated 2 ml refillable-pod platform verified; resistance and cross-model fit UNKNOWN"]);
     return rows;
   }
   function caliburnGuideBody(){
