@@ -7,6 +7,9 @@ This folder contains the operating, compliance and launch-readiness documents fo
 - [Supplier and payment quote comparison](templates/SUPPLIER-AND-PAYMENT-QUOTE-COMPARISON.md) — capture written quotes and evidence; current entries are marked NOT CHECKED / HOLD.
 - [Product/SKU approval record](templates/PRODUCT-SKU-APPROVAL-TEMPLATE.md) — one evidence record for each exact product variant.
 
+## Data and evidence
+- [Device and compatibility source register](DEVICE-SOURCE-REGISTER.md) — dated manufacturer-source evidence, what each source supports, and what remains UNKNOWN.
+
 ## Compliance and launch
 - [UK vape compliance pre-launch checklist](UK-VAPE-COMPLIANCE-PRELAUNCH.md) — high-level compliance controls and launch hold.
 - [UK vape shop launch gate](uk-vape-shop-launch-gate.md) — detailed no-go checklist and sign-off requirements.
