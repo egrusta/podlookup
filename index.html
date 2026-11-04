@@ -2452,6 +2452,7 @@ strong{font-weight:600; color:#fff}
       return [
         mp ? '<a data-geo href="' + esc(geoHref("platforms/" + slug(key))) + '">' + esc(key) + '</a>' : esc(key),
         mp && mp.podOhms.length ? ohmChips(mp.podOhms) : missing,
+        mp && mp.coilOhms && mp.coilOhms.length ? ohmChips(mp.coilOhms) : missing,
         devs.length ? devs.map(function(d){ return esc(d); }).join(" · ") : missing,
         mp ? "Verified" : missing
       ];
@@ -2493,7 +2494,7 @@ strong{font-weight:600; color:#fff}
       + '<p>' + esc(resistIntro) + '</p>'
       + '<p>' + esc(resistNoRec) + '</p>'
       + '<h4>Pod resistance options by platform</h4>'
-      + tableHtml(["Platform", "Pod resistance options", "Example verified devices", "Status"], crossPlatformResistanceRows())
+      + tableHtml(["Platform", "Pod resistance options", "Replaceable coil options", "Example verified devices", "Status"], crossPlatformResistanceRows())
       + '</div>'
       + '<div class="geo-block">'
       + '<h2>What is the difference between pod resistance and device resistance?</h2>'
@@ -2772,7 +2773,8 @@ strong{font-weight:600; color:#fff}
         '<a data-geo href="' + esc(geoHref("devices/" + d.brandSlug + "/" + d.slug)) + '">' + esc(d.brand + " " + d.device) + '</a>',
         d.ohms.length ? ohmChips(d.ohms) : missing,
         d.platformKey ? '<a data-geo href="' + esc(geoHref("platforms/" + d.platformSlug)) + '">' + esc(d.platformKey) + '</a>' : missing,
-        (mp && mp.podOhms.length) ? ohmChips(mp.podOhms) : missing
+        (mp && mp.podOhms.length) ? ohmChips(mp.podOhms) : missing,
+        (mp && mp.coilOhms && mp.coilOhms.length) ? ohmChips(mp.coilOhms) : missing
       ];
     });
   }
@@ -2840,7 +2842,7 @@ strong{font-weight:600; color:#fff}
       + geoAnswer("Direct answer", "No. Pod resistance and device resistance are two different specifications, and the dataset records no rule that links a resistance value to fit. Pod resistance is a property of the pod platform \u2014 the resistances its pods are available in. Device resistance is a property of the device \u2014 the resistances the device itself supports. A pod fits because it shares the device\u2019s recorded pod platform, not because a resistance value matches.")
       + '<h4>What the dataset records</h4>'
       + '<p class="geo-note">The two resistance columns below are separate specifications and are never combined into one set. The dataset makes no resistance recommendation.</p>'
-      + tableHtml(["Device", "Device resistance options (device specification)", "Pod platform", "Pod resistance options (platform specification)"], whichPodResistanceRows())
+      + tableHtml(["Device", "Device resistance options (device specification)", "Pod platform", "Pod resistance options (platform specification)", "Replaceable coil options"], whichPodResistanceRows())
       + '</div>'
       + '<div class="geo-block">'
       + '<h2>What if my exact device or pod is not listed?</h2>'
@@ -4013,9 +4015,10 @@ strong{font-weight:600; color:#fff}
     var prods = brandProducts(b);
     var unverified = b.devices.filter(function(d){ return !d.platformKey; });
     var devNames = b.devices.map(function(d){ return b.name + " " + d.device; });
-    var podOhms = [];
+    var podOhms = [], coilOhms = [];
     plats.forEach(function(p){
       ((MASTER_PLATFORM[p.key] || {}).podOhms || []).forEach(function(o){ if (podOhms.indexOf(o) === -1) podOhms.push(o); });
+      ((MASTER_PLATFORM[p.key] || {}).coilOhms || []).forEach(function(o){ if (coilOhms.indexOf(o) === -1) coilOhms.push(o); });
     });
     var q = "What does " + b.name + " make, and which pod platforms are relevant?";
     var answer = "PodLookup records " + b.devices.length + " " + b.name + " refillable pod "
@@ -4029,6 +4032,7 @@ strong{font-weight:600; color:#fff}
       + (podOhms.length
           ? " Pod resistances available across " + (plats.length === 1 ? "that platform are " : "those platforms are ") + listText(podOhms) + "."
           : "")
+      + (coilOhms.length ? " Replaceable coil resistance options recorded are " + listText(coilOhms) + "." : "")
       + (plats.length === 1 && !unverified.length
           ? " Every " + b.name + " device listed here runs the same pod platform, so the same replacement pods fit all of them."
           : "")
@@ -4048,6 +4052,7 @@ strong{font-weight:600; color:#fff}
           ? esc(listText(plats.map(function(p){ return p.key; })))
           : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
       ["Pod resistances available", podOhms.length ? ohmChips(podOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
+      ["Replaceable coil resistance options", coilOhms.length ? ohmChips(coilOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
       ["Products listed here", prods.length
           ? esc(listText(prods.map(function(x){ return x.name; })))
           : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
@@ -4396,16 +4401,19 @@ strong{font-weight:600; color:#fff}
     if (!d.pods || !d.platformSlug) return "";
     var devOhms = d.ohms.length ? ohmChips(d.ohms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>';
     var pOhms = d.podOhms.length ? ohmChips(d.podOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>';
-    var answer = "The " + b.name + " " + d.device + " supports "
-      + (d.ohms.length ? listText(d.ohms) : "no recorded resistance option")
-      + ", and the " + d.pods + " pod platform offers "
-      + (d.podOhms.length ? listText(d.podOhms) : "no recorded resistance option")
-      + ". These are two separate specifications: a resistance value does not decide whether a pod fits.";
+    var cOhms = d.coilOhms && d.coilOhms.length ? ohmChips(d.coilOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>';
+    var answer = "The " + b.name + " " + d.device + " has device resistance options "
+      + (d.ohms.length ? listText(d.ohms) : "not recorded")
+      + ", and the " + d.pods + " platform has pod resistance options "
+      + (d.podOhms.length ? listText(d.podOhms) : "not recorded")
+      + (d.coilOhms && d.coilOhms.length ? "; its replaceable coils are available in " + listText(d.coilOhms) : "")
+      + ". These are separate specifications: a resistance value does not decide whether a pod or cartridge fits.";
     return '<div class="geo-block"><h2>' + esc(b.name + " " + d.device + " pod resistance options") + '</h2>'
       + geoAnswer("Direct answer", answer)
       + tableHtml(["Specification", "Resistances"], [
           ["Device resistance options", devOhms],
-          ["Pod resistances available", pOhms]
+          ["Pod resistances available", pOhms],
+          ["Replaceable coil resistance options", cOhms]
         ])
       + '</div>';
   }
@@ -4489,6 +4497,7 @@ strong{font-weight:600; color:#fff}
         ["Pod platform", platformCell(d)],
         ["Device resistance options", d.ohms.length ? ohmChips(d.ohms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
         ["Pod resistances available", d.podOhms.length ? ohmChips(d.podOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
+        ["Replaceable coil resistance options", d.coilOhms && d.coilOhms.length ? ohmChips(d.coilOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
         ["Specifications", specsCell]
       ];
       extraBlock = '<div class="geo-block"><h2>Replacement pods for the ' + esc(b.name + " " + d.device) + '</h2>'
