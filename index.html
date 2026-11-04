@@ -2417,10 +2417,11 @@ strong{font-weight:600; color:#fff}
      device resistance distinction. Every value is read from MASTER; a fit is only
      ever the recorded platform relationship, never inferred from a brand or model
      name; and no recommendation is made where the dataset supports none. */
-  var CROSS_GUIDE_PLATFORMS = ["XROS Pods", "Xlim Pods", "Caliburn G / G2 Pods", "Caliburn GPP Pods", "Caliburn A2 Pods", "Caliburn A3 Pods", "Caliburn Original Pods"];
+  var CROSS_GUIDE_PLATFORMS = ["XROS Pods", "Xlim Pods", "Xlim C Cartridge & Coil System", "Caliburn G / G2 Pods", "Caliburn GPP Pods", "Caliburn A2 Pods", "Caliburn A3 Pods", "Caliburn Original Pods"];
   var CROSS_GUIDE_CROSS = {
     "XROS Pods": "None recorded with Xlim Pods or any Caliburn pod platform.",
-    "Xlim Pods": "None recorded with XROS Pods or any Caliburn pod platform.",
+    "Xlim Pods": "None recorded with XROS Pods or any Caliburn pod platform; XLIM C is a separate cartridge-and-coil system.",
+    "Xlim C Cartridge & Coil System": "Separate from standard Xlim Pods; no cross-platform fit is recorded.",
     "Caliburn G / G2 Pods": "None recorded with XROS Pods or Xlim Pods.",
     "Caliburn GPP Pods": "None recorded with XROS Pods or Xlim Pods.",
     "Caliburn A2 Pods": "None recorded with XROS Pods, Xlim Pods, Caliburn G / G2, GPP or A3 Pods.",
@@ -2457,7 +2458,7 @@ strong{font-weight:600; color:#fff}
     });
   }
   function crossPlatformGuideBody(){
-    var answer = "Compatibility in the dataset is platform-specific: a pod fits the devices that share its pod platform, and nothing else. "
+    var answer = "Compatibility in the dataset is platform-specific: a pod or cartridge system fits only the devices recorded on that platform, and nothing else. "
       + "No XROS → XLIM compatibility and no XROS → Caliburn compatibility is recorded — the XROS Pods, Xlim Pods and Caliburn pod platforms are recorded as separate platforms with no shared devices, so no XROS pod is stated as fitting an XLIM or Caliburn device. "
       + "That separation is read from the recorded platform boundaries rather than from the brand names: the dataset never infers a fit, or a refusal, from a brand or model name alone.";
     var boundaryNote = "Each row below is a recorded platform and the devices it is verified to run. The cross-platform column states only what the dataset records between the platforms — an absent relationship is not a claim about a device it was never linked to.";
@@ -2465,7 +2466,8 @@ strong{font-weight:600; color:#fff}
     var resistNoRec = "The dataset records no recommendation that links a resistance value to a person, to health outcomes, or to any therapeutic purpose. Because the data supports no such recommendation, none is given here. Use the table to see what each platform records, and confirm the exact cartridge options with the manufacturer's own information.";
     var sepIntro = "The dataset records resistance as two separate facts, and this guide never merges them:";
     var sepItems = [
-      "<strong>Pod resistance options</strong> — the resistance values available in the pods/cartridges built for a device's pod platform. This is a pod fact, taken from the platform.",
+      "<strong>Pod resistance options</strong> — the resistance values available in integrated-coil pods/cartridges built for a device's platform.",
+      "<strong>Replaceable coil options</strong> — resistance values for coils that are separately installed in a compatible empty cartridge.",
       "<strong>Device resistance options</strong> — the resistance range the device itself is recorded as supporting. This is a device specification."
     ];
     var sepExample = "They can differ. The Xlim SE is recorded with device resistance options of 0.6Ω, 0.8Ω and 1.2Ω, while its Xlim Pods platform lists pod resistance options of 0.4Ω, 0.6Ω, 0.8Ω and 1.2Ω — so the device's supported range is not the same set as the pods available for it. Neither figure is copied across to stand in for the other.";
@@ -4148,6 +4150,7 @@ strong{font-weight:600; color:#fff}
   var PLATFORM_NOTES = {
     "XROS Pods": "The XROS pod platform is shared across the whole XROS series. Every device listed here runs the current-generation XROS pods, so they all take the same replacement pods; the models differ in device specifications, not in pod fit.",
     "Xlim Pods": "The standard XLIM cartridge platform is shared by the devices listed here; XLIM C is a separate cartridge-and-changeable-coil system and is not part of this platform. Cartridge variants still have model-specific limits: OXVA lists the 0.4Ω Top Fill cartridge only for Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic. Do not treat every resistance variant as a universal fit.",
+     "Xlim C Cartridge & Coil System": "XLIM C uses its own 2 ml cartridge and separate replaceable XLIM C coils. OXVA lists 0.6Ω, 0.8Ω and 1.2Ω coil options. It is not compatible with the standard XLIM integrated-coil cartridge platform.",
     "Caliburn G / G2 Pods": "The Caliburn G / G2 platform covers the Caliburn G and Caliburn G2 only. The Caliburn G3, G4, G5 and Air series use GPP; A2/A2S/AK2 use A2 pods; A3/A3S/AK3/AZ3 use A3 pods; and the original Caliburn uses its own dedicated refillable pod.",
     "Caliburn GPP Pods": "UWELL confirms GPP cartridge compatibility across the Caliburn G3, G4 and G5 series, and explicitly confirms all GPP cartridges fit Caliburn Air and Air R. GPP cartridges have integrated coils and are not compatible with the separate Caliburn G / G2, A2, A3 or original Caliburn platforms.",
     "Caliburn A2 Pods": "The Caliburn A2 platform covers A2, A2S and AK2. UWELL lists the 0.9Ω A2 pod for the A2 and AK2, and states A2S is compatible with that pod as well as its own 1.2Ω side-refill pod.",
