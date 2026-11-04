@@ -4288,7 +4288,9 @@ strong{font-weight:600; color:#fff}
     var q = "Which pods fit the " + b.name + " " + d.device + "?";
     var answer, answerRows;
     if (verified){
-      answer = "Pods that fit the " + b.name + " " + d.device + " are the standard cartridges built for the " + d.pods + " pod platform this device runs."
+      answer = d.platformKey === "Xlim C Cartridge & Coil System"
+        ? "The OXVA Xlim C uses its own 2 ml cartridge with replaceable XLIM C coils. OXVA lists 0.6Ω, 0.8Ω and 1.2Ω coil options; it does not use standard XLIM integrated-coil pods."
+        : "Pods that fit the " + b.name + " " + d.device + " are the standard cartridges built for the " + d.pods + " pod platform this device runs."
         + (d.platformKey === "Xlim Pods" ? " OXVA's 0.4Ω Top Fill cartridge is a model-specific exception: OXVA lists it only for Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic." : "")
         + (d.platformKey === "Caliburn A2 Pods" ? " The 1.2Ω side-refill pod is listed for A2S only; the 0.9Ω A2 pod is listed for A2, A2S and AK2." : "")
         + (d.podOhms.length ? " Pod resistances available for that platform are " + listText(d.podOhms) + "." : "")
@@ -4301,8 +4303,10 @@ strong{font-weight:600; color:#fff}
         ["Brand", esc(b.name)],
         ["Verified pod platform", platformCell(d)],
         ["Pod resistances available", d.podOhms.length ? ohmChips(d.podOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
+        ["Replaceable coil resistance options", d.coilOhms && d.coilOhms.length ? ohmChips(d.coilOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
         ["Device resistance options", d.ohms.length ? ohmChips(d.ohms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
-        ["Replacement pod products listed", pods.length ? esc(listText(pods.map(function(x){ return x.name; }))) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
+        ["Replacement pod/cartridge products listed", pods.length ? esc(listText(pods.map(function(x){ return x.name; }))) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
+        ["Replacement coil types recorded", (MASTER_COILS_BY_PLATFORM[d.platformKey] || []).length ? esc(listText(MASTER_COILS_BY_PLATFORM[d.platformKey].map(function(x){ return x.name; }))) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
         ["Compatibility note", d.note ? esc(d.note) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>']
       ];
     } else {
@@ -4341,7 +4345,9 @@ strong{font-weight:600; color:#fff}
     var q = "What is the " + b.name + " " + d.device + " compatible with?";
     var answer, answerRows;
     if (verified){
-      answer = "The " + b.name + " " + d.device + " is compatible with the standard " + d.pods + " cartridge platform."
+      answer = d.platformKey === "Xlim C Cartridge & Coil System"
+        ? "The OXVA Xlim C is compatible with its own 2 ml cartridge and replaceable XLIM C coils in 0.6Ω, 0.8Ω and 1.2Ω. It is separate from standard XLIM integrated-coil pods."
+        : "The " + b.name + " " + d.device + " is compatible with the standard " + d.pods + " cartridge platform."
         + (d.platformKey === "Xlim Pods" ? " OXVA's 0.4Ω Top Fill cartridge is a model-specific exception: OXVA lists it only for Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic." : "")
         + (d.platformKey === "Caliburn A2 Pods" ? " The 1.2Ω side-refill pod is listed for A2S only; the 0.9Ω A2 pod is listed for A2, A2S and AK2." : "")
         + (d.podOhms.length ? " Pod resistances available for that platform are " + listText(d.podOhms) + "." : "")
@@ -4355,8 +4361,10 @@ strong{font-weight:600; color:#fff}
         ["Brand", esc(b.name)],
         ["Verified pod platform", platformCell(d)],
         ["Pod resistances available", d.podOhms.length ? ohmChips(d.podOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
+        ["Replaceable coil resistance options", d.coilOhms && d.coilOhms.length ? ohmChips(d.coilOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
         ["Device resistance options", d.ohms.length ? ohmChips(d.ohms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
-        ["Pods recorded as compatible", pods.length ? esc(listText(pods.map(function(x){ return x.name; }))) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
+        ["Pods/cartridges recorded as compatible", pods.length ? esc(listText(pods.map(function(x){ return x.name; }))) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
+        ["Replacement coil types recorded", (MASTER_COILS_BY_PLATFORM[d.platformKey] || []).length ? esc(listText(MASTER_COILS_BY_PLATFORM[d.platformKey].map(function(x){ return x.name; }))) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
         ["Compatibility note", d.note ? esc(d.note) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>']
       ];
     } else {
