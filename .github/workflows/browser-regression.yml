@@ -1,6 +1,14 @@
 name: Browser regression
 
 on:
+  push:
+    branches:
+      - "test/**"
+    paths:
+      - "index.html"
+      - "src/**"
+      - "tests/**"
+      - ".github/workflows/browser-regression.yml"
   pull_request:
     paths:
       - "index.html"
