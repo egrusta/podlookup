@@ -2360,7 +2360,7 @@ strong{font-weight:600; color:#fff}
      products. Nothing is inferred from the XLIM family name or a model number,
      and the XLIM C — which the dataset documents as the one exception to the
      shared XLIM platform — is never presented as a compatible device. */
-  var XLIM_GUIDE_DEVICES = MASTER.devices.filter(function(d){ return d.family === "XLIM"; }).map(function(d){ return d.device; });
+  var XLIM_GUIDE_DEVICES = MASTER.devices.filter(function(d){ return d.family === "XLIM" && d.platformKey === "Xlim Pods"; }).map(function(d){ return d.device; });
   var XLIM_GUIDE_PLATFORM = "Xlim Pods";
   function xlimDeviceListText(){
     var l = XLIM_GUIDE_DEVICES;
@@ -2384,9 +2384,9 @@ strong{font-weight:600; color:#fff}
     });
   }
   function xlimGuideBody(){
-    var answer = "The verified OXVA XLIM devices — the " + xlimDeviceListText() + " — all run the Xlim Pods platform (2 ml), so the same XLIM cartridges fit all of them. "
-      + "Compatibility comes from the pod platform recorded for each device in the verified dataset, never from the XLIM name, so these devices share pods because they share a platform. "
-      + "OXVA documents one exception across the wider XLIM range — the XLIM C — which our data does not list as a compatible device.";
+    var answer = "The standard OXVA XLIM devices — the " + xlimDeviceListText() + " — run the Xlim Pods platform (2 ml), so the standard XLIM cartridges recorded for that platform fit these devices. "
+      + "Compatibility comes from the platform recorded for each device, never from the XLIM name. XLIM C is now recorded separately: it uses its own 2 ml cartridge and replaceable XLIM C coils in 0.6Ω, 0.8Ω and 1.2Ω, not standard XLIM pods. "
+      + "The XLIM C is listed on its own cartridge-and-coil system, not on the standard Xlim Pods platform.";
     var pods = MASTER_PODS_BY_PLATFORM[XLIM_GUIDE_PLATFORM] || [];
     var podFact = pods.length
       ? "Compatible pod products — " + pods.map(function(p){ return p.name; }).join(" and ") + " are the pod products built for the Xlim Pods platform, and the dataset lists each as fitting every XLIM device above."
@@ -2395,15 +2395,21 @@ strong{font-weight:600; color:#fff}
       "Compatibility follows the pod platform recorded for a device in the verified dataset — never the XLIM family name or a model number. Sharing the XLIM name does not by itself mean two devices share pods; the shared platform is what establishes fit.",
       "Xlim Pods — shared by the " + xlimDeviceListText() + ". Each of these devices records the same pod platform, so every XLIM cartridge built for that platform fits all of them.",
       podFact,
-      "XLIM C — OXVA states the XLIM C is the one exception to the shared XLIM platform. It is not in our verified device set, so it is never shown as compatible and no pod fit is stated for it here.",
-      "The pod resistance options in the table are the resistances available for the Xlim Pods platform — the cartridges. A device's own supported resistance options are a separate specification and are not presented here as the set of pods available."
+      "XLIM C — recorded on its own Xlim C Cartridge & Coil System: a dedicated 2 ml cartridge and replaceable 0.6Ω, 0.8Ω and 1.2Ω coils. It is not compatible with the standard Xlim Pods platform.",
+      "The pod resistance options in the table are the resistances available for the standard Xlim Pods platform. XLIM C's replaceable coil options are a separate specification and are recorded on its own cartridge-and-coil system page."
     ];
     var links = [];
     XLIM_GUIDE_DEVICES.forEach(function(dev){
       links.push(geoLink(geoHref("devices/oxva/" + slug(dev)), "OXVA " + dev + " device information", "Pod platform and specifications", "data-geo"));
       links.push(geoLink(geoHref("compatibility/oxva/" + slug(dev)), "What is the OXVA " + dev + " compatible with?", "Compatibility answer", "data-geo"));
     });
-    links.push(geoLink(geoHref("platforms/" + slug(XLIM_GUIDE_PLATFORM)), XLIM_GUIDE_PLATFORM + " pod platform", "The devices that use this platform", "data-geo"));
+    links.push(geoLink(geoHref("platforms/" + slug(XLIM_GUIDE_PLATFORM)), XLIM_GUIDE_PLATFORM + " pod platform", "The standard XLIM devices that use this platform", "data-geo"));
+    var xlimC = MASTER.devices.filter(function(d){ return d.brand === "OXVA" && d.device === "Xlim C"; })[0];
+    if (xlimC){
+      links.push(geoLink(geoHref("devices/oxva/" + xlimC.slug), "OXVA Xlim C device information", "Separate cartridge-and-coil system", "data-geo"));
+      links.push(geoLink(geoHref("compatibility/oxva/" + xlimC.slug), "What is OXVA Xlim C compatible with?", "Its own cartridge and replaceable coils", "data-geo"));
+      links.push(geoLink(geoHref("platforms/" + slug(xlimC.platformKey)), "Xlim C Cartridge & Coil System", "The separate XLIM C system", "data-geo"));
+    }
     links.push(geoLink(geoHref("brands/oxva"), "OXVA brand information", "All OXVA devices, platforms and guides", "data-geo"));
     return '<div class="geo-block">'
       + geoAnswer("Direct answer", answer)
@@ -2418,7 +2424,7 @@ strong{font-weight:600; color:#fff}
     return {
       id: "xlim-pods", kicker: "Platform guide", h2Title: true,
       title: "Which pods fit the OXVA XLIM devices?",
-      summary: "Four verified XLIM devices share one pod platform — the Xlim Pro, Xlim Pro 2, Xlim SE and Xlim SQ Pro — with the XLIM C documented as the single exception.",
+      summary: "Ten standard XLIM devices share the Xlim Pods platform; XLIM C is recorded separately with its own cartridge and replaceable coils.",
       body: xlimGuideBody()
     };
   }
