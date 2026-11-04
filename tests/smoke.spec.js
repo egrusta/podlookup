@@ -165,3 +165,39 @@ test.describe('PodLookup basket and responsive regression', () => {
     expect(errors).toEqual([]);
   });
 });
+
+
+test.describe('PodLookup SEO publication regression', () => {
+  test('LLM reference is public, complete and accurately labels the demo storefront', async ({ request }) => {
+    const response = await request.get('/llms.txt');
+    expect(response.ok()).toBeTruthy();
+    expect(response.headers()['content-type']).toMatch(/text\/plain|text\/markdown/);
+
+    const content = await response.text();
+    const deviceLinks = [...content.matchAll(/^- \\[[^\\]]+\\]\\(https:\\/\\/podlookup\\.co\\.uk\\/\\?p=devices\\//gm)];
+    expect(deviceLinks).toHaveLength(49);
+    expect(content).toContain('UNKNOWN rather than guessing');
+    expect(content).toMatch(/demo storefront/i);
+    expect(content).toMatch(/no orders are placed/i);
+    expect(content).toContain('Caliburn GPP Pods');
+  });
+
+  test('sitemap entries are unique and have a last-modified date', async ({ request }) => {
+    const response = await request.get('/sitemap.xml');
+    expect(response.ok()).toBeTruthy();
+    const xml = await response.text();
+    const entries = [...xml.matchAll(/<url>([\\s\\S]*?)<\\/url>/g)].map(match => match[1]);
+    const urls = entries.map(entry => entry.match(/<loc>(.*?)<\\/loc>/)?.[1]);
+
+    expect(entries).toHaveLength(112);
+    expect(new Set(urls).size).toBe(112);
+    expect(entries.every(entry => /<lastmod>\\d{4}-\\d{2}-\\d{2}<\\/lastmod>/.test(entry))).toBe(true);
+  });
+
+  test('unknown routes are explicitly noindexed and explain missing data', async ({ page }) => {
+    await page.goto('/?p=__podlookup-regression-unknown-route__');
+    await expect(page).toHaveTitle('Information currently unavailable | PodLookup');
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
+    await expect(page.locator('main')).toContainText('That device or platform is not in the PodLookup compatibility data.');
+  });
+});
