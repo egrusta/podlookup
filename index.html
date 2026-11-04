@@ -1566,13 +1566,14 @@ strong{font-weight:600; color:#fff}
      ========================================================================== */
   var MASTER = {
     sourceOfTruth: "index.html (embedded MASTER; JSON mirror absent)",
-    meta: { claimCount: 393, verified: 338, unknown: 24, notApplicable: 22, conflict: 6, partial: 3, sources: 20, devices: 49, pods: 7, platforms: 6, products: 7 },
+    meta: { claimCount: 393, verified: 338, unknown: 24, notApplicable: 22, conflict: 6, partial: 3, sources: 20, devices: 49, pods: 8, platforms: 7, products: 7 },
     platforms: [
       { key: "XROS Pods", brand: "Vaporesso", podOhms: ["0.4Ω", "0.6Ω", "0.8Ω", "1.0Ω", "1.2Ω"] },
       { key: "Xlim Pods", brand: "OXVA", podOhms: ["0.4Ω", "0.6Ω", "0.8Ω", "1.2Ω"] },
       { key: "Caliburn G / G2 Pods", brand: "Uwell", podOhms: ["0.8Ω", "1.0Ω", "1.2Ω"] },
       { key: "Caliburn GPP Pods", brand: "Uwell", podOhms: ["0.4Ω", "0.6Ω", "0.9Ω", "1.2Ω"] },
       { key: "Caliburn A2 Pods", brand: "Uwell", podOhms: ["0.9Ω", "1.2Ω"] },
+      { key: "Caliburn Original Pods", brand: "Uwell", podOhms: [] },
       { key: "Caliburn A3 Pods", brand: "Uwell", podOhms: ["0.8Ω", "1.0Ω"] }
     ],
     devices: [
@@ -1655,9 +1656,9 @@ strong{font-weight:600; color:#fff}
       { brand: "OXVA", device: "Xlim Crystal", family: "XLIM", platform: "Xlim Pods (2 ml)", platformKey: "Xlim Pods", platformStatus: "VERIFIED", ohms: [], ohmsStatus: "UNKNOWN", podOhms: ["0.4Ω", "0.6Ω", "0.8Ω", "1.2Ω"], note: "OXVA lists XLIM Crystal as compatible with standard XLIM cartridges. Device resistance options remain UNKNOWN. The 0.4Ω Top Fill cartridge is not included in OXVA's restricted compatibility list for this model.", productId: null },
       { brand: "OXVA", device: "Xlim POD", family: "XLIM", platform: "Xlim Pods (2 ml)", platformKey: "Xlim Pods", platformStatus: "VERIFIED", ohms: [], ohmsStatus: "UNKNOWN", podOhms: ["0.4Ω", "0.6Ω", "0.8Ω", "1.2Ω"], note: "OXVA lists XLIM POD as compatible with standard XLIM cartridges. Device resistance options remain UNKNOWN. The 0.4Ω Top Fill cartridge is not included in OXVA's restricted compatibility list for this model.", productId: null },
       { brand: "Uwell", device: "Caliburn", family: "Caliburn",
-        platform: "", platformKey: "", platformStatus: "UNKNOWN",
+        platform: "Caliburn Original Pods (2 ml)", platformKey: "Caliburn Original Pods", platformStatus: "VERIFIED",
         ohms: [], ohmsStatus: "UNKNOWN", podOhms: [],
-        note: "The original Caliburn's pod platform is not established by an official manufacturer source in our dataset, so no compatibility answer is shown for it. Buy the pods sold for the original Caliburn model.",
+        note: "UWELL's official original Caliburn product page confirms a 2 ml refillable pod. The pod resistance and compatibility with other Caliburn models are not established in this dataset, so no cross-model fit is stated.",
         productId: null },
       { brand: "Uwell", device: "Caliburn G2", family: "Caliburn",
         platform: "Caliburn G / G2 Pods (2 ml)", platformKey: "Caliburn G / G2 Pods", platformStatus: "VERIFIED",
@@ -1715,6 +1716,7 @@ strong{font-weight:600; color:#fff}
       { name: "Uwell Caliburn G / G2 Pods", brand: "Uwell", platformKey: "Caliburn G / G2 Pods" },
       { name: "Uwell Caliburn GPP Pods", brand: "Uwell", platformKey: "Caliburn GPP Pods" },
       { name: "Uwell Caliburn A2 Pods", brand: "Uwell", platformKey: "Caliburn A2 Pods" },
+      { name: "Uwell Caliburn Original Pods", brand: "Uwell", platformKey: "Caliburn Original Pods" },
       { name: "Uwell Caliburn A3 Pods", brand: "Uwell", platformKey: "Caliburn A3 Pods" }
     ]
   };
