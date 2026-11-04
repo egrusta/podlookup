@@ -61,8 +61,9 @@ const assert = require("node:assert/strict");
     const storedAfterAdd = await page.evaluate(() => localStorage.getItem("podlookup-cart"));
     assert.ok(storedAfterAdd, "adding an item must persist cart state");
 
-    await page.locator("#cartBtn").click();
-    await page.waitForTimeout(100);
+    // Adding from the product modal intentionally opens the basket.
+    // Assert that state instead of clicking the header button underneath the open drawer.
+    assert.equal(await page.locator("#cartDrawer").evaluate(el => el.hidden), false, "adding from the modal must open the basket");
     assert.ok(await page.locator("#cartBody [data-inc]").count(), "cart line must expose increment control");
     assert.ok(await page.locator("#cartBody [data-dec]").count(), "cart line must expose decrement control");
     const before = await page.locator("#cartBody").innerText();
