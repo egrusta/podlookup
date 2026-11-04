@@ -125,8 +125,26 @@ ASA/CAP guidance says nicotine-containing e-cigarettes and components are prohib
 | Product recall / safety incident procedure and supplier contact tree | Owner + supplier | Trading |
 | Customer support scripts and staff training records | Owner | First customer order |
 | Bookkeeping, VAT review, invoices, supplier invoices, sales/returns and stock records | Owner + accountant | First purchase/sale |
-| WEEE/battery/packaging obligations review for the chosen product range and business size | Owner + compliance adviser | Before stocking/selling electrical products |
+| WEEE retailer take-back and safe recycling process for vapes and returned parts (including used pods, coils and batteries); vape retailers are excluded from the general Distributor Takeback Scheme, so obtain a suitable dedicated collection arrangement | Owner + approved waste/recycling provider | Before selling vapes |
+| Battery, packaging and other producer/distributor obligations review for the chosen range and business size | Owner + compliance adviser | Before stocking/selling electrical products |
+| Distance-selling pre-contract information, cancellation instructions/form, delivery terms and complaint contact; assess the normal 14-day cancellation period and any narrow exceptions with a solicitor | Owner + UK solicitor | Before checkout |
 | Final launch sign-off sheet and dated test evidence | Owner | Public launch |
+
+### WEEE and vape take-back — mandatory operating design
+
+Vapes are electrical items, including reusable devices. GOV.UK says distributors selling vapes online or in shops must offer a take-back service for vapes and vape parts returned by customers, including used pods, coils and batteries. Vape retailers are excluded from the general Distributor Takeback Scheme (DTS). Before selling, arrange a suitable dedicated collection/recycling service, publish clear return instructions and keep evidence of the waste contractor, collections and safe handling. Do not store damaged lithium-battery devices casually: use a safe, documented process and suitable collection containers.
+
+Official sources:
+- https://www.gov.uk/guidance/regulations-waste-electrical-and-electronic-equipment
+- https://www.gov.uk/guidance/single-use-vapes-ban
+
+### Distance-selling consumer information
+
+Before a customer is bound by an online sales contract, the trader must provide the required pre-contract information clearly and make the applicable cancellation instructions/form available. The normal distance-sales cancellation period for goods is 14 days after the consumer (or their nominated recipient) takes physical possession. Exceptions are specific and fact-dependent; do not assume opened vape devices, pods or e-liquids are automatically excluded. Have a UK solicitor determine the correct treatment for each product type, hygiene/seal arrangements, faulty goods and statutory rights before publishing a returns policy.
+
+Official sources:
+- https://www.legislation.gov.uk/uksi/2013/3134
+- https://www.legislation.gov.uk/uksi/2013/3134/regulation/30
 
 ### HMRC records and duty — important 2026 change
 HMRC guidance says Vaping Products Duty applies to vaping liquid, including liquid in bottles, cartridges and pods, whether or not it contains nicotine. The published rate is £2.20 per 10 ml. Duty stamps must be affixed to the outermost retail packaging where required. Retailers selling/distributing only duty-paid products do not need to apply for Vaping Products Duty or the stamp scheme approval themselves, but must retain evidence that products are legitimate.
