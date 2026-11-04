@@ -4032,12 +4032,12 @@ strong{font-weight:600; color:#fff}
       ((MASTER_PLATFORM[p.key] || {}).podOhms || []).forEach(function(o){ if (podOhms.indexOf(o) === -1) podOhms.push(o); });
       ((MASTER_PLATFORM[p.key] || {}).coilOhms || []).forEach(function(o){ if (coilOhms.indexOf(o) === -1) coilOhms.push(o); });
     });
-    var q = "What does " + b.name + " make, and which pod platforms are relevant?";
-    var answer = "PodLookup records " + b.devices.length + " " + b.name + " refillable pod "
+    var q = "What does " + b.name + " make, and which pod or cartridge systems are relevant?";
+    var answer = "PodLookup records " + b.devices.length + " " + b.name + " refillable vape "
       + (b.devices.length === 1 ? "device" : "devices") + " across the " + listText(b.families) + " "
       + (b.families.length === 1 ? "family" : "families") + ": " + listText(devNames) + "."
       + (plats.length
-          ? " The pod " + (plats.length === 1 ? "platform" : "platforms") + " relevant to "
+          ? " The pod/cartridge " + (plats.length === 1 ? "platform" : "platforms") + " relevant to "
             + (plats.length === 1 ? "these devices is " : "these devices are ")
             + listText(plats.map(function(p){ return p.key; })) + "."
           : " No pod platform is established for these devices in our dataset.")
@@ -4060,7 +4060,7 @@ strong{font-weight:600; color:#fff}
       ["Brand", esc(b.name)],
       ["Verified devices", b.devices.length + (b.devices.length === 1 ? " device" : " devices")],
       ["Device families", esc(listText(b.families))],
-      ["Verified pod platforms", plats.length
+      ["Verified pod/cartridge platforms", plats.length
           ? esc(listText(plats.map(function(p){ return p.key; })))
           : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
       ["Pod resistances available", podOhms.length ? ohmChips(podOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
