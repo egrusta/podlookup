@@ -62,6 +62,10 @@ From **29 October 2026**, promotional free distribution and substantial promotio
 - [ ] Do not display prices, delivery promises, stock levels or “in stock” statements unless they are backed by a real supplier/fulfilment process.
 - [ ] Ensure payment, order, customer-service and age-verification providers have been assessed for data protection, security and contractual suitability.
 - [ ] Test failed age checks, abandoned orders, chargebacks, refunds, returns, recall notices and customer-data deletion before launch.
+- [ ] Provide required pre-contract information before the customer is bound, including trader identity/contact details, product characteristics, total price, delivery arrangements, complaints contact and applicable cancellation information/form.
+- [ ] Implement the normal 14-day distance-sales cancellation right for goods unless a specific statutory exception genuinely applies. Do not assume opened vape devices, pods or e-liquids are automatically exempt; obtain product-specific legal advice before writing exclusions.
+- [ ] Set up a vape-specific WEEE take-back route for returned vapes and parts (including used pods, coils and batteries). Vape retailers are excluded from the general Distributor Takeback Scheme; keep the recycling contractor, customer instructions and collection evidence on file.
+- [ ] Document safe storage, transport and recycling of returned/damaged lithium-battery devices; do not dispose of them in ordinary waste.
 
 ## 5. PodLookup-specific trust controls
 
