@@ -4175,7 +4175,8 @@ strong{font-weight:600; color:#fff}
     var q = "Which pods fit the " + b.name + " " + d.device + "?";
     var answer, answerRows;
     if (verified){
-      answer = "Pods that fit the " + b.name + " " + d.device + " are the pods built for the " + d.pods + " pod platform this device runs."
+      answer = "Pods that fit the " + b.name + " " + d.device + " are the standard cartridges built for the " + d.pods + " pod platform this device runs."
+        + (d.platformKey === "Xlim Pods" ? " OXVA's 0.4Ω Top Fill cartridge is a model-specific exception: OXVA lists it only for Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic." : "")
         + (d.podOhms.length ? " Pod resistances available for that platform are " + listText(d.podOhms) + "." : "")
         + (pods.length
             ? " Replacement pod products listed for this device on this storefront: " + listText(pods.map(function(x){ return x.name; })) + "."
@@ -4226,7 +4227,8 @@ strong{font-weight:600; color:#fff}
     var q = "What is the " + b.name + " " + d.device + " compatible with?";
     var answer, answerRows;
     if (verified){
-      answer = "The " + b.name + " " + d.device + " is compatible with the " + d.pods + " pod platform, so every pod built for that platform fits it."
+      answer = "The " + b.name + " " + d.device + " is compatible with the standard " + d.pods + " cartridge platform."
+        + (d.platformKey === "Xlim Pods" ? " OXVA's 0.4Ω Top Fill cartridge is a model-specific exception: OXVA lists it only for Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic." : "")
         + (d.podOhms.length ? " Pod resistances available for that platform are " + listText(d.podOhms) + "." : "")
         + (d.ohms.length ? " The device itself supports " + listText(d.ohms) + "." : "")
         + (pods.length
@@ -4333,9 +4335,12 @@ strong{font-weight:600; color:#fff}
           : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'
       ];
     });
+    var direct = p.key === "Xlim Pods"
+      ? "The standard XLIM V2, Top Fill and prefilled cartridge families fit the listed devices on this platform, except XLIM C. The 0.4Ω Top Fill cartridge is a narrower variant and OXVA lists it only for Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic. Devices on the standard platform: "
+      : "Every pod built for the " + p.key + " platform fits every device on that platform: ";
+    direct += listText(p.devices.map(function(d){ return d.brand + " " + d.device; })) + ".";
     return '<div class="geo-block"><h2>Which devices each ' + esc(p.key) + ' pod fits</h2>'
-      + geoAnswer("Direct answer", "Every pod built for the " + p.key + " platform fits every device on that platform: "
-        + listText(p.devices.map(function(d){ return d.brand + " " + d.device; })) + ".")
+      + geoAnswer("Direct answer", direct)
       + tableHtml(["Replacement pod", "Compatible devices", "Pod resistances available"], rows)
       + '</div>';
   }
