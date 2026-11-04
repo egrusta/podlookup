@@ -4165,7 +4165,11 @@ strong{font-weight:600; color:#fff}
   function platformAuthorityBlock(p){
     var mp = MASTER_PLATFORM[p.key] || {};
     var podOhms = mp.podOhms || [];
-    var q = "Which devices use the " + p.key + " pod platform?";
+    var coilOhms = mp.coilOhms || [];
+    var coilTypes = MASTER_COILS_BY_PLATFORM[p.key] || [];
+    var q = p.key === "Xlim C Cartridge & Coil System"
+      ? "Which devices use the XLIM C cartridge-and-coil system?"
+      : "Which devices use the " + p.key + " pod platform?";
     var devNames = p.devices.map(function(d){ return d.brand + " " + d.device; });
     var pBrands = [];
     p.devices.forEach(function(d){ if (pBrands.indexOf(d.brand) === -1) pBrands.push(d.brand); });
@@ -4173,16 +4177,20 @@ strong{font-weight:600; color:#fff}
       + (p.devices.length === 1 ? "device" : "devices") + " in the PodLookup data "
       + (p.devices.length === 1 ? "runs" : "run") + " the " + p.key + " pod platform: " + listText(devNames) + "."
       + (podOhms.length ? " Pod resistances available for this platform are " + listText(podOhms) + "." : "")
+      + (coilOhms.length ? " Replaceable coil resistance options for this system are " + listText(coilOhms) + "." : "")
       + (p.key === "Xlim Pods" ? " XLIM C uses a separate cartridge-and-changeable-coil system. The 0.4Ω Top Fill cartridge is a restricted variant listed by OXVA only for Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic." : "")
+      + (p.key === "Xlim C Cartridge & Coil System" ? " XLIM C uses its own 2 ml cartridge with replaceable coils; it is not compatible with standard XLIM pods." : "")
       + (p.key === "Caliburn A2 Pods" ? " The 1.2Ω side-refill pod is specific to Caliburn A2S; the 0.9Ω A2 pod is listed for A2, A2S and AK2." : "")
-      + " A pod is built for one platform only, so " + p.key + " pods do not fit devices that use a different platform.";
+      + (p.key === "Xlim C Cartridge & Coil System" ? " This is a cartridge-and-coil system, not an integrated-coil pod platform." : " A pod is built for one platform only, so " + p.key + " pods do not fit devices that use a different platform.");
     var podTypes = MASTER_PODS_BY_PLATFORM[p.key] || [];
     var answerRows = [
       ["Platform", esc(p.key)],
       ["Brand", esc(mp.brand || "")],
       ["Verified devices", p.devices.length + (p.devices.length === 1 ? " device" : " devices")],
       ["Pod resistances available", podOhms.length ? ohmChips(podOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
-      ["Replacement pod type recorded", podTypes.length ? esc(listText(podTypes.map(function(x){ return x.name; }))) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
+      ["Replaceable coil resistance options", coilOhms.length ? ohmChips(coilOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
+      ["Replacement pod/cartridge type recorded", podTypes.length ? esc(listText(podTypes.map(function(x){ return x.name; }))) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
+      ["Replacement coil type recorded", coilTypes.length ? esc(listText(coilTypes.map(function(x){ return x.name; }))) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
       ["Shop products listed", p.podProducts.length ? esc(listText(p.podProducts.map(function(x){ return x.name; }))) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>']
     ];
     var note = PLATFORM_NOTES[p.key];
