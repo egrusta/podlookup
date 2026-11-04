@@ -4238,19 +4238,21 @@ strong{font-weight:600; color:#fff}
         '<a data-geo href="' + esc(geoHref("devices/" + d.brandSlug + "/" + d.slug)) + '">' + esc(d.brand + " " + d.device) + '</a>',
         esc(d.family),
         d.ohms.length ? esc(d.ohms.join(", ")) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>',
+        d.coilOhms && d.coilOhms.length ? esc(d.coilOhms.join(", ")) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>',
         '<a data-geo href="' + esc(geoHref("compatibility/" + d.brandSlug + "/" + d.slug)) + '">What is the ' + esc(d.brand + " " + d.device) + ' compatible with?</a>'
       ];
     });
     var prods = p.podProducts.length
       ? '<div class="fr-matches">' + p.podProducts.map(function(x){ return matchRow(x, "Fits this platform"); }).join("") + '</div>'
-      : '<p class="geo-note fr-missing">' + esc(UNKNOWN) + ' No replacement pod for this platform is listed on this storefront.</p>';
+      : '<p class="geo-note fr-missing">' + esc(UNKNOWN) + (p.key === "Xlim C Cartridge & Coil System" ? ' No replacement cartridge or coil product is listed on this storefront.' : ' No replacement pod for this platform is listed on this storefront.') + '</p>';
+    var platformType = p.key === "Xlim C Cartridge & Coil System" ? "cartridge-and-coil system" : "pod platform";
     var html = crumbsFor(items)
-      + '<p class="geo-kicker">Pod platform</p>'
-      + '<h1>' + esc(p.key) + ' pod platform</h1>'
+      + '<p class="geo-kicker">' + (platformType === "cartridge-and-coil system" ? 'Cartridge and coil system' : 'Pod platform') + '</p>'
+      + '<h1>' + esc(p.key) + ' ' + platformType + '</h1>'
       + platformAuthorityBlock(p)
       + '<div class="geo-block"><h2>Devices that use ' + esc(p.key) + '</h2>'
-        + tableHtml(["Device", "Device family", "Device resistance options", "Compatibility"], rows) + '</div>'
-      + '<div class="geo-block"><h2>' + esc(p.key) + ' replacement pods</h2>' + prods + '</div>'
+        + tableHtml(["Device", "Device family", "Device resistance options", "Replaceable coil options", "Compatibility"], rows) + '</div>'
+      + '<div class="geo-block"><h2>' + esc(p.key) + (platformType === "cartridge-and-coil system" ? ' replacement cartridge and coils' : ' replacement pods') + '</h2>' + prods + '</div>'
       + podDevicesBlockHtml(p)
       + relatedPlatformsBlockHtml(p)
       + brandsBlockHtml(p.devices)
@@ -4264,8 +4266,10 @@ strong{font-weight:600; color:#fff}
       })
     }];
     showGeo(html, {
-      title: "Which devices use the " + p.key + " pod platform? | PodLookup",
-      description: "The devices recorded on the " + p.key + " pod platform, the pod resistances available for it and the replacement pods that fit them, from the PodLookup compatibility data.",
+      title: (p.key === "Xlim C Cartridge & Coil System" ? "Which devices use the XLIM C cartridge-and-coil system?" : "Which devices use the " + p.key + " pod platform?") + " | PodLookup",
+      description: p.key === "Xlim C Cartridge & Coil System"
+        ? "The OXVA XLIM C uses a dedicated 2 ml cartridge and replaceable coils. See verified 0.6Ω, 0.8Ω and 1.2Ω coil options and the separate standard XLIM pod platform."
+        : "The devices recorded on the " + p.key + " pod platform, the pod resistances available for it and the replacement pods that fit them, from the PodLookup compatibility data.",
       url: geoHref("platforms/" + p.slug)
     }, nodes);
   }
