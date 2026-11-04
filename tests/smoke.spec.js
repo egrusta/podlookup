@@ -198,6 +198,6 @@ test.describe('PodLookup SEO publication regression', () => {
     await page.goto('/?p=__podlookup-regression-unknown-route__');
     await expect(page).toHaveTitle('Information currently unavailable | PodLookup');
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
-    await expect(page.locator('main')).toContainText('That device or platform is not in the PodLookup compatibility data.');
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', 'That device or platform is not in the PodLookup compatibility data.');
   });
 });
