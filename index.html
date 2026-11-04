@@ -1405,7 +1405,7 @@ strong{font-weight:600; color:#fff}
 
       <h3>Guides</h3>
       <ul>
-        <li><strong>Which pod fits my device?</strong> Pods are made for a pod platform, not a single device. OXVA standard XLIM cartridges fit the listed XLIM devices except XLIM C, which uses its own cartridge and replaceable coils. The 0.4Ω Top Fill cartridge has a narrower model-specific compatibility list. UWELL GPP cartridges are shared by the Caliburn G3, G4, G5, Air and Air R devices; A2, A3 and G/G2 use separate platforms, and the original Caliburn remains UNKNOWN.</li>
+        <li><strong>Which pod fits my device?</strong> Pods are made for a pod platform, not a single device. OXVA standard XLIM cartridges fit the listed XLIM devices except XLIM C, which uses its own cartridge and replaceable coils. The 0.4Ω Top Fill cartridge has a narrower model-specific compatibility list. UWELL GPP cartridges are shared by the Caliburn G3, G4, G5, Air and Air R devices; A2, A3 and G/G2 use separate platforms, and the original Caliburn has its own refillable pod, with resistance and cross-model fit UNKNOWN.</li>
         <li><strong>XROS compatibility guide</strong> The XROS 3, XROS 4, XROS 4 Mini, XROS 5 and XROS 5 Mini all take the current XROS pod platform. 0.4Ω and 0.6Ω run warmer with more vapour, 0.8Ω is the balanced middle ground, and 1.0Ω and 1.2Ω give a tighter draw and longer battery life.</li>
         <li><strong>XROS vs XLIM</strong> The XROS is slightly airier and more forgiving of different liquids; the Xlim is tighter and more adjustable. Replacement pods for both sit in a similar price band, so running cost is broadly equivalent.</li>
         <li><strong>How replacement pods work</strong> A pod is a consumable that holds the coil and wick. A burnt taste that does not fade, noticeably weak flavour or a leaking base all mean it is time to change. How heavily you vape matters more than any fixed figure.</li>
@@ -1436,7 +1436,7 @@ strong{font-weight:600; color:#fff}
         <dt>Do you sell nicotine products?</dt>
         <dd>No. This prototype has no nicotine products, no checkout and no age verification. A production version would need full UK age verification and regulatory compliance before any transaction.</dd>
         <dt>How do I know which device I have?</dt>
-        <dd>Check the exact model name printed on the body. UWELL's G3, G4, G5, Air and Air R devices use GPP cartridges; A2/A2S/AK2, A3/A3S/AK3/AZ3 and G/G2 use separate platforms. The original Caliburn remains UNKNOWN in our data.</dd>
+        <dd>Check the exact model name printed on the body. UWELL's G3, G4, G5, Air and Air R devices use GPP cartridges; A2/A2S/AK2, A3/A3S/AK3/AZ3 and G/G2 use separate platforms. The original Caliburn has its own 2 ml refillable pod; resistance and cross-model fit remain UNKNOWN.</dd>
         <dt>Which devices use the XROS Pods pod platform?</dt>
         <dd>The XROS Pods pod platform (2 ml, top-fill) is recorded for the Vaporesso XROS 6, XROS 6 Mini, XROS PRO 2, XROS 5, XROS 5 Mini, XROS 4, XROS 4 Mini and XROS 3. The pod platform is shared across these devices, while device-supported resistance options can differ by model.</dd>
         <dt>Which devices use the Xlim Pods pod platform?</dt>
@@ -1454,7 +1454,7 @@ strong{font-weight:600; color:#fff}
         <dt>How do I check whether a pod fits my device?</dt>
         <dd>Check the device's recorded pod platform, then check that the pod is recorded for that same platform. A pod fits only where the dataset records both on one pod platform — never because they share a brand, a family name, a model number or a resistance.</dd>
         <dt>Can I use a pod from the same brand in my device?</dt>
-        <dd>Not by itself. A shared brand is not a compatibility record. Uwell records four separate Caliburn pod platforms (G / G2, GPP, A2 and A3), so a Uwell pod recorded for one platform is not recorded for a device on another. Pods fit only when the device and the pods share one recorded pod platform.</dd>
+        <dd>Not by itself. A shared brand is not a compatibility record. Uwell records five separate Caliburn pod platforms (original, G / G2, GPP, A2 and A3), so a Uwell pod recorded for one platform is not recorded for a device on another. Pods fit only when the device and the pods share one recorded pod platform.</dd>
         <dt>Does the pod resistance determine compatibility?</dt>
         <dd>No. Pod resistance is a specification of the pod platform and device resistance is a specification of the device; the dataset records no rule linking a resistance value to fit. A pod fits because it shares the device's recorded pod platform.</dd>
         <dt>What if my exact device or pod is not listed?</dt>
@@ -1896,7 +1896,7 @@ strong{font-weight:600; color:#fff}
     { q: "Do you sell nicotine products?",
       a: "No. This prototype has no nicotine products, no checkout and no age verification. A production version would need full UK age verification and regulatory compliance before any transaction." },
     { q: "How do I know which device I have?",
-      a: "Check the exact model name printed on the body. UWELL's G3, G4, G5, Air and Air R devices use GPP; A2/A2S/AK2, A3/A3S/AK3/AZ3 and G/G2 use separate platforms. The original Caliburn remains UNKNOWN in our data." }
+      a: "Check the exact model name printed on the body. UWELL's G3, G4, G5, Air and Air R devices use GPP; A2/A2S/AK2, A3/A3S/AK3/AZ3 and G/G2 use separate platforms. The original Caliburn has its own 2 ml refillable pod; resistance and cross-model fit remain UNKNOWN." }
   ];
 
   /* ---- helpers ---- */
@@ -2811,10 +2811,10 @@ strong{font-weight:600; color:#fff}
       + '</div>'
       + '<div class="geo-block">'
       + '<h2>Can I use a pod from the same brand in my device?</h2>'
-      + geoAnswer("Direct answer", "Not by itself. A shared brand is not a compatibility record \u2014 compatibility is the recorded pod-platform relationship. A brand can run more than one pod platform: Uwell records four separate Caliburn pod platforms (G / G2, GPP, A2 and A3), so a Uwell pod recorded for one platform is not recorded for a device on another. Pods fit a device only when that device and those pods share one recorded pod platform, regardless of the brand printed on them.")
+      + geoAnswer("Direct answer", "Not by itself. A shared brand is not a compatibility record \u2014 compatibility is the recorded pod-platform relationship. A brand can run more than one pod platform: Uwell records five separate Caliburn pod platforms (original, G / G2, GPP, A2 and A3), so a Uwell pod recorded for one platform is not recorded for a device on another. Pods fit a device only when that device and those pods share one recorded pod platform, regardless of the brand printed on them.")
       + '<h4>What the dataset records</h4>'
       + '<ul>'
-      + '<li><strong>Uwell</strong> — four separate pod platforms: Caliburn G / G2 Pods (G and G2 replaceable-coil system), Caliburn GPP Pods (G3/G4/G5/Air/Air R integrated-coil cartridges), Caliburn A2 Pods (A2/A2S/AK2, with the 1.2Ω side-refill variant specific to A2S) and Caliburn A3 Pods (A3/A3S/AK3/AZ3 integrated-coil cartridges).</li>'
+      + '<li><strong>Uwell</strong> — five separate pod platforms: Caliburn Original Pods (original Caliburn refillable pod; resistance and cross-model fit UNKNOWN), Caliburn G / G2 Pods (G and G2 replaceable-coil system), Caliburn GPP Pods (G3/G4/G5/Air/Air R integrated-coil cartridges), Caliburn A2 Pods (A2/A2S/AK2, with the 1.2Ω side-refill variant specific to A2S) and Caliburn A3 Pods (A3/A3S/AK3/AZ3 integrated-coil cartridges).</li>'
       + '<li><strong>Vaporesso</strong> \u2014 one pod platform, XROS Pods, recorded across the XROS-series devices listed here.</li>'
       + '<li><strong>OXVA</strong> \u2014 one pod platform, Xlim Pods, recorded across the Xlim devices listed here.</li>'
       + '</ul>'
@@ -4138,7 +4138,7 @@ strong{font-weight:600; color:#fff}
     "XROS Pods": "The XROS pod platform is shared across the whole XROS series. Every device listed here runs the current-generation XROS pods, so they all take the same replacement pods; the models differ in device specifications, not in pod fit.",
     "Xlim Pods": "The standard XLIM cartridge platform is shared by the devices listed here; XLIM C is a separate cartridge-and-changeable-coil system and is not part of this platform. Cartridge variants still have model-specific limits: OXVA lists the 0.4Ω Top Fill cartridge only for Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic. Do not treat every resistance variant as a universal fit.",
     "Caliburn G / G2 Pods": "The Caliburn G / G2 platform covers the Caliburn G and Caliburn G2 only. The Caliburn G3, G4, G5 and Air series use GPP; A2/A2S/AK2 use A2 pods; A3/A3S/AK3/AZ3 use A3 pods; and the original Caliburn uses its own dedicated refillable pod.",
-    "Caliburn GPP Pods": "UWELL confirms GPP cartridge compatibility across the Caliburn G3, G4 and G5 series, and explicitly confirms all GPP cartridges fit Caliburn Air and Air R. GPP cartridges have integrated coils and are not compatible with the separate Caliburn G / G2, A2 or A3 platforms. The original Caliburn remains UNKNOWN in this dataset.",
+    "Caliburn GPP Pods": "UWELL confirms GPP cartridge compatibility across the Caliburn G3, G4 and G5 series, and explicitly confirms all GPP cartridges fit Caliburn Air and Air R. GPP cartridges have integrated coils and are not compatible with the separate Caliburn G / G2, A2, A3 or original Caliburn platforms.",
     "Caliburn A2 Pods": "The Caliburn A2 platform covers A2, A2S and AK2. UWELL lists the 0.9Ω A2 pod for the A2 and AK2, and states A2S is compatible with that pod as well as its own 1.2Ω side-refill pod.",
      "Caliburn A3 Pods": "The Caliburn A3 platform is shared by A3, A3S, AK3 and AZ3. UWELL's AZ3 page shows the four devices in its wide-compatibility panel and lists 0.8Ω and 1.0Ω A3 refillable pods; it does not share pods with GPP, A2, G / G2 or the original Caliburn.",
     "Caliburn Original Pods": "UWELL's official original Caliburn product page confirms its own 2 ml refillable pod. Resistance options and compatibility with other Caliburn models are not established, so no cross-model fit is stated."
