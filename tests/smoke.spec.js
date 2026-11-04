@@ -201,3 +201,15 @@ test.describe('PodLookup SEO publication regression', () => {
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', 'That device or platform is not in the PodLookup compatibility data.');
   });
 });
+
+
+test.describe('PodLookup demo storefront trust copy', () => {
+  test('delivery banner does not promise a live shipping service', async ({ page }) => {
+    await page.goto('/');
+    const announcement = page.locator('.announce');
+    await expect(announcement).toContainText('Demo only');
+    await expect(announcement).toContainText('delivery terms are illustrative');
+    await expect(announcement).not.toContainText('Free UK delivery');
+    await expect(announcement).toContainText('Demo storefront — no orders are placed');
+  });
+});
