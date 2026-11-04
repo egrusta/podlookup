@@ -22,6 +22,7 @@ PodLookup is an information-first catalogue for Vaporesso, OXVA and UWELL refill
 
 - [XROS Pods](https://podlookup.co.uk/?p=platforms/xros-pods)
 - [Xlim Pods](https://podlookup.co.uk/?p=platforms/xlim-pods)
+- [Xlim C Cartridge & Coil System](https://podlookup.co.uk/?p=platforms/xlim-c-cartridge-coil-system)
 - [Caliburn G / G2 Pods](https://podlookup.co.uk/?p=platforms/caliburn-g-g2-pods)
 - [Caliburn GPP Pods](https://podlookup.co.uk/?p=platforms/caliburn-gpp-pods)
 - [Caliburn A2 Pods](https://podlookup.co.uk/?p=platforms/caliburn-a2-pods)
@@ -53,6 +54,7 @@ PodLookup is an information-first catalogue for Vaporesso, OXVA and UWELL refill
 - [Xlim SQ](https://podlookup.co.uk/?p=devices/oxva/xlim-sq) — Xlim Pods
 - [Xlim Crystal](https://podlookup.co.uk/?p=devices/oxva/xlim-crystal) — Xlim Pods
 - [Xlim POD](https://podlookup.co.uk/?p=devices/oxva/xlim-pod) — Xlim Pods
+- [Xlim C](https://podlookup.co.uk/?p=devices/oxva/xlim-c) — Xlim C Cartridge & Coil System (2 ml cartridge; replaceable 0.6Ω, 0.8Ω and 1.2Ω coils)
 
 ### Uwell
 
@@ -91,7 +93,7 @@ PodLookup is an information-first catalogue for Vaporesso, OXVA and UWELL refill
 ## Key compatibility answers
 
 - **Vaporesso XROS:** The XROS 3, 4, 4 Mini, 5, 5 Mini, 6, 6 Mini and XROS PRO 2 are recorded on the shared XROS Pods platform. Device-supported resistance options can differ by model.
-- **OXVA XLIM:** The standard Xlim Pods platform is recorded for the listed Xlim Pro, Pro 2, SE, SQ Pro, Classic, GO, SE 2, SQ, Crystal and POD devices. XLIM C is a separate cartridge/replaceable-coil system; check the exact cartridge format and device.
+- **OXVA XLIM:** The standard Xlim Pods platform is recorded for the listed Xlim Pro, Pro 2, SE, SQ Pro, Classic, GO, SE 2, SQ, Crystal and POD devices. XLIM C is a separate 2 ml cartridge/replaceable-coil system with 0.6Ω, 0.8Ω and 1.2Ω coil options; it does not use standard integrated-coil XLIM pods.
 - **UWELL Caliburn G / G2:** These use the separate Caliburn G / G2 pod platform; it is not interchangeable with GPP.
 - **UWELL Caliburn GPP:** GPP is recorded for Caliburn G3, G4 and G5 families and Caliburn Air / Air R. It does not fit Caliburn G / G2, A2 or A3 devices.
 - **UWELL Caliburn A2 and A3:** These are separate pod platforms; do not assume cross-compatibility between A2, A3 and GPP.
@@ -100,6 +102,7 @@ PodLookup is an information-first catalogue for Vaporesso, OXVA and UWELL refill
 ## Frequently asked questions
 
 - Which pods fit the Vaporesso XROS 5?
+- Which cartridge and replaceable coils fit the OXVA Xlim C?
 - Are Xlim pods the same across the whole OXVA range?
 - Do Caliburn G2 pods fit the Caliburn G3?
 - Which pods fit Caliburn A2, A2S and AK2?
