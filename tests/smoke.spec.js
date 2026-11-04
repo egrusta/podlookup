@@ -230,3 +230,34 @@ test.describe('PodLookup demo storefront trust copy', () => {
     await expect(announcement).toContainText('Demo storefront — no orders are placed');
   });
 });
+
+
+test.describe('PodLookup complete device-route coverage', () => {
+  test('every device in the reference table has working device and compatibility pages', async ({ page }) => {
+    test.setTimeout(120000);
+    await page.goto('/');
+    const routes = await page.locator('#geoNoscript tr[data-ns-device]').evaluateAll(rows => rows.map(row => {
+      const links = [...row.querySelectorAll('a[href]')];
+      return {
+        device: row.cells[1]?.innerText.trim() || '',
+        deviceHref: links.find(link => link.getAttribute('href')?.includes('?p=devices/'))?.getAttribute('href') || '',
+        compatibilityHref: links.find(link => link.getAttribute('href')?.includes('?p=compatibility/'))?.getAttribute('href') || ''
+      };
+    }));
+
+    expect(routes).toHaveLength(50);
+    for (const route of routes) {
+      expect(route.device).toBeTruthy();
+      expect(route.deviceHref).toContain('?p=devices/');
+      expect(route.compatibilityHref).toContain('?p=compatibility/');
+
+      for (const href of [route.deviceHref, route.compatibilityHref]) {
+        const response = await page.goto('/' + href);
+        expect(response?.ok(), href + ' should load successfully').toBeTruthy();
+        await expect(page.locator('main'), href + ' should show the correct model').toContainText(route.device);
+        await expect(page.locator('meta[name="description"]')).not.toHaveAttribute('content', '');
+        await expect(page.locator('title')).not.toContainText('Information currently unavailable');
+      }
+    }
+  });
+});
