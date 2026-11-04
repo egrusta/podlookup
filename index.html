@@ -5185,7 +5185,10 @@ strong{font-weight:600; color:#fff}
       var mp = MASTER_PLATFORM[p.key];
       if (!mp){ err("Platform page '" + p.key + "' has no master-dataset platform entry (orphan)."); return; }
       var text = platformAuthorityBlock(p).replace(/<[^>]*>/g, " ").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
-      if (text.indexOf("Which devices use the " + p.key + " pod platform?") === -1)
+      var platformQuestion = p.key === "Xlim C Cartridge & Coil System"
+        ? "Which devices use the XLIM C cartridge-and-coil system?"
+        : "Which devices use the " + p.key + " pod platform?";
+      if (text.indexOf(platformQuestion) === -1)
         err("Platform page '" + p.key + "' has no 'Which devices use…?' direct answer.");
       p.devices.forEach(function(d){
         if (text.indexOf(d.brand + " " + d.device) === -1)
@@ -5418,15 +5421,23 @@ strong{font-weight:600; color:#fff}
       if (plain.indexOf("Which pods fit the OXVA XLIM devices?") === -1)
         err("XLIM guide does not ask 'Which pods fit the OXVA XLIM devices?'.");
 
-      var xlimDevices = ENTITY.devices.filter(function(d){ return d.family === "XLIM"; });
+      var xlimDevices = ENTITY.devices.filter(function(d){ return d.family === "XLIM" && d.platformKey === "Xlim Pods"; });
       if (!xlimDevices.length) err("XLIM guide: the dataset has no XLIM devices.");
       xlimDevices.forEach(function(d){
-        if (plain.indexOf(d.device) === -1) err("XLIM guide omits XLIM device '" + d.device + "'.");
+        if (plain.indexOf(d.device) === -1) err("XLIM guide omits standard-platform device '" + d.device + "'.");
         if (text.indexOf(geoHref("devices/oxva/" + d.slug)) === -1)
           err("XLIM guide has no canonical device link for '" + d.device + "'.");
         if (text.indexOf(geoHref("compatibility/oxva/" + d.slug)) === -1)
           err("XLIM guide has no canonical compatibility link for '" + d.device + "'.");
       });
+      var xlimC = ENTITY.devices.filter(function(d){ return d.brandSlug === "oxva" && d.slug === "xlim-c"; })[0];
+      if (!xlimC) err("XLIM guide: the dedicated XLIM C device entity is missing.");
+      else {
+        if (plain.indexOf("XLIM C") === -1 || plain.indexOf("0.6Ω") === -1 || plain.indexOf("0.8Ω") === -1 || plain.indexOf("1.2Ω") === -1)
+          err("XLIM guide does not describe the separate XLIM C cartridge-and-coil system.");
+        if (text.indexOf(geoHref("devices/oxva/xlim-c")) === -1 || text.indexOf(geoHref("compatibility/oxva/xlim-c")) === -1 || text.indexOf(geoHref("platforms/xlim-c-cartridge-coil-system")) === -1)
+          err("XLIM guide is missing canonical links for the dedicated XLIM C system.");
+      }
 
       var mp = MASTER_PLATFORM["Xlim Pods"];
       if (!mp) err("XLIM guide: the dataset has no 'Xlim Pods' platform.");
@@ -5988,17 +5999,17 @@ strong{font-weight:600; color:#fff}
       ENTITY.devices.forEach(function(d){
         var b = findBrandBySlug(d.brandSlug);
         if (!b) return;
-        requireQuestion("Device page '" + d.brand + " " + d.device + "'", devicePodsFitBlock(d, b), "Which pods fit the " + d.brand + " " + d.device + "?");
+        requireQuestion("Device page '" + d.brand + " " + d.device + "'", devicePodsFitBlock(d, b), d.platformKey === "Xlim C Cartridge & Coil System" ? "Which cartridge and coils fit the OXVA Xlim C?" : "Which pods fit the " + d.brand + " " + d.device + "?");
         requireQuestion("Compatibility page '" + d.brand + " " + d.device + "'", compatFitBlock(d, b), "What is the " + d.brand + " " + d.device + " compatible with?");
         aiInfo.questions += 2;
       });
       ENTITY.platforms.forEach(function(p){
-        requireQuestion("Platform page '" + p.key + "'", platformAuthorityBlock(p), "Which devices use the " + p.key + " pod platform?");
+        requireQuestion("Platform page '" + p.key + "'", platformAuthorityBlock(p), p.key === "Xlim C Cartridge & Coil System" ? "Which devices use the XLIM C cartridge-and-coil system?" : "Which devices use the " + p.key + " pod platform?");
         aiInfo.questions++;
       });
       ENTITY.brands.forEach(function(b){
         var data = brandPageData(b);
-        requireQuestion("Brand page '" + b.name + "'", data.html, "What does " + b.name + " make, and which pod platforms are relevant?");
+        requireQuestion("Brand page '" + b.name + "'", data.html, "What does " + b.name + " make, and which pod or cartridge systems are relevant?");
         if (b.devices[0]) requireQuestion("Brand page '" + b.name + "'", data.html, "Which pods fit the " + b.name + " " + b.devices[0].device + "?");
         aiInfo.questions += 2;
       });
@@ -6338,7 +6349,11 @@ strong{font-weight:600; color:#fff}
 
       /* 24c. priority question-led answers present in crawlable content */
       var nsQuestions = [];
-      ENTITY.platforms.forEach(function(p){ nsQuestions.push("Which devices use the " + p.key + " pod platform?"); });
+      ENTITY.platforms.forEach(function(p){
+        nsQuestions.push(p.key === "Xlim C Cartridge & Coil System"
+          ? "Which devices use the XLIM C cartridge-and-coil system?"
+          : "Which devices use the " + p.key + " pod platform?");
+      });
       (whichPodGuideBody().match(/<h2>([^<]+)<\/h2>/g) || []).forEach(function(h){ nsQuestions.push(h.replace(/<\/?h2>/g, "")); });
       (POD_TROUBLE_FACTS.symptoms || []).forEach(function(s){ nsQuestions.push(s.question); });
       nsQuestions.push("Can I use XROS pods in an Xlim or Caliburn device?");
