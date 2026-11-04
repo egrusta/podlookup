@@ -1575,10 +1575,11 @@ strong{font-weight:600; color:#fff}
      ========================================================================== */
   var MASTER = {
     sourceOfTruth: "index.html (embedded MASTER; JSON mirror absent)",
-    meta: { claimCount: 393, verified: 338, unknown: 24, notApplicable: 22, conflict: 6, partial: 3, sources: 20, devices: 49, pods: 8, platforms: 7, products: 7 },
+    meta: { claimCount: 393, verified: 338, unknown: 24, notApplicable: 22, conflict: 6, partial: 3, sources: 20, devices: 50, pods: 9, platforms: 8, coils: 1, products: 7 },
     platforms: [
       { key: "XROS Pods", brand: "Vaporesso", podOhms: ["0.4Ω", "0.6Ω", "0.8Ω", "1.0Ω", "1.2Ω"] },
       { key: "Xlim Pods", brand: "OXVA", podOhms: ["0.4Ω", "0.6Ω", "0.8Ω", "1.2Ω"] },
+      { key: "Xlim C Cartridge & Coil System", brand: "OXVA", podOhms: [], coilOhms: ["0.6Ω", "0.8Ω", "1.2Ω"] },
       { key: "Caliburn G / G2 Pods", brand: "Uwell", podOhms: ["0.8Ω", "1.0Ω", "1.2Ω"] },
       { key: "Caliburn GPP Pods", brand: "Uwell", podOhms: ["0.4Ω", "0.6Ω", "0.9Ω", "1.2Ω"] },
       { key: "Caliburn A2 Pods", brand: "Uwell", podOhms: ["0.9Ω", "1.2Ω"] },
@@ -1664,6 +1665,7 @@ strong{font-weight:600; color:#fff}
       { brand: "OXVA", device: "Xlim SQ", family: "XLIM", platform: "Xlim Pods (2 ml)", platformKey: "Xlim Pods", platformStatus: "VERIFIED", ohms: [], ohmsStatus: "UNKNOWN", podOhms: ["0.4Ω", "0.6Ω", "0.8Ω", "1.2Ω"], note: "OXVA lists XLIM SQ as compatible with standard XLIM cartridges. Device resistance options remain UNKNOWN. The 0.4Ω Top Fill cartridge is not included in OXVA's restricted compatibility list for this model.", productId: null },
       { brand: "OXVA", device: "Xlim Crystal", family: "XLIM", platform: "Xlim Pods (2 ml)", platformKey: "Xlim Pods", platformStatus: "VERIFIED", ohms: [], ohmsStatus: "UNKNOWN", podOhms: ["0.4Ω", "0.6Ω", "0.8Ω", "1.2Ω"], note: "OXVA lists XLIM Crystal as compatible with standard XLIM cartridges. Device resistance options remain UNKNOWN. The 0.4Ω Top Fill cartridge is not included in OXVA's restricted compatibility list for this model.", productId: null },
       { brand: "OXVA", device: "Xlim POD", family: "XLIM", platform: "Xlim Pods (2 ml)", platformKey: "Xlim Pods", platformStatus: "VERIFIED", ohms: [], ohmsStatus: "UNKNOWN", podOhms: ["0.4Ω", "0.6Ω", "0.8Ω", "1.2Ω"], note: "OXVA lists XLIM POD as compatible with standard XLIM cartridges. Device resistance options remain UNKNOWN. The 0.4Ω Top Fill cartridge is not included in OXVA's restricted compatibility list for this model.", productId: null },
+      { brand: "OXVA", device: "Xlim C", family: "XLIM", platform: "Xlim C Cartridge & Coil System (2 ml)", platformKey: "Xlim C Cartridge & Coil System", platformStatus: "VERIFIED", ohms: [], ohmsStatus: "UNKNOWN", podOhms: [], coilOhms: ["0.6Ω", "0.8Ω", "1.2Ω"], note: "OXVA's official XLIM C page specifies a 2 ml cartridge with replaceable XLIM C coils in 0.6Ω, 0.8Ω and 1.2Ω options. XLIM C uses its own cartridge-and-coil system, not standard XLIM integrated-coil pods.", productId: null },
       { brand: "Uwell", device: "Caliburn", family: "Caliburn",
         platform: "Caliburn Original Pods (2 ml)", platformKey: "Caliburn Original Pods", platformStatus: "VERIFIED",
         ohms: [], ohmsStatus: "UNKNOWN", podOhms: [],
@@ -1722,19 +1724,24 @@ strong{font-weight:600; color:#fff}
       { name: "Vaporesso XROS Pods", brand: "Vaporesso", platformKey: "XROS Pods" },
       { name: "OXVA XLIM Top Fill Cartridge", brand: "OXVA", platformKey: "Xlim Pods" },
       { name: "OXVA XLIM V2 Cartridge", brand: "OXVA", platformKey: "Xlim Pods" },
+      { name: "OXVA XLIM C Cartridge", brand: "OXVA", platformKey: "Xlim C Cartridge & Coil System" },
       { name: "Uwell Caliburn G / G2 Pods", brand: "Uwell", platformKey: "Caliburn G / G2 Pods" },
       { name: "Uwell Caliburn GPP Pods", brand: "Uwell", platformKey: "Caliburn GPP Pods" },
       { name: "Uwell Caliburn A2 Pods", brand: "Uwell", platformKey: "Caliburn A2 Pods" },
       { name: "Uwell Caliburn Original Pods", brand: "Uwell", platformKey: "Caliburn Original Pods" },
       { name: "Uwell Caliburn A3 Pods", brand: "Uwell", platformKey: "Caliburn A3 Pods" }
+    ],
+    coils: [
+      { name: "OXVA XLIM C Coils", brand: "OXVA", platformKey: "Xlim C Cartridge & Coil System", ohms: ["0.6Ω", "0.8Ω", "1.2Ω"] }
     ]
   };
   // Derive the inventory count from the actual records to prevent future metadata drift.
   MASTER.meta.devices = MASTER.devices.length;
-  var MASTER_BY_DEVICE = {}, MASTER_PLATFORM = {}, MASTER_PODS_BY_PLATFORM = {};
+  var MASTER_BY_DEVICE = {}, MASTER_PLATFORM = {}, MASTER_PODS_BY_PLATFORM = {}, MASTER_COILS_BY_PLATFORM = {};
   MASTER.devices.forEach(function(d){ MASTER_BY_DEVICE[d.brand + "|" + d.device] = d; });
   MASTER.platforms.forEach(function(p){ MASTER_PLATFORM[p.key] = p; });
   MASTER.pods.forEach(function(p){ (MASTER_PODS_BY_PLATFORM[p.platformKey] = MASTER_PODS_BY_PLATFORM[p.platformKey] || []).push(p); });
+  MASTER.coils.forEach(function(c){ (MASTER_COILS_BY_PLATFORM[c.platformKey] = MASTER_COILS_BY_PLATFORM[c.platformKey] || []).push(c); });
 
   var PRODUCTS = [
     {
