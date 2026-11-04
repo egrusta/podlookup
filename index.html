@@ -4164,6 +4164,7 @@ strong{font-weight:600; color:#fff}
       + (p.devices.length === 1 ? "runs" : "run") + " the " + p.key + " pod platform: " + listText(devNames) + "."
       + (podOhms.length ? " Pod resistances available for this platform are " + listText(podOhms) + "." : "")
       + (p.key === "Xlim Pods" ? " XLIM C uses a separate cartridge-and-changeable-coil system. The 0.4Ω Top Fill cartridge is a restricted variant listed by OXVA only for Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic." : "")
+      + (p.key === "Caliburn A2 Pods" ? " The 1.2Ω side-refill pod is specific to Caliburn A2S; the 0.9Ω A2 pod is listed for A2, A2S and AK2." : "")
       + " A pod is built for one platform only, so " + p.key + " pods do not fit devices that use a different platform.";
     var podTypes = MASTER_PODS_BY_PLATFORM[p.key] || [];
     var answerRows = [
@@ -4246,8 +4247,9 @@ strong{font-weight:600; color:#fff}
   function platformPeersSentence(d){
     var peers = platformPeers(d);
     if (!peers.length) return "";
-    return " The same replacement pods fit every other device on the " + d.platformKey + " platform: "
-      + listText(peers.map(function(x){ return x.brand + " " + x.device; })) + ".";
+    return " Other devices recorded on the same " + d.platformKey + " platform are: "
+      + listText(peers.map(function(x){ return x.brand + " " + x.device; }))
+      + ". Check the platform's model-specific cartridge notes before choosing a resistance or variant.";
   }
 
   /* A device with no established pod platform links nowhere — UNKNOWN stays UNKNOWN. */
@@ -4270,6 +4272,7 @@ strong{font-weight:600; color:#fff}
     if (verified){
       answer = "Pods that fit the " + b.name + " " + d.device + " are the standard cartridges built for the " + d.pods + " pod platform this device runs."
         + (d.platformKey === "Xlim Pods" ? " OXVA's 0.4Ω Top Fill cartridge is a model-specific exception: OXVA lists it only for Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic." : "")
+        + (d.platformKey === "Caliburn A2 Pods" ? " The 1.2Ω side-refill pod is listed for A2S only; the 0.9Ω A2 pod is listed for A2, A2S and AK2." : "")
         + (d.podOhms.length ? " Pod resistances available for that platform are " + listText(d.podOhms) + "." : "")
         + (pods.length
             ? " Replacement pod products listed for this device on this storefront: " + listText(pods.map(function(x){ return x.name; })) + "."
@@ -4322,6 +4325,7 @@ strong{font-weight:600; color:#fff}
     if (verified){
       answer = "The " + b.name + " " + d.device + " is compatible with the standard " + d.pods + " cartridge platform."
         + (d.platformKey === "Xlim Pods" ? " OXVA's 0.4Ω Top Fill cartridge is a model-specific exception: OXVA lists it only for Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic." : "")
+        + (d.platformKey === "Caliburn A2 Pods" ? " The 1.2Ω side-refill pod is listed for A2S only; the 0.9Ω A2 pod is listed for A2, A2S and AK2." : "")
         + (d.podOhms.length ? " Pod resistances available for that platform are " + listText(d.podOhms) + "." : "")
         + (d.ohms.length ? " The device itself supports " + listText(d.ohms) + "." : "")
         + (pods.length
@@ -4397,9 +4401,9 @@ strong{font-weight:600; color:#fff}
       ];
     });
     return '<div class="geo-block"><h2>Pod alternatives for the ' + esc(b.name + " " + d.device) + '</h2>'
-      + geoAnswer("Direct answer", "The same " + d.pods + " pods fit "
+      + geoAnswer("Direct answer", "These devices are recorded on the same " + d.pods + " platform: "
         + listText(peers.map(function(x){ return x.brand + " " + x.device; }))
-        + ". Any pod built for the " + d.pods + " platform fits each of these devices; a pod from another platform does not.")
+        + ". The platform may have model-specific cartridge or coil variants; check its compatibility note before choosing.")
       + tableHtml(["Alternative device", "Device resistance options", "Pod resistances available"], rows)
       + '</div>';
   }
