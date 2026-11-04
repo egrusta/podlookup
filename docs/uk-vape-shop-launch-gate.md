@@ -74,7 +74,7 @@ From **29 October 2026**, promotional free distribution and substantial promotio
 - [ ] Keep model-specific restrictions visible (for example, XLIM 0.4Ω Top Fill and Caliburn A2S 1.2Ω side-refill limitations).
 - [ ] Keep UNKNOWN values as UNKNOWN until an official manufacturer source resolves them.
 - [ ] Do not imply that a compatibility record means a product is stocked, genuine, MHRA-notified or available to buy. Those are separate checks.
-- [ ] Keep a dated source-review record and re-check manufacturer compatibility information when a model or cartridge is revised.
+- [ ] Keep a dated source-review record and re-check manufacturer compatibility information when a model or cartridge is revised. Use the [device and compatibility source register](DEVICE-SOURCE-REGISTER.md); it currently contains the XLIM C record only, so remaining records still need URL-level migration.
 
 ## 6. Launch sign-off
 
