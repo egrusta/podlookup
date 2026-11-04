@@ -1,0 +1,48 @@
+name: Browser regression
+
+on:
+  push:
+    branches:
+      - "test/**"
+    paths:
+      - "index.html"
+      - "src/**"
+      - "tests/**"
+      - ".github/workflows/browser-regression.yml"
+  pull_request:
+    paths:
+      - "index.html"
+      - "src/**"
+      - "tests/**"
+      - ".github/workflows/browser-regression.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: npm install --no-save playwright
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start local static server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/podlookup-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/podlookup-http.log
+          exit 1
+      - name: Run mobile and desktop regression tests
+        run: node tests/e2e/basket-regression.cjs
