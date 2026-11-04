@@ -1732,7 +1732,7 @@ strong{font-weight:600; color:#fff}
       img: "src/img/caliburn-g3.jpg",
       rating: 4.6, reviews: 540, badge: "Value",
       blurb: "The device that made refillable pods mainstream, now in its third generation. Simple, dependable and still one of the easiest starter setups you can buy.",
-      compatibility: ["Caliburn GPP Pods — 0.6Ω, 0.9Ω and 1.2Ω", "Caliburn G3 pod platform"],
+      compatibility: ["Caliburn GPP Pods — 0.4Ω, 0.6Ω, 0.9Ω and 1.2Ω", "Shared GPP integrated-coil cartridge platform across the Caliburn G3, G4 and G5 series"],
       specs: ["900 mAh battery", "Up to 25W output", "OLED display", "Dual Airflow System", "USB-C charging", "Integrated-coil G3 cartridges"]
     },
     {
@@ -1758,9 +1758,9 @@ strong{font-weight:600; color:#fff}
       category: "Replacement Pods", art: "pod", price: 9.99, was: null,
       img: "src/img/caliburn-pods.jpg",
       rating: 4.7, reviews: 455, badge: "",
-      blurb: "Replacement cartridges for Caliburn G3 devices, running Uwell's Pro-FOCS flavour technology. A good match if you prefer a slightly tighter, warmer draw.",
-      compatibility: ["Fits Caliburn G3", "0.6Ω, 0.9Ω and 1.2Ω options"],
-      specs: ["2 ml (TPD) capacity", "Integrated-coil cartridge", "Pro-FOCS flavour technology", "Top-fill or side-fill variants"]
+      blurb: "Integrated-coil GPP replacement cartridges for the listed Caliburn G3, G4 and G5 devices. Cartridge generations and filling formats can differ, so check the exact pack before choosing.",
+      compatibility: ["Fits Caliburn G3, Caliburn GK3, Caliburn GK3 Tenet, Caliburn G5 Lite KOKO, Caliburn G5 Lite, Caliburn G5 Lite SE, Caliburn G4 Pro KOKO, Caliburn G4 Classic, Caliburn G4 Pro, Caliburn G4, Caliburn G4 Mini, Caliburn G3 Pro KOKO, Caliburn G3 Lite KOKO, Caliburn G3 Pro, Caliburn G3 Lite, Caliburn G3 ECO, Caliburn G5 KOKO, Caliburn G5, Caliburn G5 Pro, Caliburn G5 Vision", "0.4Ω, 0.6Ω, 0.9Ω and 1.2Ω GPP cartridge options", "UWELL confirms GPP compatibility across G3, G4 and G5 series devices."],
+      specs: ["2 ml TPD-compatible cartridge options", "Integrated-coil cartridge", "GPP platform", "Previous and upgraded cartridge generations"]
     }
   ];
 
@@ -1780,8 +1780,8 @@ strong{font-weight:600; color:#fff}
     {
       key: "Caliburn", title: "Uwell Caliburn", accent: "#6f7bff", glow: "rgba(111,123,255,.28)",
       tag: "Pod platform 03",
-      desc: "The classic refillable starter. Straightforward to fill, easy to live with, and ideal if you are moving on from disposables.",
-      bullets: ["Caliburn G3 pods", "Top-fill pods", "Beginner friendly"]
+      desc: "UWELL's GPP platform links the Caliburn G3, G4 and G5 families. G/G2 and A3 cartridges remain separate, so the exact model still matters.",
+      bullets: ["GPP cartridges for G3 / G4 / G5", "0.4Ω · 0.6Ω · 0.9Ω · 1.2Ω", "G / G2 and A3 are separate"]
     }
   ];
 
@@ -1844,7 +1844,7 @@ strong{font-weight:600; color:#fff}
     { q: "Are Xlim pods the same across the whole OXVA range?",
       a: "The standard Xlim Pods platform (2 ml) is recorded for Xlim Pro, Xlim Pro 2, Xlim SE, Xlim SQ Pro, Xlim Classic, Xlim GO, Xlim SE 2, Xlim SQ, Xlim Crystal and Xlim POD. XLIM C uses a separate cartridge and replaceable-coil system. OXVA restricts the 0.4Ω Top Fill cartridge to Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic; check the exact cartridge format and model." },
     { q: "Do Caliburn G2 pods fit the Caliburn G3?",
-      a: "No. The Caliburn G and Caliburn G2 use the Caliburn G / G2 pod platform, but the Caliburn G3 uses the separate Caliburn G3 pod platform and does not take G or G2 pods. The original Caliburn's pod platform is not established by an official source in our data, so buy the pods sold for that exact model." },
+      a: "No. The Caliburn G and Caliburn G2 use the separate Caliburn G / G2 platform. The Caliburn G3, G4 and G5 families use the GPP platform; GPP cartridges do not fit G or G2 devices. The original Caliburn's pod platform remains UNKNOWN in our data." },
     { q: "What resistance pod should I choose?",
       a: "A lower resistance such as 0.6Ω gives a warmer vape and more vapour. A higher resistance such as 1.0Ω gives a tighter draw and better battery life. 0.8Ω is the balanced middle ground most people settle on. The exact options depend on your device's pod platform." },
     { q: "How do I know when to replace a pod?",
@@ -1854,7 +1854,7 @@ strong{font-weight:600; color:#fff}
     { q: "Do you sell nicotine products?",
       a: "No. This prototype has no nicotine products, no checkout and no age verification. A production version would need full UK age verification and regulatory compliance before any transaction." },
     { q: "How do I know which device I have?",
-      a: "Check the model name printed on the body of the device, or look at the pod you are replacing — genuine pods usually have the platform name moulded into the plastic. Devices in the same family usually share one pod platform, except Uwell, where the Caliburn G3 uses its own pods." }
+      a: "Check the exact model name printed on the body. UWELL's Caliburn G3, G4 and G5 families share GPP cartridges; Caliburn G/G2 and A3 use separate platforms, and the original Caliburn remains UNKNOWN in our data." }
   ];
 
   /* ---- helpers ---- */
@@ -2221,13 +2221,13 @@ strong{font-weight:600; color:#fff}
      that platform's POD resistances, and its genuine replacement pod product.
      Nothing is inferred from the Caliburn family name or a model number, and the
      original Caliburn — which has no recorded pod platform — keeps UNKNOWN. */
-  var CALIBURN_GUIDE_DEVICES = ["Caliburn G2", "Caliburn G3", "Caliburn A3", "Caliburn"];
+  var CALIBURN_GUIDE_DEVICES = ["Caliburn G2","Caliburn G3","Caliburn GK3","Caliburn GK3 Tenet","Caliburn G5 Lite KOKO","Caliburn G5 Lite","Caliburn G5 Lite SE","Caliburn G4 Pro KOKO","Caliburn G4 Classic","Caliburn G4 Pro","Caliburn G4","Caliburn G4 Mini","Caliburn G3 Pro KOKO","Caliburn G3 Lite KOKO","Caliburn G3 Pro","Caliburn G3 Lite","Caliburn G3 ECO","Caliburn G5 KOKO","Caliburn G5","Caliburn G5 Pro","Caliburn G5 Vision","Caliburn A3","Caliburn"];
   var CALIBURN_GUIDE_PLATFORMS = ["Caliburn G / G2 Pods", "Caliburn GPP Pods", "Caliburn A3 Pods"];
   function caliburnGuideRows(){
     var missing = '<span class="fr-missing">' + esc(UNKNOWN) + '</span>';
     var groups = [
       { label: "Caliburn G / G2", platformKey: "Caliburn G / G2 Pods" },
-      { label: "Caliburn G3", platformKey: "Caliburn GPP Pods" },
+      { label: "Caliburn GPP (G3 / G4 / G5)", platformKey: "Caliburn GPP Pods" },
       { label: "Caliburn A3", platformKey: "Caliburn A3 Pods" }
     ];
     var rows = groups.map(function(g){
@@ -2247,15 +2247,14 @@ strong{font-weight:600; color:#fff}
     return rows;
   }
   function caliburnGuideBody(){
-    var answer = "Uwell Caliburn devices run three separate pod platforms. "
-      + "The Caliburn G and Caliburn G2 share the Caliburn G / G2 Pods platform; "
-      + "the Caliburn G3 uses the Caliburn GPP Pods platform; and the Caliburn A3 uses the Caliburn A3 Pods platform. "
-      + "A pod built for one of these platforms does not fit a device on another. "
+    var answer = "Uwell Caliburn devices in this reference use three recorded platforms. "
+      + "The Caliburn G and G2 share the Caliburn G / G2 Pods platform; the G3, G4 and G5 families use Caliburn GPP Pods; and the A3 uses Caliburn A3 Pods. "
+      + "A pod built for one platform does not fit a device on another. "
       + "Our data does not establish a pod platform for the original Caliburn, so no pods can be stated as fitting it.";
     var facts = [
       "Compatibility follows the pod platform recorded for a device — never the Caliburn family name or a model number. Sharing the Caliburn name does not by itself mean two devices share pods.",
       "Caliburn G / G2 Pods — shared by the Caliburn G and Caliburn G2. The G2 takes the 1.0Ω and 0.8Ω coils of the Caliburn G as well as its own 1.2Ω coil.",
-      "Caliburn GPP Pods — the Caliburn G3 uses its own integrated-coil platform and does not take Caliburn G / G2 pods. Pod resistances available: 0.6Ω, 0.9Ω and 1.2Ω.",
+      "Caliburn GPP Pods — shared by the listed Caliburn G3, G4 and G5 models. Integrated-coil cartridges offer 0.4Ω, 0.6Ω, 0.9Ω and 1.2Ω options; they do not fit Caliburn G / G2 or A3 devices.",
       "Caliburn A3 Pods — the Caliburn A3 takes A3 pods only. Pod resistance available: 1.0Ω.",
       "Original Caliburn — " + UNKNOWN + " The dataset does not establish a pod platform for it, so no Caliburn G / G2, G3 or A3 pod is stated as fitting it.",
       "The pod resistance options in the table are the resistances available for the pod platform. A device's own supported resistance options are a separate figure and are not presented here as the set of pods available."
@@ -4091,8 +4090,8 @@ strong{font-weight:600; color:#fff}
   var PLATFORM_NOTES = {
     "XROS Pods": "The XROS pod platform is shared across the whole XROS series. Every device listed here runs the current-generation XROS pods, so they all take the same replacement pods; the models differ in device specifications, not in pod fit.",
     "Xlim Pods": "The standard XLIM cartridge platform is shared by the devices listed here; XLIM C is a separate cartridge-and-changeable-coil system and is not part of this platform. Cartridge variants still have model-specific limits: OXVA lists the 0.4Ω Top Fill cartridge only for Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic. Do not treat every resistance variant as a universal fit.",
-    "Caliburn G / G2 Pods": "The Caliburn G / G2 platform covers the Caliburn G and Caliburn G2. Sharing the Caliburn name does not automatically mean pod compatibility: the Caliburn G3 and the Caliburn A3 each use their own separate platform. The original Uwell Caliburn's pod platform is not established by an official manufacturer source in our dataset, so no pods are listed for it.",
-    "Caliburn GPP Pods": "The Caliburn G3 uses its own integrated-coil cartridge platform. It does not take Caliburn G / G2 pods, and the Caliburn A3 uses a different platform again.",
+    "Caliburn G / G2 Pods": "The Caliburn G / G2 platform covers the Caliburn G and Caliburn G2 only. The Caliburn G3, G4 and G5 series use the separate GPP platform, while the A3 uses its own platform. The original Uwell Caliburn's pod platform is not established by an official manufacturer source in our dataset.",
+    "Caliburn GPP Pods": "UWELL confirms GPP cartridge compatibility across the Caliburn G3, G4 and G5 series. GPP cartridges have integrated coils and are not compatible with the separate Caliburn G / G2 or A3 platforms. The original Caliburn remains UNKNOWN in this dataset.",
     "Caliburn A3 Pods": "The Caliburn A3 uses its own pod platform, so it takes A3 pods only — it does not share pods with the Caliburn G / G2 or the Caliburn G3."
   };
 
