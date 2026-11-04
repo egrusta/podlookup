@@ -4165,12 +4165,14 @@ strong{font-weight:600; color:#fff}
       + (podOhms.length ? " Pod resistances available for this platform are " + listText(podOhms) + "." : "")
       + (p.key === "Xlim Pods" ? " XLIM C uses a separate cartridge-and-changeable-coil system. The 0.4Ω Top Fill cartridge is a restricted variant listed by OXVA only for Xlim Pro, Xlim SQ Pro, Xlim SE 2, Xlim GO and Xlim Classic." : "")
       + " A pod is built for one platform only, so " + p.key + " pods do not fit devices that use a different platform.";
+    var podTypes = MASTER_PODS_BY_PLATFORM[p.key] || [];
     var answerRows = [
       ["Platform", esc(p.key)],
       ["Brand", esc(mp.brand || "")],
       ["Verified devices", p.devices.length + (p.devices.length === 1 ? " device" : " devices")],
       ["Pod resistances available", podOhms.length ? ohmChips(podOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
-      ["Replacement pods listed", p.podProducts.length ? esc(listText(p.podProducts.map(function(x){ return x.name; }))) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>']
+      ["Replacement pod type recorded", podTypes.length ? esc(listText(podTypes.map(function(x){ return x.name; }))) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
+      ["Shop products listed", p.podProducts.length ? esc(listText(p.podProducts.map(function(x){ return x.name; }))) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>']
     ];
     var note = PLATFORM_NOTES[p.key];
     return '<div class="geo-block geo-fit">'
