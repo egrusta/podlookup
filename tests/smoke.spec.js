@@ -174,9 +174,9 @@ test.describe('PodLookup SEO publication regression', () => {
     expect(response.headers()['content-type']).toMatch(/text\/plain|text\/markdown/);
 
     const content = await response.text();
-    const deviceLinks = [...content.matchAll(/^- \\[[^\\]]+\\]\\(https:\\/\\/podlookup\\.co\\.uk\\/\\?p=devices\\//gm)];
+    const deviceLinks = [...content.matchAll(/^- \[[^\]]+\]\(https:\/\/podlookup\.co\.uk\/\?p=devices\//gm)];
     expect(deviceLinks).toHaveLength(49);
-    expect(content).toContain('UNKNOWN rather than guessing');
+    expect(content).toContain('UNKNOWN means the available evidence does not establish compatibility');
     expect(content).toMatch(/demo storefront/i);
     expect(content).toMatch(/no orders are placed/i);
     expect(content).toContain('Caliburn GPP Pods');
@@ -186,12 +186,12 @@ test.describe('PodLookup SEO publication regression', () => {
     const response = await request.get('/sitemap.xml');
     expect(response.ok()).toBeTruthy();
     const xml = await response.text();
-    const entries = [...xml.matchAll(/<url>([\\s\\S]*?)<\\/url>/g)].map(match => match[1]);
-    const urls = entries.map(entry => entry.match(/<loc>(.*?)<\\/loc>/)?.[1]);
+    const entries = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(match => match[1]);
+    const urls = entries.map(entry => entry.match(/<loc>(.*?)<\/loc>/)?.[1]);
 
     expect(entries).toHaveLength(112);
     expect(new Set(urls).size).toBe(112);
-    expect(entries.every(entry => /<lastmod>\\d{4}-\\d{2}-\\d{2}<\\/lastmod>/.test(entry))).toBe(true);
+    expect(entries.every(entry => /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(entry))).toBe(true);
   });
 
   test('unknown routes are explicitly noindexed and explain missing data', async ({ page }) => {
