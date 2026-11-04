@@ -140,7 +140,7 @@ test.describe('PodLookup basket and responsive regression', () => {
         uwell: doc.querySelectorAll('[data-ns-device^="uwell/"]').length
       };
     });
-    expect(fallback).toEqual({ devices: 49, platforms: 7, uwell: 31 });
+    expect(fallback).toEqual({ devices: 50, platforms: 8, uwell: 31 });
 
     const robots = await request.get('/robots.txt');
     expect(robots.ok()).toBeTruthy();
@@ -152,8 +152,25 @@ test.describe('PodLookup basket and responsive regression', () => {
     expect(sitemap.headers()['content-type']).toMatch(/xml/);
     const xml = await sitemap.text();
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-    expect(locs.length).toBe(112);
+    expect(locs.length).toBe(115);
     expect(new Set(locs).size).toBe(112);
+  });
+
+  test('OXVA XLIM C has a separate cartridge-and-coil compatibility system', async ({ page }) => {
+    await page.goto('/?p=devices/oxva/xlim-c');
+    await expect(page.locator('main')).toContainText('Xlim C');
+    await expect(page.locator('main')).toContainText('0.6Ω');
+    await expect(page.locator('main')).toContainText('0.8Ω');
+    await expect(page.locator('main')).toContainText('1.2Ω');
+
+    await page.goto('/?p=compatibility/oxva/xlim-c');
+    await expect(page.locator('main')).toContainText('XLIM C');
+    await expect(page.locator('main')).toContainText('separate');
+
+    await page.goto('/?p=platforms/xlim-c-cartridge-coil-system');
+    await expect(page.locator('main')).toContainText('Xlim C');
+    await expect(page.locator('main')).toContainText('2 ml');
+    await expect(page.locator('main')).toContainText('replaceable');
   });
 
   test('no uncaught JavaScript page errors on the home and platform routes', async ({ page }) => {
@@ -175,7 +192,7 @@ test.describe('PodLookup SEO publication regression', () => {
 
     const content = await response.text();
     const deviceLinks = [...content.matchAll(/^- \[[^\]]+\]\(https:\/\/podlookup\.co\.uk\/\?p=devices\//gm)];
-    expect(deviceLinks).toHaveLength(49);
+    expect(deviceLinks).toHaveLength(50);
     expect(content).toContain('UNKNOWN means the available evidence does not establish compatibility');
     expect(content).toMatch(/storefront as a demo/i);
     expect(content).toMatch(/no orders are placed/i);
@@ -189,7 +206,7 @@ test.describe('PodLookup SEO publication regression', () => {
     const entries = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(match => match[1]);
     const urls = entries.map(entry => entry.match(/<loc>(.*?)<\/loc>/)?.[1]);
 
-    expect(entries).toHaveLength(112);
+    expect(entries).toHaveLength(115);
     expect(new Set(urls).size).toBe(112);
     expect(entries.every(entry => /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(entry))).toBe(true);
   });
