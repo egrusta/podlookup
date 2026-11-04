@@ -4095,7 +4095,7 @@ strong{font-weight:600; color:#fff}
     });
     var platBlock = plats.length
       ? '<div class="geo-links">' + plats.map(function(p){
-          return geoLink(geoHref("platforms/" + p.slug), p.key + " pod platform",
+          return geoLink(geoHref("platforms/" + p.slug), p.key + (p.key === "Xlim C Cartridge & Coil System" ? " cartridge-and-coil system" : " pod platform"),
             p.devices.length + (p.devices.length === 1 ? " device on this platform" : " devices on this platform"), "data-geo");
         }).join("") + '</div>'
       : '<p class="geo-note fr-missing">' + esc(UNKNOWN) + '</p>';
@@ -4107,15 +4107,15 @@ strong{font-weight:600; color:#fff}
     var compatBlock = '<div class="geo-links">' + b.devices.map(function(d){
       return geoLink(geoHref("compatibility/" + b.slug + "/" + d.slug),
         "What is the " + b.name + " " + d.device + " compatible with?",
-        d.platformKey ? "Pod platform: " + d.platformKey : UNKNOWN, "data-geo");
+        d.platformKey ? (d.platformKey === "Xlim C Cartridge & Coil System" ? "Cartridge-and-coil system: " : "Pod platform: ") + d.platformKey : UNKNOWN, "data-geo");
     }).join("") + '</div>';
     var html = crumbsFor(items)
       + '<p class="geo-kicker">Brand</p>'
-      + '<h1>' + esc(b.name) + ' pod devices</h1>'
+      + '<h1>' + esc(b.name) + ' vape devices</h1>'
       + brandAuthorityBlock(b)
       + '<div class="geo-block"><h2>Verified ' + esc(b.name) + ' devices</h2>'
         + tableHtml(["Device pod fit", "Device family", "Verified pod platform"], devRows) + '</div>'
-      + '<div class="geo-block"><h2>Verified ' + esc(b.name) + ' pod platforms</h2>' + platBlock + '</div>'
+      + '<div class="geo-block"><h2>Verified ' + esc(b.name) + ' pod/cartridge systems</h2>' + platBlock + '</div>'
       + '<div class="geo-block"><h2>Verified ' + esc(b.name) + ' products</h2>' + prodBlock + '</div>'
       + '<div class="geo-block"><h2>' + esc(b.name) + ' compatibility information</h2>' + compatBlock + '</div>'
       + guidesBlockHtml(b.families, "Guides for " + b.name)
@@ -4306,7 +4306,9 @@ strong{font-weight:600; color:#fff}
   function devicePodsFitBlock(d, b){
     var pods = d.podsProducts || [];
     var verified = !!d.pods && !!d.platformSlug;
-    var q = "Which pods fit the " + b.name + " " + d.device + "?";
+    var q = d.platformKey === "Xlim C Cartridge & Coil System"
+      ? "Which cartridge and coils fit the OXVA Xlim C?"
+      : "Which pods fit the " + b.name + " " + d.device + "?";
     var answer, answerRows;
     if (verified){
       answer = d.platformKey === "Xlim C Cartridge & Coil System"
@@ -4322,7 +4324,7 @@ strong{font-weight:600; color:#fff}
       answerRows = [
         ["Device", esc(b.name + " " + d.device)],
         ["Brand", esc(b.name)],
-        ["Verified pod platform", platformCell(d)],
+        [d.platformKey === "Xlim C Cartridge & Coil System" ? "Verified cartridge-and-coil system" : "Verified pod platform", platformCell(d)],
         ["Pod resistances available", d.podOhms.length ? ohmChips(d.podOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
         ["Replaceable coil resistance options", d.coilOhms && d.coilOhms.length ? ohmChips(d.coilOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
         ["Device resistance options", d.ohms.length ? ohmChips(d.ohms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
@@ -4342,7 +4344,7 @@ strong{font-weight:600; color:#fff}
     var links = [];
     if (verified){
       var plat = findPlatformBySlug(d.platformSlug);
-      links.push(geoLink(geoHref("platforms/" + d.platformSlug), d.pods + " pod platform",
+      links.push(geoLink(geoHref("platforms/" + d.platformSlug), d.pods + (d.platformKey === "Xlim C Cartridge & Coil System" ? " cartridge-and-coil system" : " pod platform"),
         plat ? plat.devices.length + (plat.devices.length === 1 ? " device on this platform" : " devices on this platform") : "", "data-geo"));
     }
     links.push(geoLink(geoHref("compatibility/" + b.slug + "/" + d.slug),
@@ -4380,7 +4382,7 @@ strong{font-weight:600; color:#fff}
       answerRows = [
         ["Device", esc(b.name + " " + d.device)],
         ["Brand", esc(b.name)],
-        ["Verified pod platform", platformCell(d)],
+        [d.platformKey === "Xlim C Cartridge & Coil System" ? "Verified cartridge-and-coil system" : "Verified pod platform", platformCell(d)],
         ["Pod resistances available", d.podOhms.length ? ohmChips(d.podOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
         ["Replaceable coil resistance options", d.coilOhms && d.coilOhms.length ? ohmChips(d.coilOhms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
         ["Device resistance options", d.ohms.length ? ohmChips(d.ohms) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>'],
@@ -4398,11 +4400,12 @@ strong{font-weight:600; color:#fff}
       ];
     }
     var links = [];
-    links.push(geoLink(geoHref("devices/" + b.slug + "/" + d.slug), "Pods for the " + b.name + " " + d.device,
-      "Which pods fit, and the pods listed for it", "data-geo"));
+    links.push(geoLink(geoHref("devices/" + b.slug + "/" + d.slug),
+      d.platformKey === "Xlim C Cartridge & Coil System" ? "Cartridge and coils for OXVA Xlim C" : "Pods for the " + b.name + " " + d.device,
+      d.platformKey === "Xlim C Cartridge & Coil System" ? "The XLIM C cartridge-and-coil system" : "Which pods fit, and the pods listed for it", "data-geo"));
     if (verified){
       var plat = findPlatformBySlug(d.platformSlug);
-      links.push(geoLink(geoHref("platforms/" + d.platformSlug), d.pods + " pod platform",
+      links.push(geoLink(geoHref("platforms/" + d.platformSlug), d.pods + (d.platformKey === "Xlim C Cartridge & Coil System" ? " cartridge-and-coil system" : " pod platform"),
         plat ? plat.devices.length + (plat.devices.length === 1 ? " device on this platform" : " devices on this platform") : "", "data-geo"));
     }
     return '<div class="geo-block geo-fit">'
