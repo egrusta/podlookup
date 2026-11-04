@@ -71,9 +71,11 @@ test.describe('PodLookup basket and responsive regression', () => {
     await page.locator('#cartBtn').click();
     await expect(page.locator('#cartBody [data-inc]')).toBeVisible();
     await page.locator('#cartClear').click();
-    await expect.poll(() => page.evaluate(() => localStorage.getItem('podlookup-cart'))).toSatisfy(
-      value => !value || value === '[]'
-    );
+    await expect(page.locator('#cartBody')).toContainText('Your basket is empty');
+    await expect.poll(async () => {
+      const value = await page.evaluate(() => localStorage.getItem('podlookup-cart'));
+      return !value || value === '[]' || value === '{}';
+    }).toBe(true);
   });
 
   test('mobile navigation toggles and common phone widths have no horizontal overflow', async ({ page }) => {
