@@ -1,3 +1,21 @@
+# Public site content is crawlable. Search-oriented AI crawlers are allowed;
+# model-training crawlers are disallowed by this policy.
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
 User-agent: *
 Allow: /
 
