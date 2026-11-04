@@ -236,14 +236,18 @@ test.describe('PodLookup complete device-route coverage', () => {
   test('every device in the reference table has working device and compatibility pages', async ({ page }) => {
     test.setTimeout(120000);
     await page.goto('/');
-    const routes = await page.locator('#geoNoscript tr[data-ns-device]').evaluateAll(rows => rows.map(row => {
-      const links = [...row.querySelectorAll('a[href]')];
-      return {
-        device: row.cells[1]?.innerText.trim() || '',
-        deviceHref: links.find(link => link.getAttribute('href')?.includes('?p=devices/'))?.getAttribute('href') || '',
-        compatibilityHref: links.find(link => link.getAttribute('href')?.includes('?p=compatibility/'))?.getAttribute('href') || ''
-      };
-    }));
+    const routes = await page.evaluate(() => {
+      const source = document.querySelector('#geoNoscript');
+      const doc = new DOMParser().parseFromString(source?.textContent || '', 'text/html');
+      return [...doc.querySelectorAll('tr[data-ns-device]')].map(row => {
+        const links = [...row.querySelectorAll('a[href]')];
+        return {
+          device: row.cells[1]?.textContent.trim() || '',
+          deviceHref: links.find(link => link.getAttribute('href')?.includes('?p=devices/'))?.getAttribute('href') || '',
+          compatibilityHref: links.find(link => link.getAttribute('href')?.includes('?p=compatibility/'))?.getAttribute('href') || ''
+        };
+      });
+    });
 
     expect(routes).toHaveLength(50);
     for (const route of routes) {
