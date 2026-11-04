@@ -177,7 +177,7 @@ test.describe('PodLookup SEO publication regression', () => {
     const deviceLinks = [...content.matchAll(/^- \[[^\]]+\]\(https:\/\/podlookup\.co\.uk\/\?p=devices\//gm)];
     expect(deviceLinks).toHaveLength(49);
     expect(content).toContain('UNKNOWN means the available evidence does not establish compatibility');
-    expect(content).toMatch(/demo storefront/i);
+    expect(content).toMatch(/storefront as a demo/i);
     expect(content).toMatch(/no orders are placed/i);
     expect(content).toContain('Caliburn GPP Pods');
   });
