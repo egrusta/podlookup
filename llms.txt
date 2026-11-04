@@ -1,0 +1,126 @@
+# PodLookup
+
+> UK-focused refillable pod compatibility reference. Find a device, check its recorded pod platform, and understand what is and is not verified before making a purchase decision.
+
+PodLookup is an information-first catalogue for Vaporesso, OXVA and UWELL refillable pod devices. Compatibility statements are derived from the site's embedded MASTER dataset and linked manufacturer/source records. If a compatibility detail is not established, PodLookup marks it UNKNOWN rather than guessing.
+
+## Main pages
+
+- [Home and compatibility finder](https://podlookup.co.uk/)
+- [Device catalogue](https://podlookup.co.uk/?p=devices)
+- [Pod compatibility index](https://podlookup.co.uk/?p=compatibility)
+- [Pod platform index](https://podlookup.co.uk/?p=platforms)
+- [Frequently asked questions](https://podlookup.co.uk/#faq)
+
+## Brands
+
+- [Vaporesso](https://podlookup.co.uk/?p=brands/vaporesso)
+- [OXVA](https://podlookup.co.uk/?p=brands/oxva)
+- [UWELL](https://podlookup.co.uk/?p=brands/uwell)
+
+## Pod platforms
+
+- [XROS Pods](https://podlookup.co.uk/?p=platforms/xros-pods)
+- [Xlim Pods](https://podlookup.co.uk/?p=platforms/xlim-pods)
+- [Caliburn G / G2 Pods](https://podlookup.co.uk/?p=platforms/caliburn-g-g2-pods)
+- [Caliburn GPP Pods](https://podlookup.co.uk/?p=platforms/caliburn-gpp-pods)
+- [Caliburn A2 Pods](https://podlookup.co.uk/?p=platforms/caliburn-a2-pods)
+- [Caliburn A3 Pods](https://podlookup.co.uk/?p=platforms/caliburn-a3-pods)
+- [Caliburn Original Pods](https://podlookup.co.uk/?p=platforms/caliburn-original-pods)
+
+## Device catalogue
+
+### Vaporesso
+
+- [XROS 6](https://podlookup.co.uk/?p=devices/vaporesso/xros-6) — XROS Pods
+- [XROS 6 Mini](https://podlookup.co.uk/?p=devices/vaporesso/xros-6-mini) — XROS Pods
+- [XROS PRO 2](https://podlookup.co.uk/?p=devices/vaporesso/xros-pro-2) — XROS Pods
+- [XROS 5](https://podlookup.co.uk/?p=devices/vaporesso/xros-5) — XROS Pods
+- [XROS 5 Mini](https://podlookup.co.uk/?p=devices/vaporesso/xros-5-mini) — XROS Pods
+- [XROS 4](https://podlookup.co.uk/?p=devices/vaporesso/xros-4) — XROS Pods
+- [XROS 4 Mini](https://podlookup.co.uk/?p=devices/vaporesso/xros-4-mini) — XROS Pods
+- [XROS 3](https://podlookup.co.uk/?p=devices/vaporesso/xros-3) — XROS Pods
+
+### OXVA
+
+- [Xlim Pro](https://podlookup.co.uk/?p=devices/oxva/xlim-pro) — Xlim Pods
+- [Xlim Pro 2](https://podlookup.co.uk/?p=devices/oxva/xlim-pro-2) — Xlim Pods
+- [Xlim SE](https://podlookup.co.uk/?p=devices/oxva/xlim-se) — Xlim Pods
+- [Xlim SQ Pro](https://podlookup.co.uk/?p=devices/oxva/xlim-sq-pro) — Xlim Pods
+- [Xlim Classic](https://podlookup.co.uk/?p=devices/oxva/xlim-classic) — Xlim Pods
+- [Xlim GO](https://podlookup.co.uk/?p=devices/oxva/xlim-go) — Xlim Pods
+- [Xlim SE 2](https://podlookup.co.uk/?p=devices/oxva/xlim-se-2) — Xlim Pods
+- [Xlim SQ](https://podlookup.co.uk/?p=devices/oxva/xlim-sq) — Xlim Pods
+- [Xlim Crystal](https://podlookup.co.uk/?p=devices/oxva/xlim-crystal) — Xlim Pods
+- [Xlim POD](https://podlookup.co.uk/?p=devices/oxva/xlim-pod) — Xlim Pods
+
+### Uwell
+
+- [Caliburn](https://podlookup.co.uk/?p=devices/uwell/caliburn) — Caliburn Original Pods
+- [Caliburn G2](https://podlookup.co.uk/?p=devices/uwell/caliburn-g2) — Caliburn G / G2 Pods
+- [Caliburn G3](https://podlookup.co.uk/?p=devices/uwell/caliburn-g3) — Caliburn GPP Pods
+- [Caliburn GK3](https://podlookup.co.uk/?p=devices/uwell/caliburn-gk3) — Caliburn GPP Pods
+- [Caliburn GK3 Tenet](https://podlookup.co.uk/?p=devices/uwell/caliburn-gk3-tenet) — Caliburn GPP Pods
+- [Caliburn G5 Lite KOKO](https://podlookup.co.uk/?p=devices/uwell/caliburn-g5-lite-koko) — Caliburn GPP Pods
+- [Caliburn G5 Lite](https://podlookup.co.uk/?p=devices/uwell/caliburn-g5-lite) — Caliburn GPP Pods
+- [Caliburn G5 Lite SE](https://podlookup.co.uk/?p=devices/uwell/caliburn-g5-lite-se) — Caliburn GPP Pods
+- [Caliburn G4 Pro KOKO](https://podlookup.co.uk/?p=devices/uwell/caliburn-g4-pro-koko) — Caliburn GPP Pods
+- [Caliburn G4 Classic](https://podlookup.co.uk/?p=devices/uwell/caliburn-g4-classic) — Caliburn GPP Pods
+- [Caliburn G4 Pro](https://podlookup.co.uk/?p=devices/uwell/caliburn-g4-pro) — Caliburn GPP Pods
+- [Caliburn G4](https://podlookup.co.uk/?p=devices/uwell/caliburn-g4) — Caliburn GPP Pods
+- [Caliburn G4 Mini](https://podlookup.co.uk/?p=devices/uwell/caliburn-g4-mini) — Caliburn GPP Pods
+- [Caliburn G3 Pro KOKO](https://podlookup.co.uk/?p=devices/uwell/caliburn-g3-pro-koko) — Caliburn GPP Pods
+- [Caliburn G3 Lite KOKO](https://podlookup.co.uk/?p=devices/uwell/caliburn-g3-lite-koko) — Caliburn GPP Pods
+- [Caliburn G3 Pro](https://podlookup.co.uk/?p=devices/uwell/caliburn-g3-pro) — Caliburn GPP Pods
+- [Caliburn G3 Lite](https://podlookup.co.uk/?p=devices/uwell/caliburn-g3-lite) — Caliburn GPP Pods
+- [Caliburn G3 ECO](https://podlookup.co.uk/?p=devices/uwell/caliburn-g3-eco) — Caliburn GPP Pods
+- [Caliburn G5 KOKO](https://podlookup.co.uk/?p=devices/uwell/caliburn-g5-koko) — Caliburn GPP Pods
+- [Caliburn G5](https://podlookup.co.uk/?p=devices/uwell/caliburn-g5) — Caliburn GPP Pods
+- [Caliburn G5 Pro](https://podlookup.co.uk/?p=devices/uwell/caliburn-g5-pro) — Caliburn GPP Pods
+- [Caliburn G5 Vision](https://podlookup.co.uk/?p=devices/uwell/caliburn-g5-vision) — Caliburn GPP Pods
+- [Caliburn Air](https://podlookup.co.uk/?p=devices/uwell/caliburn-air) — Caliburn GPP Pods
+- [Caliburn Air R](https://podlookup.co.uk/?p=devices/uwell/caliburn-air-r) — Caliburn GPP Pods
+- [Caliburn A2](https://podlookup.co.uk/?p=devices/uwell/caliburn-a2) — Caliburn A2 Pods
+- [Caliburn A2S](https://podlookup.co.uk/?p=devices/uwell/caliburn-a2s) — Caliburn A2 Pods
+- [Caliburn AK2](https://podlookup.co.uk/?p=devices/uwell/caliburn-ak2) — Caliburn A2 Pods
+- [Caliburn A3](https://podlookup.co.uk/?p=devices/uwell/caliburn-a3) — Caliburn A3 Pods
+- [Caliburn A3S](https://podlookup.co.uk/?p=devices/uwell/caliburn-a3s) — Caliburn A3 Pods
+- [Caliburn AK3](https://podlookup.co.uk/?p=devices/uwell/caliburn-ak3) — Caliburn A3 Pods
+- [Caliburn AZ3](https://podlookup.co.uk/?p=devices/uwell/caliburn-az3) — Caliburn A3 Pods
+
+## Key compatibility answers
+
+- **Vaporesso XROS:** The XROS 3, 4, 4 Mini, 5, 5 Mini, 6, 6 Mini and XROS PRO 2 are recorded on the shared XROS Pods platform. Device-supported resistance options can differ by model.
+- **OXVA XLIM:** The standard Xlim Pods platform is recorded for the listed Xlim Pro, Pro 2, SE, SQ Pro, Classic, GO, SE 2, SQ, Crystal and POD devices. XLIM C is a separate cartridge/replaceable-coil system; check the exact cartridge format and device.
+- **UWELL Caliburn G / G2:** These use the separate Caliburn G / G2 pod platform; it is not interchangeable with GPP.
+- **UWELL Caliburn GPP:** GPP is recorded for Caliburn G3, G4 and G5 families and Caliburn Air / Air R. It does not fit Caliburn G / G2, A2 or A3 devices.
+- **UWELL Caliburn A2 and A3:** These are separate pod platforms; do not assume cross-compatibility between A2, A3 and GPP.
+- **Unknown information:** When the source evidence does not establish a fit, treat the result as UNKNOWN. Do not infer compatibility from brand name or appearance.
+
+## Frequently asked questions
+
+- Which pods fit the Vaporesso XROS 5?
+- Are Xlim pods the same across the whole OXVA range?
+- Do Caliburn G2 pods fit the Caliburn G3?
+- Which pods fit Caliburn A2, A2S and AK2?
+- Which pods fit Caliburn A3, A3S, AK3 and AZ3?
+- Do Caliburn Air and Air R use GPP cartridges?
+- Does the original Caliburn use its own refillable pod?
+- What resistance pod should I choose?
+- How do I know when to replace a pod?
+- Is PodLookup a real shop?
+- Do you sell nicotine products?
+- How do I know which device I have?
+
+## Data and trust principles
+
+- Prefer manufacturer-backed specifications and traceable source records.
+- Distinguish device-supported resistance from pod-available resistance.
+- Do not treat a shared brand or product family as proof of compatibility.
+- UNKNOWN means the available evidence does not establish compatibility.
+- The website currently identifies its storefront as a demo and states that no orders are placed.
+
+## Crawl and sitemap
+
+- [XML sitemap](https://podlookup.co.uk/sitemap.xml)
+- [Robots policy](https://podlookup.co.uk/robots.txt)
