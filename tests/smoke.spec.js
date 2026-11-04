@@ -56,6 +56,8 @@ test.describe('PodLookup basket and responsive regression', () => {
     const storedAfterAdd = await page.evaluate(() => localStorage.getItem('podlookup-cart'));
     expect(storedAfterAdd).toBeTruthy();
 
+    // The product details modal remains open after adding; close it before using the header basket.
+    await page.locator('#modalClose').click();
     await page.locator('#cartBtn').click();
     await expect(page.locator('#cartBody [data-inc]')).toBeVisible();
     const subtotalBefore = await page.locator('#cartTotal').innerText();
