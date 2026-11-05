@@ -3933,6 +3933,7 @@ strong{font-weight:600; color:#fff}
     if (route.type === "devices" || route.type === "compatibility") renderGeoIndex(route.type);
     else if (route.type === "guides") renderGeoGuides();
     else if (route.type === "guide") renderGeoGuide(route.guide);
+    else if (route.type === "info") renderGeoInfo(route.id);
     else if (route.type === "platforms") renderGeoPlatforms();
     else if (route.type === "brand") renderGeoBrand(route.brand);
     else if (route.type === "platform") renderGeoPlatform(route.platform);
@@ -4699,6 +4700,32 @@ strong{font-weight:600; color:#fff}
     showGeo(html, { title: g.title + " | PodLookup", description: g.summary, url: geoHref(path) }, nodes);
   }
 
+  function renderGeoInfo(id){
+    var isAbout = id === "about";
+    var items = [{ name: "Home", path: "" }, { name: isAbout ? "About PodLookup" : "How PodLookup verifies compatibility" }];
+    var body = isAbout
+      ? "<p>PodLookup is a UK-focused compatibility reference answering one practical question: which refillable pods fit a particular device? It is an independent information project, not owned by, affiliated with or sponsored by Vaporesso, OXVA or Uwell.</p>"
+        + "<h2>What you get here</h2><ul><li>Exact-model device pages and recorded pod platforms.</li><li>Compatibility charts that keep device resistance and pod resistance separate.</li><li>Technical guides for XROS, XLIM and Caliburn systems.</li><li>Explicit gaps: when evidence does not establish a fit, we say \"currently unavailable\".</li></ul>"
+        + "<h2>Scope</h2><p>PodLookup focuses on UK TPD versions where the available evidence supports that distinction. Product names remain the property of their manufacturers. Compatibility statements are tied to the manufacturer evidence recorded by PodLookup.</p>"
+        + "<p>Last content review: 5 November 2026.</p>"
+      : "<p>PodLookup is a compatibility reference, not a shop. Every compatibility statement is intended to trace back to an official manufacturer source. When the evidence does not establish a fit, we say so instead of guessing.</p>"
+        + "<h2>Our method</h2><ol><li><strong>Official sources first.</strong> Device platforms, supported resistances and kit contents are recorded from manufacturer sources where available.</li><li><strong>One structured dataset.</strong> Pages derive from the same versioned dataset so device, compatibility and FAQ surfaces can be audited against one another.</li><li><strong>Platform vs device stays separate.</strong> A pod platform available resistance is not automatically the same as the resistance options supported by every device on it.</li><li><strong>UK versions are scoped.</strong> UK TPD 2 ml variants are the primary reference where the manufacturer provides a UK distinction.</li><li><strong>UNKNOWN stays UNKNOWN.</strong> If the evidence does not establish a fit, the page shows \"currently unavailable\" and does not infer compatibility from appearance, branding or resistance alone.</li></ol>"
+        + "<h2>Corrections</h2><p>Compatibility information can change when manufacturers revise product pages. PodLookup re-checks source records during content updates and keeps model-specific evidence separate from assumptions.</p>"
+        + "<h2>What PodLookup is not</h2><p>PodLookup is not currently a retailer. The storefront UI is a product-research prototype; no orders or payments are processed.</p>";
+    var html = crumbsFor(items)
+      + "<p class=\"geo-kicker\">" + (isAbout ? "About PodLookup" : "Methodology") + "</p>"
+      + "<h1>" + (isAbout ? "About PodLookup" : "How PodLookup verifies pod compatibility") + "</h1>"
+      + "<article class=\"geo-block geo-guide-body\">" + body + "</article>"
+      + "<div class=\"geo-block\"><h2>Related information</h2><div class=\"geo-links\">"
+      + geoLink(geoHref("guides/which-pod"), "Which pod fits my device?", "Compatibility basics", "data-geo")
+      + geoLink(geoHref("platforms/xros-pods"), "XROS Pods platform", "Recorded XROS devices and pod variants", "data-geo")
+      + geoLink(geoHref("guides/caliburn-pods"), "Caliburn pod guide", "Recorded Caliburn platforms", "data-geo")
+      + "</div></div>" + finderCtaBlockHtml();
+    var nodes = [breadcrumbSchema(items)];
+    if (isAbout) nodes.push({"@context":"https://schema.org","@type":"AboutPage","name":"About PodLookup","description":"About the independent UK PodLookup compatibility reference.","url":geoHref("about")});
+    else nodes.push({"@context":"https://schema.org","@type":"TechArticle","headline":"How PodLookup verifies pod compatibility","description":"Methodology used to record and audit pod compatibility.","url":geoHref("methodology"),"inLanguage":"en-GB"});
+    showGeo(html,{title:(isAbout ? "About PodLookup — the UK pod compatibility reference" : "How PodLookup verifies pod compatibility | PodLookup"),description:(isAbout ? "About the independent UK PodLookup compatibility reference." : "How PodLookup records manufacturer-backed compatibility evidence and preserves UNKNOWN when a fit is not established."),url:geoHref(id)},nodes);
+  }
   function renderGeoNotFound(){
     var items = [{ name: "Home", path: "" }, { name: "Information unavailable" }];
     var html = crumbsFor(items)
