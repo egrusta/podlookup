@@ -310,7 +310,7 @@ test.describe('PodLookup crawlable technical guide routes', () => {
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp('\\?p=guides/' + id + '$'));
       await expect(page.locator('meta[name="description"]')).not.toHaveAttribute('content', '');
       await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
-      await expect(page.locator('#geo-schema')).toContainText('TechArticle');
+      await expect.poll(() => page.locator('#geo-schema').evaluate(el => el.textContent)).toContain('TechArticle');
       await expect(page.locator('#geoView a[data-geo][href*="?p=guides/"]').first()).toBeVisible();
     }
   });
