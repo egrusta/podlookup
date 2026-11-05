@@ -1056,7 +1056,7 @@ strong{font-weight:600; color:#fff}
     <div class="wrap">
       <div class="section-head">
         <h2>Compatibility Finder</h2>
-        <p>Answer one question — which device do you have? — and we will show its pod or cartridge system, the pod/coil resistances available and the exact products recorded for it.</p>
+        <p>Use either direction — choose a device to find its pod/cartridge system, or choose a pod platform and resistance to find the recorded devices that support it.</p>
       </div>
       <p class="finder-lede">Every refillable device uses a recorded pod, cartridge or coil system. Choose your brand and model below to see what fits; model-specific coil and cartridge variants are kept separate. We only show compatibility recorded in our own product data — where we do not have a detail on file you will see a clear note rather than a guess.</p>
       <div class="finder panel">
@@ -2959,7 +2959,8 @@ strong{font-weight:600; color:#fff}
       Object.keys(COMPATIBILITY[b] || {}).forEach(function(d){
         var e = COMPATIBILITY[b][d];
         if (e.pods !== finderPodPlatform) return;
-        if ((e.ohms || []).indexOf(finderPodResistance) === -1) return;
+        var supported = finderPodPlatform === "Xlim C Cartridge & Coil System" ? (e.coilOhms || []) : (e.ohms || []);
+        if (supported.indexOf(finderPodResistance) === -1) return;
         matches.push({brand:b, device:d, entry:e});
       });
     });
