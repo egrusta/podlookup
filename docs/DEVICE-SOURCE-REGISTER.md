@@ -96,7 +96,7 @@
 
 ## Register coverage
 
-This register now contains manufacturer source records for the Vaporesso XROS family, the standard OXVA XLIM cartridge family and the separate OXVA Xlim C cartridge-and-coil system. A separate [UWELL Caliburn source audit](uwell-caliburn-source-audit.md) records A2/A3 cartridge-family evidence, older G/G2 coil evidence and newer GPP G3/G4/G5 platform evidence, while deliberately leaving exact cartridge SKU direction unresolved where the manufacturer does not establish it. The remaining Uwell device and platform records in the embedded MASTER dataset still require model-level source review. Do not interpret a device's presence in the site as proof that every source has been audited. Existing UNKNOWN safeguards remain in force.
+This register contains manufacturer source records for the Vaporesso XROS family, the standard OXVA XLIM cartridge family and the separate OXVA Xlim C cartridge-and-coil system. A separate [UWELL Caliburn source audit](uwell-caliburn-source-audit.md) records A2/A3 cartridge-family evidence, older G/G2 coil evidence and newer GPP G3/G4/G5 platform evidence. Seven legacy Caliburn models — GZ2, GZ2 Cyber, GK2, Tenet, Tenet KOKO, X and Explorer — are now present in MASTER as explicit UNKNOWN pod-platform records: manufacturer evidence supports some coil-family or broad cartridge statements, but does not establish an exact interchangeable cartridge SKU and fit direction. Their pages preserve UNKNOWN rather than guessing. The remaining Uwell device and platform records still require model-level source review. Do not interpret a device's presence in the site as proof that every source has been audited.
 
 ## Review log
 
