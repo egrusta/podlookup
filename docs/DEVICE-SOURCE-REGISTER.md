@@ -96,7 +96,7 @@
 
 ## Register coverage
 
-This register now contains manufacturer source records for the Vaporesso XROS family, the standard OXVA XLIM cartridge family and the separate OXVA Xlim C cartridge-and-coil system. A separate [UWELL Caliburn G-family source audit](uwell-caliburn-source-audit.md) records older G/G2 evidence and deliberately leaves exact cartridge SKU direction unresolved where the manufacturer does not establish it. The remaining Uwell device and platform records in the embedded MASTER dataset still require model-level source review. Do not interpret a device's presence in the site as proof that every source has been audited. Existing UNKNOWN safeguards remain in force.
+This register now contains manufacturer source records for the Vaporesso XROS family, the standard OXVA XLIM cartridge family and the separate OXVA Xlim C cartridge-and-coil system. A separate [UWELL Caliburn G-family source audit](uwell-caliburn-source-audit.md) records older G/G2 coil evidence and newer GPP G3/G4/G5 platform evidence, while deliberately leaving exact cartridge SKU direction unresolved where the manufacturer does not establish it. The remaining Uwell device and platform records in the embedded MASTER dataset still require model-level source review. Do not interpret a device's presence in the site as proof that every source has been audited. Existing UNKNOWN safeguards remain in force.
 
 ## Review log
 
