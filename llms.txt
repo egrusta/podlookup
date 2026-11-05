@@ -99,6 +99,17 @@ PodLookup is an information-first catalogue for Vaporesso, OXVA and UWELL refill
 - **UWELL Caliburn A2 and A3:** These are separate pod platforms; do not assume cross-compatibility between A2, A3 and GPP.
 - **Unknown information:** When the source evidence does not establish a fit, treat the result as UNKNOWN. Do not infer compatibility from brand name or appearance.
 
+## Technical guides
+
+- [All pod compatibility and component guides](https://podlookup.co.uk/?p=guides)
+- [Which pod fits my device?](https://podlookup.co.uk/?p=guides/which-pod)
+- [Vaporesso XROS compatibility guide](https://podlookup.co.uk/?p=guides/xros-guide)
+- [XROS and XLIM platform records](https://podlookup.co.uk/?p=guides/xros-vs-xlim)
+- [How replacement pods work](https://podlookup.co.uk/?p=guides/pods-work)
+- [Which UWELL Caliburn pods fit each device?](https://podlookup.co.uk/?p=guides/caliburn-pods)
+- [Which pods fit OXVA XLIM devices?](https://podlookup.co.uk/?p=guides/xlim-pods)
+- [Cross-platform compatibility and resistance records](https://podlookup.co.uk/?p=guides/cross-platform-resistance)
+
 ## Frequently asked questions
 
 - Which pods fit the Vaporesso XROS 5?
