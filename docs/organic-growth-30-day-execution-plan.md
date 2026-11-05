@@ -33,27 +33,37 @@ Official references:
 
 ## 3. Measurement: establish the real baseline first
 
-No current, verified daily unique-visitor baseline is available in this plan. Historical Cloudflare counts must not be treated as today's baseline.
+No current, verified daily unique-visitor baseline is available. Historical Cloudflare counts must not be treated as today's baseline.
+
+**Measurement readiness check — 5 November 2026:** the current production homepage and repository source were checked for GA4, Google Tag Manager, Cloudflare Web Analytics and Zaraz scripts. No client-side analytics beacon was detected. This does not rule out Cloudflare edge-level request analytics in the dashboard; those figures are a different measurement source and have not yet been verified.
 
 Use a consistent reporting definition:
 
-- **Primary:** GA4 organic-search users per day, excluding known internal/staff traffic where possible.
-- **Cross-check:** Cloudflare unique visitors, with bot and security-event traffic excluded where available.
-- **Search visibility:** Google Search Console clicks, impressions, CTR, average position, indexed pages, and query/page reports.
-- **Quality checks:** engaged sessions, useful page views, finder interactions, and return visits. Do not count a bounce or a single bot hit as a meaningful visitor.
-- Never add GA4 users, Cloudflare visitors and Search Console clicks together; they measure different things.
+- **Primary visitor measure:** Cloudflare Web Analytics unique visitors per day, once enabled and verified. Treat this as the best available browser-measured proxy for real visitors, not an exact count of identifiable people.
+- **Organic search:** Google Search Console clicks, impressions, CTR, average position, indexed pages, and query/page reports.
+- **Optional secondary measure:** GA4 organic users and engaged sessions, only after its privacy, cookie/consent and internal-traffic settings have been reviewed and configured.
+- **Quality checks:** useful page views, Compatibility Finder interactions, and return visits. Do not count a single bot hit, uptime check or staff test as a meaningful visitor.
+- Never add Cloudflare visitors, GA4 users and Search Console clicks together; they measure different things.
 
-**Access gate:** connect read-only Search Console and GA4 reporting, or export their reports weekly. If the accounts are not connected, record the metric as unavailable rather than estimating it.
+**Recommended no-cost setup:** enable Cloudflare Web Analytics for the Pages project. Cloudflare's documented path is **Workers & Pages → PodLookup → Metrics → Web Analytics → Enable**. Cloudflare says Pages will add its beacon on the next deployment. After deployment, verify that the live page contains the beacon and that the Web Analytics dashboard begins receiving data. If automatic injection does not work with the site's current Perchance-derived HTML structure, use Cloudflare's documented manual setup only after obtaining the site's own beacon snippet from the dashboard.
+
+**Access gate:** verify the PodLookup domain in Google Search Console and submit `https://podlookup.co.uk/sitemap.xml`. Export its 28-day Performance and Pages reports weekly. If Search Console or Web Analytics is not connected, record the metric as unavailable rather than estimating it.
+
+Official setup references:
+- Cloudflare Pages Web Analytics: https://developers.cloudflare.com/pages/how-to/web-analytics/
+- Cloudflare Web Analytics overview and privacy model: https://developers.cloudflare.com/web-analytics/about/
+- Cloudflare Web Analytics setup: https://developers.cloudflare.com/web-analytics/get-started/
 
 ## 4. Thirty-day execution schedule
 
 ### Days 1–3 — Measurement and crawl baseline
 
-1. Record current GA4 users, organic users, sessions and landing pages for the previous 28 days, if GA4 is available.
-2. Record Cloudflare unique visitors and bot/security traffic for the same period.
-3. Export Search Console queries, pages, clicks, impressions, CTR and average position for 28 days.
-4. Check the production `robots.txt`, XML sitemap, canonical URLs, response codes and page titles.
-5. Establish a baseline table; do not claim growth until the same measurement method is used for each reporting period.
+1. Enable and verify Cloudflare Web Analytics for the Pages project; record its first complete 28-day visitor and page-view period when available.
+2. Verify the PodLookup domain in Search Console, submit the production sitemap, and export clicks, impressions, CTR, average position and landing pages for the previous 28 days.
+3. Record Cloudflare edge-level request and bot/security metrics separately if available; do not substitute request counts for unique visitors.
+4. Use GA4 only if it is already configured or can be added after the privacy and consent review; otherwise mark GA4 metrics unavailable.
+5. Check the production `robots.txt`, XML sitemap, canonical URLs, response codes and page titles.
+6. Establish a baseline table; do not claim growth until the same measurement method is used for each reporting period.
 
 **Deliverable:** baseline dashboard and a list of crawl/indexing defects.
 
@@ -134,9 +144,9 @@ Suggested weekly reporting table:
 
 | Metric | Baseline | Day 7 | Day 14 | Day 21 | Day 30 |
 |---|---:|---:|---:|---:|---:|
-| Real unique visitors/day (7-day average) | To measure | | | | Target: 100 |
-| Organic users/day | To measure | | | | |
-| Search Console clicks/day | To measure | | | | |
+| Cloudflare Web Analytics unique visitors/day (7-day average) | To measure | | | | Target: 100 |
+| Search Console organic clicks/day | To measure | | | | |
+| GA4 organic users/day (optional) | If configured | | | | |
 | Search impressions/day | To measure | | | | |
 | Indexed intended URLs | To measure | | | | |
 | Engaged organic sessions | To measure | | | | |
