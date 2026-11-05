@@ -138,3 +138,11 @@ PodLookup is an information-first catalogue for Vaporesso, OXVA and UWELL refill
 
 - [XML sitemap](https://podlookup.co.uk/sitemap.xml)
 - [Robots policy](https://podlookup.co.uk/robots.txt)
+
+
+## New technical and trust pages (5 November 2026)
+- XROS 6 vs XROS 5 guide: https://podlookup.co.uk/?p=guides/xros-6-vs-5 — same XROS Pods platform; model-specific resistance records remain separate.
+- Caliburn G4 vs G5 guide: https://podlookup.co.uk/?p=guides/caliburn-g4-vs-g5 — verification in progress; no unverified pod interchangeability claim.
+- Methodology: https://podlookup.co.uk/?p=methodology — how official-source evidence, platform/device separation and UNKNOWN status are handled.
+- About PodLookup: https://podlookup.co.uk/?p=about — independent UK-focused compatibility reference scope and ownership statement.
+- XROS platform: https://podlookup.co.uk/?p=platforms/xros-pods — includes cross-compatibility questions for recorded XROS devices.
