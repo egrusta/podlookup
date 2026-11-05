@@ -315,3 +315,16 @@ test.describe('PodLookup crawlable technical guide routes', () => {
     }
   });
 });
+
+test.describe('PodLookup demo privacy and launch-list clarity', () => {
+  test('does not present an inactive email signup or retain locally entered addresses', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('#notifyForm')).toHaveCount(0);
+    await expect(page.locator('#launchListBtn')).toHaveCount(0);
+    await expect(page.locator('footer')).toContainText('does not collect email addresses or send launch notifications');
+    await expect(page.locator('#cartDrawer')).toContainText('email notifications are not active');
+    await page.evaluate(() => localStorage.setItem('podlookup-notify', 'demo@example.com'));
+    await page.reload();
+    expect(await page.evaluate(() => localStorage.getItem('podlookup-notify'))).toBeNull();
+  });
+});
