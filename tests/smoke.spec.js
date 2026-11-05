@@ -271,6 +271,8 @@ test.describe('PodLookup information-first homepage copy', () => {
   test('homepage presents platform information without promotional comparison language', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('.hero-copy')).toContainText('UK compatibility reference');
+    await expect(page).toHaveTitle('PodLookup | XROS, XLIM & Caliburn Pod Compatibility Reference');
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /UK reference for Vaporesso XROS, OXVA XLIM and UWELL Caliburn pod compatibility/);
     await expect(page.locator('.trust-row')).toContainText('Evidence status');
     await expect(page.locator('.trust-row')).not.toContainText('proven refillable ecosystems');
     await expect(page.locator('#ecoGrid')).toContainText('View XROS device records');
