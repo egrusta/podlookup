@@ -1499,12 +1499,7 @@ strong{font-weight:600; color:#fff}
         <span class="brand-text">Pod<em>Lookup</em></span>
       </a>
       <p>A front-end product research prototype exploring how a specialist refillable vape retailer could present compatibility information clearly.</p>
-      <p style="font-size:.84rem;color:var(--txt-2);margin:12px 0 0;max-width:34ch">Checkout isn't live yet — leave your email and we'll tell you when it opens.</p>
-      <form id="notifyForm" style="margin-top:10px;display:flex;gap:8px;max-width:34ch">
-        <input type="email" id="notifyEmail" required placeholder="Email for launch news" aria-label="Email for launch news" style="flex:1;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:.84rem">
-        <button class="btn btn-ghost" type="submit" style="padding:10px 16px;min-height:44px">Join</button>
-      </form>
-      <p id="notifyMsg" style="font-size:.8rem;color:var(--accent-2);margin-top:8px" aria-live="polite"></p>
+      <p style="font-size:.84rem;color:var(--txt-2);margin:12px 0 0;max-width:34ch">This demonstration does not collect email addresses or send launch notifications.</p>
     </div>
     <div class="footer-col">
       <h3>Reference catalogue</h3>
@@ -1552,7 +1547,7 @@ strong{font-weight:600; color:#fff}
   <div class="drawer-foot">
     <div class="drawer-total"><span>Subtotal</span><strong id="cartTotal">£0.00</strong></div>
     <button class="btn btn-primary btn-block" disabled title="Demonstration storefront — checkout is disabled">Checkout — demo only</button>
-    <p class="fine-print" style="text-align:center;margin:2px 0 0">Checkout isn't live yet — <button type="button" id="launchListBtn" style="background:none;border:0;padding:0;color:var(--accent-2);font:inherit;font-weight:600;cursor:pointer;text-decoration:underline">join the launch list</button>.</p>
+    <p class="fine-print" style="text-align:center;margin:2px 0 0">Checkout and email notifications are not active in this demonstration.</p>
     <button class="btn btn-ghost btn-block" id="cartClear" type="button">Clear cart</button>
   </div>
 </aside>
@@ -6562,14 +6557,6 @@ strong{font-weight:600; color:#fff}
     updateActiveNav();
 
     $("#cartBtn").addEventListener("click", openCart);
-    var launchListBtn = $("#launchListBtn");
-    if (launchListBtn) launchListBtn.addEventListener("click", function(){
-      closeCart();
-      var form = $("#notifyForm");
-      if (form) form.scrollIntoView({ behavior: "smooth", block: "center" });
-      var email = $("#notifyEmail");
-      if (email) setTimeout(function(){ try { email.focus({ preventScroll: true }); } catch (e) { email.focus(); } }, 500);
-    });
     $("#cartClose").addEventListener("click", closeCart);
     $("#cartClear").addEventListener("click", function(){ cart = []; renderCart(); });
     $("#cartBody").addEventListener("click", function(e){
@@ -6584,17 +6571,6 @@ strong{font-weight:600; color:#fff}
     });
 
     $("#modalClose").addEventListener("click", closeModal);
-    var notifyForm = $("#notifyForm");
-    if (notifyForm) notifyForm.addEventListener("submit", function(e){
-      e.preventDefault();
-      var input = $("#notifyEmail");
-      var msg = $("#notifyMsg");
-      var email = (input.value || "").trim();
-      if (!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email)){ msg.textContent = "Enter a valid email address."; return; }
-      try { localStorage.setItem("podlookup-notify", email); } catch (err) {}
-      msg.textContent = "Thanks — you are on the launch list.";
-      input.value = "";
-    });
     $("#overlay").addEventListener("click", function(){ closeModal(); closeCart(); });
     document.addEventListener("keydown", function(e){
       if (e.key === "Escape"){ closeModal(); closeCart(); closeNav(); }
@@ -6605,6 +6581,8 @@ strong{font-weight:600; color:#fff}
   /* ---- boot ---- */
   function init(){
     buildEntities();
+    /* The former demo launch form only saved email locally; no notification service existed. */
+    try { localStorage.removeItem("podlookup-notify"); } catch (e) {}
     if (!GUIDES.some(function(g){ return g.id === "caliburn-pods"; })) GUIDES.splice(1, 0, caliburnGuideEntry());
     if (!GUIDES.some(function(g){ return g.id === "xlim-pods"; })) GUIDES.splice(2, 0, xlimGuideEntry());
     if (!GUIDES.some(function(g){ return g.id === "cross-platform-resistance"; })) GUIDES.splice(3, 0, crossPlatformGuideEntry());
