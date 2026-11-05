@@ -1,6 +1,6 @@
 # PodLookup
 
-> UK-focused refillable pod compatibility reference. Find a device, check its recorded pod platform, and understand what is and is not verified before making a purchase decision.
+> UK-focused refillable pod compatibility reference. Find a device, check its recorded pod platform, and understand what is and is not established by the available evidence.
 
 PodLookup is an information-first catalogue for Vaporesso, OXVA and UWELL refillable pod devices. Compatibility statements are derived from the site's embedded MASTER dataset and linked manufacturer/source records. If a compatibility detail is not established, PodLookup marks it UNKNOWN rather than guessing.
 
@@ -109,7 +109,7 @@ PodLookup is an information-first catalogue for Vaporesso, OXVA and UWELL refill
 - Which pods fit Caliburn A3, A3S, AK3 and AZ3?
 - Do Caliburn Air and Air R use GPP cartridges?
 - Does the original Caliburn use its own refillable pod?
-- What resistance pod should I choose?
+- Which resistance options are recorded for my device?
 - How do I know when to replace a pod?
 - Is PodLookup a real shop?
 - Do you sell nicotine products?
