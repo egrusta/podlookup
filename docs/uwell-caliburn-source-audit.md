@@ -2,7 +2,7 @@
 
 **Checked:** 5 November 2026  
 **Purpose:** Record manufacturer evidence for older Caliburn G-family devices before changing the compatibility dataset.  
-**Status:** Research complete for the sources below; implementation deliberately pending where exact cartridge direction or SKU identity is not established.
+**Status:** Research complete for the sources below. Legacy models whose exact cartridge SKU or compatibility direction is unresolved are represented in MASTER as explicit UNKNOWN pod-platform records; no fit is inferred from coil-family compatibility.
 
 ## Evidence rules
 
@@ -178,6 +178,20 @@
 5. Add only the proven relationships to MASTER, routes, static fallback, sitemap, llms.txt and regression tests.
 6. Keep all unresolved cartridge fit values UNKNOWN.
 
+## Legacy model route status
+
+The following older models are now represented by device and compatibility routes in PodLookup, while their pod platform remains UNKNOWN until a manufacturer source identifies the exact cartridge SKU and compatibility direction:
+
+- Caliburn GZ2
+- Caliburn GZ2 Cyber
+- Caliburn GK2
+- Caliburn Tenet
+- Caliburn Tenet KOKO
+- Caliburn X
+- Caliburn Explorer
+
+Where the manufacturer explicitly lists G-series coil resistance options, those are stored separately as replaceable-coil facts. They are not converted into a pod-platform or cartridge-fit claim. The GK2 (Vision) wording appears in UWELL's GZ2 Cyber compatibility panel, but is not added as a separate device record until an exact standalone model identity and source page are established.
+
 ## Review log
 
 | Date | Scope | Result |
@@ -185,3 +199,4 @@
 | 5 November 2026 | UWELL G/G2 family | Manufacturer pages confirm G-series coil support for several omitted devices; exact cartridge interchangeability remains a separate question and is not inferred. |
 | 5 November 2026 | UWELL GPP G3/G4/G5 family | Added official GPP platform and model-page evidence; kept cartridge-generation and SKU direction distinctions explicit. |
 | 5 November 2026 | UWELL A2/A3 families | Added official A2/A2S/AK2 and A3/A3S/AK3/AZ3 evidence, preserving model-specific resistance distinctions. |
+| 5 November 2026 | Legacy Caliburn G family | Added GZ2, GZ2 Cyber, GK2, Tenet, Tenet KOKO, X and Explorer as UNKNOWN pod-platform records; retained verified coil-family evidence separately. |
