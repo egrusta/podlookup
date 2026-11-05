@@ -3906,8 +3906,54 @@ strong{font-weight:600; color:#fff}
   }
 function renderGeoFinder(){
 var items=[{name:"Home",path:""},{name:"Pod Finder",path:"finder"}];
-var html=crumbsFor(items)+'<p class="geo-kicker">Compatibility tool</p><h1>Pod Finder — which pods fit your device?</h1>'+geoAnswer("How it works","Answer two questions and get the exact pods for your device — verified against official manufacturer sources, UK 2 ml versions.")+'<div class="geo-block"><h2>Finder questions</h2><div class="geo-links"><div><strong>How do I know which pods fit my vape?</strong><p>Check the model on the device, find it here, match the platform — same platform means same pods.</p></div><div><strong>I lost the box — how do I identify my device?</strong><p>Model name on the body, or the pod name moulded into the plastic; enter either here.</p></div><div><strong>Are pods from another brand compatible?</strong><p>No. Platforms are brand-specific; XROS, XLIM and Caliburn families do not interchange.</p></div><div><strong>What does 0.8 ohm vs 1.2 ohm change?</strong><p>Lower resistance is generally airier and warmer; higher resistance generally gives a tighter draw. The device must list that resistance as supported.</p></div><div><strong>Your finder does not list my device — why?</strong><p>It is not verified yet; PodLookup publishes no guesses.</p></div></div></div><div class="geo-block"><h2>Browse the reference</h2><div class="geo-links">'+geoLink(geoHref("devices"),"Device catalogue","All recorded devices","data-geo")+geoLink(geoHref("platforms"),"Pod platforms","Platform-level compatibility records","data-geo")+geoLink(geoHref("guides/which-pod"),"Which pod fits my device?","Compatibility basics",'data-geo data-guide="which-pod"')+'</div></div>';
-showGeo(html,{title:"Pod Finder — which pods fit your device? | PodLookup",description:"Find the pod platform and recorded resistance options for your refillable vape device using PodLookup's compatibility reference.",url:geoHref("finder")},[breadcrumbSchema(items)]);
+var devices=ENTITY.brands.reduce(function(a,b){return a.concat(b.devices);},[]);
+var platforms=ENTITY.platforms||[];
+var deviceOptions='<option value="">Select a device</option>'+devices.map(function(d){return '<option value="'+esc(d.brandSlug+"|"+d.slug)+'">'+esc(d.brand+" "+d.device)+'</option>';}).join("");
+var platformOptions='<option value="">Select a pod platform</option>'+platforms.map(function(p){return '<option value="'+esc(p.slug)+'">'+esc(p.brand+" — "+p.key)+'</option>';}).join("");
+var resistanceSet={};
+platforms.forEach(function(p){(p.podOhms||[]).concat(p.coilOhms||[]).forEach(function(o){resistanceSet[o]=1;});});
+devices.forEach(function(d){(d.ohms||[]).forEach(function(o){resistanceSet[o]=1;});});
+var resistances=Object.keys(resistanceSet).sort(function(a,b){return parseFloat(a)-parseFloat(b);});
+var resistanceOptions='<option value="">Select resistance</option>'+resistances.map(function(o){return '<option value="'+esc(o)+'">'+esc(o)+'</option>';}).join("");
+var html=crumbsFor(items)
++'<p class="geo-kicker">Compatibility tool</p><h1>Pod Finder — which pods fit your device?</h1>'
++geoAnswer("How it works","Answer two questions and get the exact pods for your device — verified against the PodLookup compatibility records and official manufacturer evidence where recorded.")
++'<div class="geo-block"><h2>I have a device</h2><p>Select the exact model. The result is taken directly from the device record.</p>'
++'<div class="geo-links"><label for="podFinderDevice">Device</label><select id="podFinderDevice" class="finder-select">'+deviceOptions+'</select><button type="button" id="podFinderDeviceBtn" class="finder-btn">Find compatible pods</button></div></div>'
++'<div class="geo-block"><h2>I have pods</h2><p>Select the recorded pod platform and resistance. The result lists devices on that platform whose device resistance record includes the selected value.</p>'
++'<div class="geo-links"><label for="podFinderPlatform">Pod platform</label><select id="podFinderPlatform" class="finder-select">'+platformOptions+'</select><label for="podFinderResistance">Resistance</label><select id="podFinderResistance" class="finder-select">'+resistanceOptions+'</select><button type="button" id="podFinderPodsBtn" class="finder-btn">Find compatible devices</button></div></div>'
++'<div id="podFinderResult" class="geo-block" aria-live="polite"><h2>Results</h2><p>Select an option above to see a compatibility result.</p></div>'
++'<div class="geo-block"><h2>Finder questions</h2><div class="geo-links"><div><strong>How do I know which pods fit my vape?</strong><p>Check the model on the device, find it here, match the platform — same platform means same pods.</p></div><div><strong>I lost the box — how do I identify my device?</strong><p>Model name on the body, or the pod name moulded into the plastic; enter either here.</p></div><div><strong>Are pods from another brand compatible?</strong><p>No. Platforms are brand-specific; XROS, XLIM and Caliburn families do not interchange.</p></div><div><strong>What does 0.8 ohm vs 1.2 ohm change?</strong><p>Lower resistance is generally airier and warmer; higher resistance generally gives a tighter draw. The device must list that resistance as supported.</p></div><div><strong>Your finder does not list my device — why?</strong><p>It is not verified yet; PodLookup publishes no guesses.</p></div></div></div>'
++'<div class="geo-block"><h2>Browse the reference</h2><div class="geo-links">'+geoLink(geoHref("devices"),"Device catalogue","All recorded devices","data-geo")+geoLink(geoHref("platforms"),"Pod platforms","Platform-level compatibility records","data-geo")+geoLink(geoHref("guides/which-pod"),"Which pod fits my device?","Compatibility basics",'data-geo data-guide="which-pod"')+'</div></div>';
+showGeo(html,{title:"Pod Finder — which pods fit your device? | PodLookup",description:"Find which pods fit your device or which devices support a recorded pod platform and resistance.",url:geoHref("finder")},[breadcrumbSchema(items)]);
+var deviceSel=document.getElementById("podFinderDevice"), platformSel=document.getElementById("podFinderPlatform"), resistanceSel=document.getElementById("podFinderResistance"), result=document.getElementById("podFinderResult");
+function deviceByValue(v){var q=String(v||"").split("|");if(q.length!==2)return null;var b=findBrandBySlug(q[0]);return b?findDeviceIn(b,q[1]):null;}
+function resultDevice(){
+var d=deviceByValue(deviceSel.value);
+if(!d){result.innerHTML='<h2>Results</h2><p>Select a device first.</p>';return;}
+var b=findBrandBySlug(d.brandSlug), title=d.platformKey==="Xlim C Cartridge & Coil System"?"Cartridge and coils for "+b.name+" "+d.device:"Pods for "+b.name+" "+d.device;
+var fit=d.platformKey?d.platformKey:"UNKNOWN";
+var links=geoLink(geoHref("devices/"+d.brandSlug+"/"+d.slug),b.name+" "+d.device+" device page","Full model record",'data-geo')
++(d.platformSlug?geoLink(geoHref("platforms/"+d.platformSlug),d.pods||d.platformKey+" platform","Platform compatibility record",'data-geo'):"")
++geoLink(geoHref("compatibility/"+d.brandSlug+"/"+d.slug),"Compatibility page","Exact compatibility record",'data-geo');
+result.innerHTML='<h2>'+esc(title)+'</h2><p><strong>Recorded platform:</strong> '+esc(fit)+'.</p>'
++(d.ohms&&d.ohms.length?'<p><strong>Device resistance:</strong> '+esc(d.ohms.join(", "))+'.</p>':'<p><strong>Device resistance:</strong> UNKNOWN.</p>')
++(d.podOhms&&d.podOhms.length?'<p><strong>Pod resistance available:</strong> '+esc(d.podOhms.join(", "))+'.</p>':'')
++'<div class="geo-links">'+links+'</div>';
+}
+function resultPods(){
+var p=platforms.filter(function(x){return x.slug===platformSel.value;})[0],r=String(resistanceSel.value||"");
+if(!p||!r){result.innerHTML='<h2>Results</h2><p>Select both a pod platform and resistance.</p>';return;}
+var matches=devices.filter(function(d){return d.platformSlug===p.slug && (d.ohms||[]).indexOf(r)!==-1;});
+if(!matches.length){result.innerHTML='<h2>Results</h2><p>No device in the current records lists '+esc(r)+' on the '+esc(p.key)+' platform. PodLookup does not infer a fit.</p>';return;}
+var rows=matches.map(function(d){return geoLink(geoHref("devices/"+d.brandSlug+"/"+d.slug),d.brand+" "+d.device,"Recorded platform: "+p.key,'data-geo');}).join("");
+result.innerHTML='<h2>Devices supporting '+esc(r)+'</h2><p>'+esc(p.brand+" "+p.key)+' — '+matches.length+' recorded device'+(matches.length===1?"":"s")+'.</p><div class="geo-links">'+rows+'</div>';
+}
+if(deviceSel) deviceSel.addEventListener("change",resultDevice);
+if(platformSel) platformSel.addEventListener("change",function(){result.innerHTML='<h2>Results</h2><p>Now choose a resistance to narrow the device list.</p>';});
+if(resistanceSel) resistanceSel.addEventListener("change",function(){if(platformSel.value)resultPods();});
+var db=document.getElementById("podFinderDeviceBtn"),pb=document.getElementById("podFinderPodsBtn");
+if(db)db.addEventListener("click",resultDevice); if(pb)pb.addEventListener("click",resultPods);
 }
 function renderGeoInfoPage(kind){
 var about=kind==="about",title=about?"About PodLookup":"PodLookup methodology",desc=about?"About PodLookup and its evidence-first compatibility reference.":"How PodLookup records pod compatibility, resistance data, sources and UNKNOWN claims.",items=[{name:"Home",path:""},{name:title}];
