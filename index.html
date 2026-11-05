@@ -2263,9 +2263,9 @@ strong{font-weight:600; color:#fff}
   }
 
   var FAMILY_GUIDES = {
-    XROS: ["which-pod", "xros-guide", "xros-vs-xlim", "cross-platform-resistance"],
-    XLIM: ["which-pod", "xlim-pods", "xros-vs-xlim", "pods-work", "cross-platform-resistance"],
-    Caliburn: ["which-pod", "caliburn-pods", "pods-work", "cross-platform-resistance"]
+    XROS: ["which-pod", "xros-guide", "xros-vs-xlim", "cross-platform-resistance", "pods-work"],
+    XLIM: ["which-pod", "xlim-pods", "xros-vs-xlim", "cross-platform-resistance", "pods-work"],
+    Caliburn: ["which-pod", "caliburn-pods", "cross-platform-resistance", "pods-work"]
   };
   function guidesFor(family){
     var ids = FAMILY_GUIDES[family] || ["which-pod", "pods-work"];
@@ -2978,7 +2978,7 @@ strong{font-weight:600; color:#fff}
 
     var guidesBlock = '<div><p class="fr-subhead">Related guides</p><div class="fr-guides">'
       + guidesFor(family).map(function(g){
-          return '<a class="fr-guide" href="#guides" data-guide="' + esc(g.id) + '">'
+          return '<a class="fr-guide" data-geo data-guide="' + esc(g.id) + '" href="' + esc(geoHref("guides/" + g.id)) + '">'
             + '<span><span class="fr-guide-k">' + esc(g.kicker) + '</span><span class="fr-guide-t">' + esc(g.title) + '</span></span>'
             + '<span class="fr-guide-arrow" aria-hidden="true">&#8594;</span></a>';
         }).join("")
@@ -3220,7 +3220,7 @@ strong{font-weight:600; color:#fff}
         + '<h3>' + esc(g.title) + '</h3>'
         + '<p>' + esc(g.summary) + '</p>'
         + guideLinkHtml(g)
-        + '<button class="btn btn-ghost" type="button" data-guide="' + esc(g.id) + '">Read guide</button>'
+        + '<a class="btn btn-ghost" data-geo data-guide="' + esc(g.id) + '" href="' + esc(geoHref("guides/" + g.id)) + '">Read guide</a>'
         + '</article>';
     }).join("");
   }
@@ -3292,7 +3292,7 @@ strong{font-weight:600; color:#fff}
               }).join("") + '</div></section>' : '')
         + (relGuides.length ? '<section class="pd-sec"><h4>Related guides</h4><div class="rel-guides">'
             + relGuides.map(function(g){
-                return '<button class="rel-guide" type="button" data-guide="' + esc(g.id) + '">'
+                return '<a class="rel-guide" data-geo data-guide="' + esc(g.id) + '" href="' + esc(geoHref("guides/" + g.id)) + '">'
                   + '<span><span class="rg-kicker">' + esc(g.kicker) + '</span><span class="rg-title">' + esc(g.title) + '</span></span>'
                   + '<span aria-hidden="true">&#8594;</span>'
                 + '</button>';
@@ -3683,12 +3683,20 @@ strong{font-weight:600; color:#fff}
   }
 
   /* ---- route parsing (?p=<path>) ---- */
-  var GEO_HEADS = { devices: 1, compatibility: 1, brands: 1, platforms: 1 };
+  var GEO_HEADS = { devices: 1, compatibility: 1, brands: 1, platforms: 1, guides: 1 };
   function parseGeoPath(raw){
     if (raw === null || raw === undefined || raw === "") return null;
     var parts = String(raw).split("/").filter(function(s){ return s.length > 0; });
     if (!parts.length || parts.length > 3 || !GEO_HEADS[parts[0]]) return null;
     var head = parts[0];
+    if (head === "guides"){
+      if (parts.length === 1) return { type: "guides" };
+      if (parts.length === 2){
+        var guide = GUIDES.filter(function(g){ return g.id === parts[1]; })[0];
+        return guide ? { type: "guide", guide: guide, path: raw } : { type: "notfound" };
+      }
+      return null;
+    }
     if (head === "devices" || head === "compatibility"){
       if (parts.length === 1) return { type: head };
       if (parts.length === 3){
@@ -3885,6 +3893,8 @@ strong{font-weight:600; color:#fff}
   function renderGeo(route){
     if (!route){ closeGeo(); return; }
     if (route.type === "devices" || route.type === "compatibility") renderGeoIndex(route.type);
+    else if (route.type === "guides") renderGeoGuides();
+    else if (route.type === "guide") renderGeoGuide(route.guide);
     else if (route.type === "platforms") renderGeoPlatforms();
     else if (route.type === "brand") renderGeoBrand(route.brand);
     else if (route.type === "platform") renderGeoPlatform(route.platform);
@@ -4468,8 +4478,8 @@ strong{font-weight:600; color:#fff}
         + ", not fault diagnosis for it. For leak, burnt taste, non-working pod and weak flavour questions, "
         + "the recorded position is given in the guides below" + ".")
       + '<div class="geo-links">'
-      + geoLink("#guides", "How replacement pods work", "Maintenance", 'data-guide="pods-work"')
-      + geoLink("#guides", "Which pod fits my device?", "Compatibility", 'data-guide="which-pod"')
+      + geoLink(geoHref("guides/pods-work"), "How replacement pods work", "Maintenance", 'data-geo data-guide="pods-work"')
+      + geoLink(geoHref("guides/which-pod"), "Which pod fits my device?", "Compatibility", 'data-geo data-guide="which-pod"')
       + geoLink("#faq", "Pod compatibility FAQ", "Direct answers to the most common questions")
       + '</div></div>';
   }
@@ -4568,7 +4578,7 @@ strong{font-weight:600; color:#fff}
     links.push(geoLink(geoHref("brands/" + b.slug), b.name + " device list", "", "data-geo"));
 
     var guidesBlock = '<div class="geo-block"><h2>Guides for the ' + esc(d.family) + ' platform</h2><div class="geo-links">'
-      + guidesFor(d.family).map(function(g){ return geoLink("#guides", g.title, g.kicker, 'data-guide="' + esc(g.id) + '"'); }).join("")
+      + guidesFor(d.family).map(function(g){ return geoLink(geoHref("guides/" + g.id), g.title, g.kicker, 'data-geo data-guide="' + esc(g.id) + '"'); }).join("")
       + '</div></div>';
     var siblingsBlock = siblings.length
       ? '<div class="geo-block"><h2>Other devices on the ' + esc(d.pods) + '</h2><div class="geo-links">'
@@ -4607,6 +4617,48 @@ strong{font-weight:600; color:#fff}
       });
     }
     showGeo(html, { title: metaTitle, description: metaDesc, url: geoHref(path) }, nodes);
+  }
+
+  function renderGeoGuides(){
+    var items = [{ name: "Home", path: "" }, { name: "Technical guides", path: "guides" }];
+    var links = GUIDES.map(function(g){
+      return geoLink(geoHref("guides/" + g.id), g.title, g.summary, 'data-geo data-guide="' + esc(g.id) + '"');
+    }).join("");
+    var html = crumbsFor(items)
+      + '<p class="geo-kicker">Technical reference</p><h1>Pod compatibility and component guides</h1>'
+      + geoAnswer("About these guides", "Question-led technical reference pages built from the PodLookup compatibility dataset. Device and pod facts are kept separate, manufacturer sources are used where available, and UNKNOWN is preserved when evidence does not establish a fit.")
+      + '<div class="geo-block"><div class="geo-links">' + links + '</div></div>'
+      + finderCtaBlockHtml()
+      + relatedGeoLinks([["Device index", "devices"], ["Compatibility index", "compatibility"], ["Pod platforms", "platforms"]]);
+    var nodes = [breadcrumbSchema(items), {
+      "@context": "https://schema.org", "@type": "ItemList", "name": "Pod compatibility and component guides",
+      "itemListElement": GUIDES.map(function(g, i){ return { "@type": "ListItem", position: i + 1, name: g.title, url: geoHref("guides/" + g.id) }; })
+    }];
+    showGeo(html, { title: "Pod compatibility and component guides | PodLookup", description: "Technical guides to exact pod compatibility, XROS and XLIM platforms, Caliburn pod systems, resistance records and replacement pod terminology.", url: geoHref("guides") }, nodes);
+  }
+  function renderGeoGuide(g){
+    if (!g){ renderGeoNotFound(); return; }
+    var path = "guides/" + g.id;
+    var items = [{ name: "Home", path: "" }, { name: "Technical guides", path: "guides" }, { name: g.title }];
+    var related = GUIDES.filter(function(x){ return x.id !== g.id; }).slice(0, 4);
+    var relatedHtml = related.length
+      ? '<div class="geo-block"><h2>Related technical guides</h2><div class="geo-links">'
+        + related.map(function(x){ return geoLink(geoHref("guides/" + x.id), x.title, x.kicker, 'data-geo data-guide="' + esc(x.id) + '"'); }).join("")
+        + '</div></div>' : "";
+    var html = crumbsFor(items)
+      + '<p class="geo-kicker">' + esc(g.kicker) + '</p><h1>' + esc(g.title) + '</h1>'
+      + geoAnswer("Guide overview", g.summary)
+      + '<article class="geo-block geo-guide-body">' + g.body + '</article>'
+      + guideLinkHtml(g)
+      + relatedHtml
+      + finderCtaBlockHtml();
+    var nodes = [breadcrumbSchema(items), {
+      "@context": "https://schema.org", "@type": "TechArticle",
+      "headline": g.title, "description": g.summary, "mainEntityOfPage": geoHref(path),
+      "author": { "@type": "Organization", "name": "PodLookup" },
+      "publisher": { "@type": "Organization", "name": "PodLookup" }, "inLanguage": "en-GB"
+    }];
+    showGeo(html, { title: g.title + " | PodLookup", description: g.summary, url: geoHref(path) }, nodes);
   }
 
   function renderGeoNotFound(){
@@ -4676,7 +4728,7 @@ strong{font-weight:600; color:#fff}
     var items = guidesLinksFor(families);
     if (!items.length) return "";
     return '<div class="geo-block"><h2>' + esc(heading) + '</h2><div class="geo-links">'
-      + items.map(function(g){ return geoLink("#guides", g.title, g.kicker, 'data-guide="' + esc(g.id) + '"'); }).join("")
+      + items.map(function(g){ return geoLink(geoHref("guides/" + g.id), g.title, g.kicker, 'data-geo data-guide="' + esc(g.id) + '"'); }).join("")
       + '</div></div>';
   }
   function brandsBlockHtml(devices){
@@ -4778,7 +4830,7 @@ strong{font-weight:600; color:#fff}
   }
   function refGuideLink(id){
     var g = GUIDES.filter(function(x){ return x.id === id; })[0];
-    return g ? geoLink("#guides", g.title, g.kicker, 'data-guide="' + esc(g.id) + '"') : "";
+    return g ? geoLink(geoHref("guides/" + g.id), g.title, g.kicker, 'data-geo data-guide="' + esc(g.id) + '"') : "";
   }
   function renderRef(){
     var host = document.getElementById("refGrid");
@@ -4803,7 +4855,7 @@ strong{font-weight:600; color:#fff}
     }).join("");
     var guides = ["which-pod", "pods-work", "cross-platform-resistance", "caliburn-pods", "xlim-pods"]
       .map(refGuideLink).join("")
-      + geoLink("#guides", "All guides", "Pod and compatibility guides");
+      + geoLink(geoHref("guides"), "All technical guides", "Pod and compatibility guides", "data-geo");
     host.innerHTML = col("Reference indexes", indexes)
       + col("Brand information", brands)
       + col("Pod platforms", plats)
@@ -5266,8 +5318,8 @@ strong{font-weight:600; color:#fff}
       var brandGuides = guidesLinksFor(b.families);
       if (!brandGuides.length) err("Brand page '" + b.name + "' has device families but no related guide.");
       brandGuides.forEach(function(g){
-        if (data.html.indexOf('data-guide="' + g.id + '"') === -1)
-          err("Brand page '" + b.name + "' omits related guide '" + g.id + "'.");
+        if (data.html.indexOf(geoHref("guides/" + g.id)) === -1)
+          err("Brand page '" + b.name + "' omits canonical related guide '" + g.id + "'.");
       });
       var devHrefs = [];
       b.devices.forEach(function(d){
@@ -5967,7 +6019,8 @@ strong{font-weight:600; color:#fff}
          shapes, or an unsupported shape. */
       function classify(path){
         var s = String(path).split("/");
-        if (s.length === 1 && (s[0] === "devices" || s[0] === "compatibility" || s[0] === "platforms")) return { kind: "index" };
+        if (s.length === 1 && (s[0] === "devices" || s[0] === "compatibility" || s[0] === "platforms" || s[0] === "guides")) return { kind: "index" };
+        if (s[0] === "guides" && s.length === 2) return { kind: "guide", id: s[1] };
         if (s[0] === "devices" && s.length === 3) return { kind: "device", brand: s[1], device: s[2] };
         if (s[0] === "compatibility" && s.length === 3) return { kind: "compat", brand: s[1], device: s[2] };
         if (s[0] === "platforms" && s.length === 2) return { kind: "platform", slug: s[1] };
@@ -5980,6 +6033,7 @@ strong{font-weight:600; color:#fff}
           return ENTITY.devices.some(function(d){ return d.brandSlug === c.brand && d.slug === c.device; });
         if (c.kind === "platform") return ENTITY.platforms.some(function(p){ return p.slug === c.slug; });
         if (c.kind === "brand") return ENTITY.brands.some(function(b){ return b.slug === c.slug; });
+        if (c.kind === "guide") return GUIDES.some(function(g){ return g.id === c.id; });
         return false;
       }
 
@@ -6263,7 +6317,7 @@ strong{font-weight:600; color:#fff}
         ENTITY.platforms.forEach(function(p){ if (refPaths.indexOf("platforms/" + p.slug) === -1) err("The discovery hub does not link platform '" + p.slug + "'."); });
         ["devices", "compatibility", "platforms"].forEach(function(p){ if (refPaths.indexOf(p) === -1) err("The discovery hub does not link the '" + p + "' index."); });
         ["which-pod", "pods-work"].forEach(function(id){
-          if (!refHost.querySelector('[data-guide="' + id + '"]')) err("The discovery hub does not link the '" + id + "' guide.");
+          if (refPaths.indexOf("guides/" + id) === -1) err("The discovery hub does not link the canonical '" + id + "' guide.");
         });
       }
       ok();
