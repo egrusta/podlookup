@@ -281,3 +281,37 @@ test.describe('PodLookup information-first homepage copy', () => {
     await expect(page.locator('#guideGrid')).not.toContainText('running cost');
   });
 });
+
+ 
+test.describe('PodLookup crawlable technical guide routes', () => {
+  test('guide index and every technical guide resolve as canonical pages', async ({ page }) => {
+    const ids = [
+      'which-pod',
+      'xros-guide',
+      'xros-vs-xlim',
+      'pods-work',
+      'caliburn-pods',
+      'xlim-pods',
+      'cross-platform-resistance'
+    ];
+
+    const indexResponse = await page.goto('/?p=guides');
+    expect(indexResponse?.ok()).toBeTruthy();
+    await expect(page.locator('#geoView h1')).toHaveText('Pod compatibility and component guides');
+    await expect(page.locator('#geoView a[href*="?p=guides/"]')).toHaveCount(ids.length);
+
+    for (const id of ids) {
+      const route = '/?p=guides/' + id;
+      const response = await page.goto(route);
+      expect(response?.ok(), route + ' should load successfully').toBeTruthy();
+      const heading = page.locator('#geoView h1');
+      await expect(heading).toBeVisible();
+      await expect(heading).not.toBeEmpty();
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp('\\?p=guides/' + id + '$'));
+      await expect(page.locator('meta[name="description"]')).not.toHaveAttribute('content', '');
+      await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+      await expect(page.locator('#geo-schema')).toContainText('TechArticle');
+      await expect(page.locator('#geoView a[data-geo][href*="?p=guides/"]').first()).toBeVisible();
+    }
+  });
+});
