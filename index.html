@@ -1,6 +1,7 @@
 <script>
-/* Ensure the hosted fragment sets a real mobile layout viewport. */
+/* Ensure the hosted fragment sets a real mobile layout viewport and document language. */
 (function () {
+  if (!document.documentElement.lang) document.documentElement.lang = 'en-GB';
   if (!document.querySelector('meta[name="viewport"]')) {
     var viewport = document.createElement('meta');
     viewport.name = 'viewport';
