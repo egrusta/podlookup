@@ -1525,6 +1525,9 @@ strong{font-weight:600; color:#fff}
       <a href="?p=platforms" data-geo>Pod platforms</a>
       <a href="?p=platforms/xros-pods" data-geo>XROS Pods platform</a>
       <a href="?p=platforms/xlim-pods" data-geo>Xlim Pods platform</a>
+      <a href="?p=finder" data-geo>Pod Finder</a>
+      <a href="?p=methodology" data-geo>Methodology</a>
+      <a href="?p=about" data-geo>About PodLookup</a>
     </div>
    <div class="footer-col">
      <h3>Info</h3>
@@ -1857,6 +1860,13 @@ strong{font-weight:600; color:#fff}
     };
   });
   var GUIDES = [
+    { id:"xros-6-vs-5", kicker:"Model comparison", title:"Vaporesso XROS 6 vs XROS 5",
+      summary:"A cautious comparison using the PodLookup XROS records; both models are recorded on the XROS Pods platform.",
+      body:'<h4>What they have in common</h4><p>The Vaporesso XROS 6 and XROS 5 are both recorded on the XROS Pods platform. That shared platform is the compatibility answer: XROS Pods are the replacement-pod family recorded for both devices.</p><h4>Resistance records</h4><p>The PodLookup dataset records 0.4Ω, 0.6Ω, 0.8Ω, 1.0Ω and 1.2Ω XROS pod options for the XROS 6 and XROS 5. Device-supported resistance and pod-available resistance are separate records.</p><h4>Which should you choose?</h4><p>This guide does not declare a winner. If your priority is compatibility, both models point to the same XROS Pods platform. Use the individual device pages for model-specific specifications.</p><h4>Quick answers</h4><p><strong>Do XROS 5 pods fit the XROS 6?</strong> Yes — both are recorded on the XROS Pods platform.</p><p><strong>Do XROS 6 pods fit the XROS 5?</strong> Yes — the same XROS Pods platform is recorded for both.</p><p><strong>Are all XROS pod resistances supported by every XROS device?</strong> Do not assume that. Pod availability and device support are separate records.</p><p><a href="?p=devices/vaporesso/xros-6" data-geo>XROS 6 device page</a> · <a href="?p=devices/vaporesso/xros-5" data-geo>XROS 5 device page</a> · <a href="?p=platforms/xros-pods" data-geo>XROS Pods platform</a></p>' },
+    { id:"caliburn-g4-vs-g5", kicker:"Model comparison", title:"Caliburn G4 vs G5",
+      summary:"A cautious comparison of the UWELL Caliburn G4 and G5 records. Verification is in progress.",
+      body:'<p><strong>Verification in progress.</strong> This guide does not upgrade any UNKNOWN compatibility or resistance record to VERIFIED.</p><h4>What is established</h4><p>PodLookup records Caliburn G4 and G5 devices within the Caliburn GPP platform records. Check the exact device page for the current resistance and compatibility fields.</p><h4>What is not being claimed</h4><p>PodLookup does not use a model name alone to infer a cartridge fit, resistance support or cross-model specification. Any field that remains UNKNOWN stays UNKNOWN until supporting evidence is recorded.</p>' },
+
     {
       id: "which-pod", kicker: "Compatibility basics", title: "Which pod fits my device?", h2Title: true,
       summary: "Compatibility is recorded by exact device model and pod platform. A shared brand name or similar appearance does not establish a compatible fit.",
@@ -2263,7 +2273,7 @@ strong{font-weight:600; color:#fff}
   }
 
   var FAMILY_GUIDES = {
-    XROS: ["which-pod", "xros-guide", "xros-vs-xlim", "cross-platform-resistance", "pods-work"],
+    XROS: ["which-pod", "xros-guide", "xros-6-vs-5", "xros-vs-xlim", "cross-platform-resistance", "pods-work"],
     XLIM: ["which-pod", "xlim-pods", "xros-vs-xlim", "cross-platform-resistance", "pods-work"],
     Caliburn: ["which-pod", "caliburn-pods", "cross-platform-resistance", "pods-work"]
   };
@@ -3683,12 +3693,15 @@ strong{font-weight:600; color:#fff}
   }
 
   /* ---- route parsing (?p=<path>) ---- */
-  var GEO_HEADS = { devices: 1, compatibility: 1, brands: 1, platforms: 1, guides: 1 };
+  var GEO_HEADS = { devices: 1, compatibility: 1, brands: 1, platforms: 1, guides: 1, finder: 1, methodology: 1, about: 1 };
   function parseGeoPath(raw){
     if (raw === null || raw === undefined || raw === "") return null;
     var parts = String(raw).split("/").filter(function(s){ return s.length > 0; });
     if (!parts.length || parts.length > 3 || !GEO_HEADS[parts[0]]) return null;
     var head = parts[0];
+    if (head === "finder") return parts.length === 1 ? { type: "finder" } : null;
+    if (head === "methodology") return parts.length === 1 ? { type: "methodology" } : null;
+    if (head === "about") return parts.length === 1 ? { type: "about" } : null;
     if (head === "guides"){
       if (parts.length === 1) return { type: "guides" };
       if (parts.length === 2){
@@ -3890,6 +3903,17 @@ strong{font-weight:600; color:#fff}
     closeGeo();
     return false;
   }
+function renderGeoFinder(){
+var items=[{name:"Home",path:""},{name:"Pod Finder",path:"finder"}];
+var html=crumbsFor(items)+'<p class="geo-kicker">Compatibility tool</p><h1>Pod Finder — which pods fit your device?</h1>'+geoAnswer("How it works","Answer two questions and get the exact pods for your device — verified against official manufacturer sources, UK 2 ml versions.")+'<div class="geo-block"><h2>Finder questions</h2><div class="geo-links"><div><strong>How do I know which pods fit my vape?</strong><p>Check the model on the device, find it here, match the platform — same platform means same pods.</p></div><div><strong>I lost the box — how do I identify my device?</strong><p>Model name on the body, or the pod name moulded into the plastic; enter either here.</p></div><div><strong>Are pods from another brand compatible?</strong><p>No. Platforms are brand-specific; XROS, XLIM and Caliburn families do not interchange.</p></div><div><strong>What does 0.8 ohm vs 1.2 ohm change?</strong><p>Lower resistance is generally airier and warmer; higher resistance generally gives a tighter draw. The device must list that resistance as supported.</p></div><div><strong>Your finder does not list my device — why?</strong><p>It is not verified yet; PodLookup publishes no guesses.</p></div></div></div><div class="geo-block"><h2>Browse the reference</h2><div class="geo-links">'+geoLink(geoHref("devices"),"Device catalogue","All recorded devices","data-geo")+geoLink(geoHref("platforms"),"Pod platforms","Platform-level compatibility records","data-geo")+geoLink(geoHref("guides/which-pod"),"Which pod fits my device?","Compatibility basics",'data-geo data-guide="which-pod"')+'</div></div>';
+showGeo(html,{title:"Pod Finder — which pods fit your device? | PodLookup",description:"Find the pod platform and recorded resistance options for your refillable vape device using PodLookup's compatibility reference.",url:geoHref("finder")},[breadcrumbSchema(items)]);
+}
+function renderGeoInfoPage(kind){
+var about=kind==="about",title=about?"About PodLookup":"PodLookup methodology",desc=about?"About PodLookup and its evidence-first compatibility reference.":"How PodLookup records pod compatibility, resistance data, sources and UNKNOWN claims.",items=[{name:"Home",path:""},{name:title}];
+var body=about?'<h2>What PodLookup is</h2><p>PodLookup is an information-first compatibility reference for refillable pod devices. It helps visitors identify the pod platform recorded for an exact device and understand what the available evidence does — and does not — establish.</p><h2>What PodLookup is not</h2><p>The current storefront is a demonstration and research interface. It does not place orders or process payments.</p><h2>Why UNKNOWN matters</h2><p>When available evidence does not establish a fit, PodLookup keeps the field UNKNOWN instead of filling the gap with a guess.</p>':'<h2>Evidence first</h2><p>Compatibility statements are derived from the embedded MASTER dataset and linked manufacturer/source records. Device-supported resistance and pod-available resistance are stored separately.</p><h2>Platform logic</h2><p>A shared brand name, appearance or model number does not prove compatibility. A fit is recorded when the dataset establishes the same pod or cartridge platform.</p><h2>UNKNOWN is a real state</h2><p>UNKNOWN means the available evidence does not establish the claim. It is not upgraded to VERIFIED merely because a similar device appears to use a similar component.</p><h2>Updates</h2><p>New claims are added only when supporting evidence is available.</p>';
+showGeo(crumbsFor(items)+'<p class="geo-kicker">PodLookup information</p><h1>'+esc(title)+'</h1><article class="geo-block geo-guide-body">'+body+'</article>'+relatedGeoLinks([["Device index","devices"],["Pod platforms","platforms"],["Guides","guides"]]),{title:title+" | PodLookup",description:desc,url:geoHref(kind)},[breadcrumbSchema(items)]);
+}
+
   function renderGeo(route){
     if (!route){ closeGeo(); return; }
     if (route.type === "devices" || route.type === "compatibility") renderGeoIndex(route.type);
@@ -3898,6 +3922,9 @@ strong{font-weight:600; color:#fff}
     else if (route.type === "platforms") renderGeoPlatforms();
     else if (route.type === "brand") renderGeoBrand(route.brand);
     else if (route.type === "platform") renderGeoPlatform(route.platform);
+    else if (route.type === "finder") renderGeoFinder();
+    else if (route.type === "methodology") renderGeoInfoPage("methodology");
+    else if (route.type === "about") renderGeoInfoPage("about");
     else if (route.type === "entity") renderGeoEntity(route);
     else if (route.type === "notfound") renderGeoNotFound();
     else closeGeo();
@@ -4261,6 +4288,7 @@ strong{font-weight:600; color:#fff}
       + '<p class="geo-kicker">' + (platformType === "cartridge-and-coil system" ? 'Cartridge and coil system' : 'Pod platform') + '</p>'
       + '<h1>' + esc(p.key) + ' ' + platformType + '</h1>'
       + platformAuthorityBlock(p)
+      + (p.key === "XROS Pods" ? '<div class="geo-block"><h2>XROS 6 vs XROS 5</h2><p>Both models are recorded on this shared XROS Pods platform. Compare the two model records in the dedicated guide.</p><div class="geo-links">' + geoLink(geoHref("guides/xros-6-vs-5"), "XROS 6 vs XROS 5 guide", "Compatibility and resistance records", 'data-geo data-guide="xros-6-vs-5"') + '</div></div>' : "")
       + '<div class="geo-block"><h2>Devices that use ' + esc(p.key) + '</h2>'
         + tableHtml(["Device", "Device family", "Device resistance options", "Replaceable coil options", "Compatibility"], rows) + '</div>'
       + '<div class="geo-block"><h2>' + esc(p.key) + (platformType === "cartridge-and-coil system" ? ' replacement cartridge and coils' : ' replacement pods') + '</h2>' + prods + '</div>'
