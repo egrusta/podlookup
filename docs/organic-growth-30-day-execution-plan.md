@@ -143,6 +143,19 @@ For each page:
 
 **Deliverable:** Day-30 report, traffic trend, content winners, unresolved blockers and next-month priorities.
 
+### Verified content expansion — 5 November 2026
+
+Added to the implementation queue and prepared in the SEO branch:
+- XROS 6 vs XROS 5 guide with model-specific resistance caveats and FAQ schema.
+- XROS platform cross-compatibility answer block covering the recorded XROS 6/5/4/3 family.
+- Methodology page explaining official-source verification, platform/device separation and explicit UNKNOWN handling.
+- About page defining PodLookup as an independent UK-focused compatibility reference.
+- Cautious Caliburn G4 vs G5 guide marked **verification in progress**; no UNKNOWN record is upgraded to VERIFIED.
+- Static HTML head fallback with runtime putMeta() overrides preserved.
+- Explicit MIME rules for robots.txt, sitemap.xml and llms.txt.
+
+The outreach list remains an owner-operated research task. No automated outreach, paid links or promotional nicotine advertising is part of the deployment.
+
 ## 5. Traffic target and reporting
 
 The headline target is **100 real unique visitors per day**, assessed as a seven-day rolling average at Day 30. That equates to roughly 700 unique visitors across a seven-day period, not 700 sessions.

@@ -171,8 +171,11 @@ test.describe('PodLookup basket and responsive regression', () => {
     expect(sitemap.headers()['content-type']).toMatch(/xml/);
     const xml = await sitemap.text();
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-    expect(locs.length).toBe(123);
-    expect(new Set(locs).size).toBe(123);
+    expect(locs.length).toBe(127);
+    expect(new Set(locs).size).toBe(127);
+    for (const route of ['guides/xros-6-vs-5','guides/caliburn-g4-vs-g5','methodology','about']) {
+      expect(locs).toContain('https://podlookup.co.uk/?p=' + route);
+    }
   });
 
   test('OXVA XLIM C has a separate cartridge-and-coil compatibility system', async ({ page }) => {
@@ -204,6 +207,24 @@ test.describe('PodLookup basket and responsive regression', () => {
 
 
 test.describe('PodLookup SEO publication regression', () => {
+  test('new SEO guide and trust routes render with route-specific metadata', async ({ page }) => {
+    for (const [route, title] of [
+      ['guides/xros-6-vs-5', 'XROS 6 vs XROS 5'],
+      ['guides/caliburn-g4-vs-g5', 'Caliburn G4 vs G5'],
+      ['methodology', 'How PodLookup verifies pod compatibility'],
+      ['about', 'About PodLookup']
+    ]) {
+      await page.goto('/?p=' + route);
+      await expect(page.locator('#geoView')).toContainText(title);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', /\?p=/);
+      await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.+/);
+    }
+    await page.goto('/?p=guides/xros-6-vs-5');
+    await expect(page.locator('#geoView')).toContainText('Do XROS 5 pods fit the XROS 6?');
+    await expect(page.locator('#geoView')).toContainText('Which XROS devices take the 0.4Ω pod?');
+    await expect(page.locator('#geo-schema')).toContainText('FAQPage');
+  });
+
   test('LLM reference is public, complete and accurately labels the demo storefront', async ({ request }) => {
     const response = await request.get('/llms.txt');
     expect(response.ok()).toBeTruthy();
