@@ -220,6 +220,22 @@ test.describe('PodLookup SEO publication regression', () => {
 });
 
 
+test.describe('PodLookup browser-console cleanliness', () => {
+  test('home and representative routes emit no console errors or warnings', async ({ page }) => {
+    const messages = [];
+    page.on('console', msg => {
+      if (['error', 'warning'].includes(msg.type())) messages.push({ type: msg.type(), text: msg.text() });
+    });
+    page.on('pageerror', error => messages.push({ type: 'pageerror', text: error.message }));
+
+    for (const route of ['/', '/?p=platforms/caliburn-a2-pods', '/?p=platforms/caliburn-gpp-pods', '/?p=devices/oxva/xlim-c']) {
+      await page.goto(route);
+    }
+
+    expect(messages, messages.map(m => '[' + m.type + '] ' + m.text).join('\\n')).toEqual([]);
+  });
+});
+
 test.describe('PodLookup demo storefront trust copy', () => {
   test('delivery banner does not promise a live shipping service', async ({ page }) => {
     await page.goto('/');
