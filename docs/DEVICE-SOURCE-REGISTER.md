@@ -46,7 +46,7 @@
 
 ## Register coverage
 
-This register currently contains the implementation-level Xlim C source record. A separate [UWELL Caliburn G-family source audit](UWELL-CALIBURN-SOURCE-AUDIT.md) records manufacturer evidence for older G/G2 devices and explicitly separates replaceable-coil compatibility from cartridge interchangeability. The other device and platform records in the embedded MASTER dataset have not yet been migrated into this URL-level register. Do not interpret their presence in the site as proof that every source has been audited. Existing UNKNOWN safeguards remain in force.
+This register currently contains the implementation-level Xlim C source record. A separate [UWELL Caliburn G-family source audit](uwell-caliburn-source-audit.md) records manufacturer evidence for older G/G2 devices and explicitly separates replaceable-coil compatibility from cartridge interchangeability. The other device and platform records in the embedded MASTER dataset have not yet been migrated into this URL-level register. Do not interpret their presence in the site as proof that every source has been audited. Existing UNKNOWN safeguards remain in force.
 
 ## Review log
 
