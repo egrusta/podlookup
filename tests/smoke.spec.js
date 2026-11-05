@@ -187,7 +187,7 @@ test.describe('PodLookup basket and responsive regression', () => {
     const xml = await sitemap.text();
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
     expect(locs.length).toBe(137);
-    expect(new Set(locs).size).toBe(123);
+    expect(new Set(locs).size).toBe(137);
   });
 
   test('OXVA XLIM C has a separate cartridge-and-coil compatibility system', async ({ page }) => {
