@@ -350,6 +350,16 @@ test.describe('PodLookup current production browser diagnostics', () => {
       await page.locator('main').waitFor({ state: 'visible' });
     }
 
+    await page.goto('/?p=devices/oxva/xlim-c');
+    await expect(page.locator('#geoView')).toContainText('Replaceable coil resistance options');
+    await expect(page.locator('#geoView')).toContainText('0.6Ω');
+    await expect(page.locator('#geoView')).toContainText('0.8Ω');
+    await expect(page.locator('#geoView')).toContainText('1.2Ω');
+
+    await page.goto('/?p=guides/xlim-pods');
+    await expect(page.locator('#geoView a[href*="/undefined"]')).toHaveCount(0);
+    await expect(page.locator('#geoView a[href*="devices/oxva/xlim-c"]')).toBeVisible();
+
     expect(messages, messages.map(m => '[' + m.type + '] ' + m.text).join('\\n')).toEqual([]);
   });
 });
