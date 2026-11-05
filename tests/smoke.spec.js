@@ -105,6 +105,13 @@ test.describe('PodLookup basket and responsive regression', () => {
 
   test('new Caliburn routes expose unique metadata and model-specific content', async ({ page }) => {
     const routes = [
+      ['devices/uwell/caliburn-gz2', 'Caliburn GZ2'],
+      ['compatibility/uwell/caliburn-gz2-cyber', 'Caliburn GZ2 Cyber'],
+      ['devices/uwell/caliburn-gk2', 'Caliburn GK2'],
+      ['compatibility/uwell/caliburn-tenet', 'Caliburn Tenet'],
+      ['devices/uwell/caliburn-tenet-koko', 'Caliburn Tenet KOKO'],
+      ['compatibility/uwell/caliburn-x', 'Caliburn X'],
+      ['devices/uwell/caliburn-explorer', 'Caliburn Explorer'],
       ['devices/uwell/caliburn-air', 'Caliburn Air'],
       ['compatibility/uwell/caliburn-air-r', 'Caliburn Air R'],
       ['devices/uwell/caliburn-a2', 'Caliburn A2'],
@@ -127,6 +134,33 @@ test.describe('PodLookup basket and responsive regression', () => {
     expect(new Set(titles).size).toBe(routes.length);
     expect(new Set(descriptions).size).toBe(routes.length);
     expect(descriptions.every(Boolean)).toBe(true);
+  });
+
+
+  test('legacy Caliburn pages preserve UNKNOWN pod fit and separate coil evidence', async ({ page }) => {
+    const models = [
+      ['caliburn-gz2', 'Caliburn GZ2', ['0.8Ω', '1.0Ω', '1.2Ω']],
+      ['caliburn-gz2-cyber', 'Caliburn GZ2 Cyber', ['0.8Ω', '1.0Ω', '1.2Ω']],
+      ['caliburn-gk2', 'Caliburn GK2', ['0.8Ω', '1.0Ω', '1.2Ω']],
+      ['caliburn-tenet', 'Caliburn Tenet', ['0.8Ω', '1.0Ω', '1.2Ω']],
+      ['caliburn-tenet-koko', 'Caliburn Tenet KOKO', ['0.8Ω', '1.0Ω', '1.2Ω']],
+      ['caliburn-x', 'Caliburn X', []],
+      ['caliburn-explorer', 'Caliburn Explorer', ['0.8Ω', '1.2Ω']]
+    ];
+
+    for (const [slug, model, coilOptions] of models) {
+      await page.goto('/?p=devices/uwell/' + slug);
+      await expect(page.locator('main')).toContainText(model);
+      await expect(page.locator('main')).toContainText('no manufacturer-verified pod platform');
+      await expect(page.locator('main')).toContainText('UNKNOWN');
+      await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+      for (const resistance of coilOptions)
+        await expect(page.locator('main')).toContainText(resistance);
+    }
+
+    await page.goto('/?p=compatibility/uwell/caliburn-gz2');
+    await expect(page.locator('main')).toContainText('no manufacturer-verified pod platform');
+    await expect(page.locator('main')).toContainText('UNKNOWN');
   });
 
   test('Caliburn A2 pod resistance stays model-specific', async ({ page }) => {
@@ -159,7 +193,7 @@ test.describe('PodLookup basket and responsive regression', () => {
         uwell: doc.querySelectorAll('[data-ns-device^="uwell/"]').length
       };
     });
-    expect(fallback).toEqual({ devices: 50, platforms: 8, uwell: 31 });
+    expect(fallback).toEqual({ devices: 57, platforms: 8, uwell: 38 });
 
     const robots = await request.get('/robots.txt');
     expect(robots.ok()).toBeTruthy();
@@ -171,8 +205,8 @@ test.describe('PodLookup basket and responsive regression', () => {
     expect(sitemap.headers()['content-type']).toMatch(/xml/);
     const xml = await sitemap.text();
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-    expect(locs.length).toBe(123);
-    expect(new Set(locs).size).toBe(123);
+    expect(locs.length).toBe(137);
+    expect(new Set(locs).size).toBe(137);
   });
 
   test('OXVA XLIM C has a separate cartridge-and-coil compatibility system', async ({ page }) => {
@@ -211,7 +245,7 @@ test.describe('PodLookup SEO publication regression', () => {
 
     const content = await response.text();
     const deviceLinks = [...content.matchAll(/^- \[[^\]]+\]\(https:\/\/podlookup\.co\.uk\/\?p=devices\//gm)];
-    expect(deviceLinks).toHaveLength(50);
+    expect(deviceLinks).toHaveLength(57);
     expect(content).toContain('UNKNOWN means the available evidence does not establish compatibility');
     expect(content).toMatch(/storefront as a demo/i);
     expect(content).toMatch(/no orders are placed/i);
@@ -225,8 +259,8 @@ test.describe('PodLookup SEO publication regression', () => {
     const entries = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(match => match[1]);
     const urls = entries.map(entry => entry.match(/<loc>(.*?)<\/loc>/)?.[1]);
 
-    expect(entries).toHaveLength(123);
-    expect(new Set(urls).size).toBe(123);
+    expect(entries).toHaveLength(137);
+    expect(new Set(urls).size).toBe(137);
     expect(entries.every(entry => /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(entry))).toBe(true);
   });
 
@@ -273,7 +307,7 @@ test.describe('PodLookup platform overview accuracy', () => {
 
 test.describe('PodLookup complete device-route coverage', () => {
   test('every device in the reference table has working device and compatibility pages', async ({ page }) => {
-    test.setTimeout(120000);
+    test.setTimeout(180000);
     await page.goto('/');
     const routes = await page.evaluate(() => {
       const source = document.querySelector('#geoNoscript');
@@ -288,7 +322,7 @@ test.describe('PodLookup complete device-route coverage', () => {
       });
     });
 
-    expect(routes).toHaveLength(50);
+    expect(routes).toHaveLength(57);
     for (const route of routes) {
       expect(route.device).toBeTruthy();
       expect(route.deviceHref).toContain('?p=devices/');
