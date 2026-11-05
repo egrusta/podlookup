@@ -1060,7 +1060,32 @@ strong{font-weight:600; color:#fff}
       </div>
       <p class="finder-lede">Every refillable device uses a recorded pod, cartridge or coil system. Choose your brand and model below to see what fits; model-specific coil and cartridge variants are kept separate. We only show compatibility recorded in our own product data — where we do not have a detail on file you will see a clear note rather than a guess.</p>
       <div class="finder panel">
-        <div class="finder-steps">
+        <div class="finder-mode" role="group" aria-label="Compatibility Finder mode" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+          <button class="choice choice-brand" type="button" data-fmode="device" aria-pressed="true">I have a device</button>
+          <button class="choice" type="button" data-fmode="pod" aria-pressed="false">I have pods</button>
+        </div>
+        <div id="finderPodMode" hidden>
+          <div class="fstep active">
+            <span class="fstep-num" aria-hidden="true">1</span>
+            <div class="fstep-body">
+              <h3 class="fstep-label">Choose the pod or cartridge platform</h3>
+              <div class="choice-row" id="finderPodPlatform" role="group" aria-label="Pod platform"></div>
+            </div>
+          </div>
+          <div class="fstep active">
+            <span class="fstep-num" aria-hidden="true">2</span>
+            <div class="fstep-body">
+              <h3 class="fstep-label">Choose the recorded resistance</h3>
+              <div class="choice-row" id="finderPodResistance" role="group" aria-label="Pod resistance"></div>
+              <p class="fr-note">For XLIM C, these are dedicated replaceable-coil resistances. They are kept separate from standard XLIM integrated-coil pods.</p>
+            </div>
+          </div>
+          <div class="fstep fstep-actions">
+            <button class="btn btn-ghost finder-reset" id="finderPodReset" type="button">Start again</button>
+          </div>
+          <div class="finder-result" id="finderPodResult" aria-live="polite"></div>
+        </div>
+        <div class="finder-steps" id="finderDeviceMode">
           <div class="fstep-progress" id="fstepProgress">
             <div class="fp-top">
               <span class="fp-label">Compatibility check</span>
@@ -2223,6 +2248,9 @@ strong{font-weight:600; color:#fff}
 
   /* ---- render: compatibility finder ---- */
   var finder = { brand: "", device: "" };
+  var finderMode = "device";
+  var finderPodPlatform = "";
+  var finderPodResistance = "";
   var deviceFilter = "";
 
   function slug(s){
@@ -2882,6 +2910,93 @@ strong{font-weight:600; color:#fff}
       + '</div>';
   }
 
+  function podFinderPlatforms(){
+    var seen = {};
+    Object.keys(COMPATIBILITY).forEach(function(b){
+      Object.keys(COMPATIBILITY[b] || {}).forEach(function(d){
+        var p = COMPATIBILITY[b][d].pods || "";
+        if (p) seen[p] = 1;
+      });
+    });
+    return Object.keys(seen).sort();
+  }
+  function podFinderResistances(platform){
+    var seen = {};
+    Object.keys(COMPATIBILITY).forEach(function(b){
+      Object.keys(COMPATIBILITY[b] || {}).forEach(function(d){
+        var e = COMPATIBILITY[b][d];
+        if (e.pods !== platform) return;
+        (e.podOhms || []).concat(e.coilOhms || []).forEach(function(o){ if (o) seen[o] = 1; });
+      });
+    });
+    return Object.keys(seen).sort(function(a,b){
+      return parseFloat(a) - parseFloat(b) || a.localeCompare(b);
+    });
+  }
+  function renderPodFinderChoices(){
+    var ph = $("#finderPodPlatform"), rh = $("#finderPodResistance");
+    if (!ph || !rh) return;
+    var platforms = podFinderPlatforms();
+    if (finderPodPlatform && platforms.indexOf(finderPodPlatform) === -1) finderPodPlatform = "";
+    ph.innerHTML = platforms.map(function(p){
+      return '<button class="choice" type="button" data-fpodplatform="' + esc(p) + '" aria-pressed="' + (finderPodPlatform === p) + '">' + esc(p) + '</button>';
+    }).join("");
+    var resistances = finderPodPlatform ? podFinderResistances(finderPodPlatform) : [];
+    if (finderPodResistance && resistances.indexOf(finderPodResistance) === -1) finderPodResistance = "";
+    rh.innerHTML = resistances.length ? resistances.map(function(o){
+      return '<button class="choice" type="button" data-fpodresistance="' + esc(o) + '" aria-pressed="' + (finderPodResistance === o) + '">' + esc(o) + '</button>';
+    }).join("") : '<p class="fr-note">Choose a pod platform first.</p>';
+  }
+  function renderPodFinderResult(){
+    var host = $("#finderPodResult");
+    if (!host) return;
+    if (!finderPodPlatform || !finderPodResistance){
+      host.innerHTML = '<div class="finder-empty"><span class="fr-badge">Compatibility result</span><h3 class="fr-device">Choose both options</h3><p class="fr-note">Select the pod platform and resistance to see every recorded device on that platform supporting that resistance.</p></div>';
+      return;
+    }
+    var matches = [];
+    Object.keys(COMPATIBILITY).forEach(function(b){
+      Object.keys(COMPATIBILITY[b] || {}).forEach(function(d){
+        var e = COMPATIBILITY[b][d];
+        if (e.pods !== finderPodPlatform) return;
+        if ((e.ohms || []).indexOf(finderPodResistance) === -1) return;
+        matches.push({brand:b, device:d, entry:e});
+      });
+    });
+    var title = finderPodPlatform === "Xlim C Cartridge & Coil System"
+      ? "XLIM C devices supporting " + finderPodResistance
+      : finderPodPlatform + " devices supporting " + finderPodResistance;
+    var rows = matches.length ? matches.map(function(m){
+      return '<a class="fr-guide" data-geo href="' + esc(geoHref("devices/" + slug(m.brand) + "/" + slug(m.device))) + '">'
+        + '<span><span class="fr-guide-k">' + esc(m.brand) + '</span><span class="fr-guide-t">' + esc(m.device) + '</span></span>'
+        + '<span class="fr-guide-arrow" aria-hidden="true">&#8594;</span></a>';
+    }).join("") : '<p class="fr-missing">No device in the recorded data matches both selections. PodLookup does not infer a fit from the product name.</p>';
+    host.innerHTML = '<div class="fr-head"><span class="fr-status">' + (matches.length ? 'Recorded matches' : 'No recorded match') + '</span>'
+      + '<h3 class="fr-device">' + esc(title) + '</h3>'
+      + '<p class="fr-platform-line">Platform: <b>' + esc(finderPodPlatform) + '</b> · Resistance: <b>' + esc(finderPodResistance) + '</b></p></div>'
+      + '<div><p class="fr-subhead">Devices</p><div class="fr-guides">' + rows + '</div></div>'
+      + '<div class="fr-links" style="margin-top:16px"><a data-geo href="' + esc(geoHref("platforms/" + slug(finderPodPlatform))) + '">View platform record<span class="fr-link-arrow" aria-hidden="true">&#8594;</span></a>'
+      + '<a data-geo href="' + esc(geoHref("methodology")) + '">How compatibility is recorded<span class="fr-link-arrow" aria-hidden="true">&#8594;</span></a></div>';
+  }
+  function renderFinderMode(){
+    var deviceMode = $("#finderDeviceMode"), podMode = $("#finderPodMode");
+    if (deviceMode) deviceMode.hidden = finderMode !== "device";
+    if (podMode) podMode.hidden = finderMode !== "pod";
+    $(".finder-mode [data-fmode]").forEach(function(b){
+      var active = b.getAttribute("data-fmode") === finderMode;
+      b.setAttribute("aria-pressed", active ? "true" : "false");
+      b.classList.toggle("choice-brand", active);
+    });
+    if (finderMode === "pod"){
+      renderPodFinderChoices();
+      renderPodFinderResult();
+    }
+  }
+  function selectFinderMode(mode){
+    finderMode = mode === "pod" ? "pod" : "device";
+    renderFinderMode();
+  }
+
   function renderBrandChoices(){
     $("#finderBrand").innerHTML = Object.keys(COMPATIBILITY).map(function(b){
       return '<button class="choice choice-brand" type="button" data-fbrand="' + esc(b) + '" aria-pressed="' + (finder.brand === b) + '">' + esc(b) + '</button>';
@@ -3037,6 +3152,7 @@ strong{font-weight:600; color:#fff}
     else el.removeAttribute("aria-hidden");
   }
   function renderFinder(){
+    renderFinderMode();
     renderBrandChoices();
     renderDeviceChoices();
     var entry = compatEntry();
@@ -3072,7 +3188,7 @@ strong{font-weight:600; color:#fff}
     renderFinder();
   }
   function resetFinder(){
-    finder.brand = ""; finder.device = ""; deviceFilter = "";
+    finder.brand = ""; finder.device = ""; finderPodPlatform = ""; finderPodResistance = ""; finderMode = "device"; deviceFilter = "";
     var s = $("#finderDeviceSearch"); if (s) s.value = "";
     clearFinderHash();
     renderFinder();
@@ -6622,7 +6738,7 @@ function deviceFaqSchemaNodes(d,b){
     });
 
     document.addEventListener("click", function(e){
-      var t = e.target.closest("[data-geo],[data-geo-back],[data-view],[data-add],[data-guide],[data-info],[data-cat],[data-clear],[data-shop-family],[data-close-modal],[data-family],[data-category],[data-fbrand],[data-fdevice],[data-fgo]");
+      var t = e.target.closest("[data-geo],[data-geo-back],[data-view],[data-add],[data-guide],[data-info],[data-cat],[data-clear],[data-shop-family],[data-close-modal],[data-family],[data-category],[data-fbrand],[data-fdevice],[data-fgo],[data-fmode],[data-fpodplatform],[data-fpodresistance]");
       if (!t) return;
 
       if (t.hasAttribute("data-geo")){ e.preventDefault(); closeModal(); closeNav(); navGeo(pathFromGeoHref(t.getAttribute("href"))); return; }
@@ -6631,6 +6747,9 @@ function deviceFaqSchemaNodes(d,b){
       if (t.hasAttribute("data-add")){ e.preventDefault(); addToCart(t.getAttribute("data-add"), t); if (t.closest("#modalContent")){ closeModal(); openCart(); } return; }
       if (t.hasAttribute("data-guide")){ e.preventDefault(); openGuide(t.getAttribute("data-guide")); return; }
       if (t.hasAttribute("data-info")){ e.preventDefault(); openInfo(t.getAttribute("data-info")); return; }
+      if (t.hasAttribute("data-fmode")){ e.preventDefault(); selectFinderMode(t.getAttribute("data-fmode")); return; }
+      if (t.hasAttribute("data-fpodplatform")){ e.preventDefault(); finderPodPlatform = t.getAttribute("data-fpodplatform"); finderPodResistance = ""; renderFinderMode(); return; }
+      if (t.hasAttribute("data-fpodresistance")){ e.preventDefault(); finderPodResistance = t.getAttribute("data-fpodresistance"); renderFinderMode(); return; }
       if (t.hasAttribute("data-fbrand")){ e.preventDefault(); selectBrand(t.getAttribute("data-fbrand")); return; }
       if (t.hasAttribute("data-fdevice")){ e.preventDefault(); selectDevice(t.getAttribute("data-fdevice")); return; }
       if (t.hasAttribute("data-fgo")){
@@ -6681,6 +6800,7 @@ function deviceFaqSchemaNodes(d,b){
     });
 
     $("#finderReset").addEventListener("click", resetFinder);
+    $("#finderPodReset").addEventListener("click", resetFinder);
     window.addEventListener("hashchange", function(){ applyHashFromLocation(); });
     window.addEventListener("popstate", function(){ applyGeoFromLocation(); });
 
