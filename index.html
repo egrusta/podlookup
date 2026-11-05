@@ -4382,7 +4382,7 @@ strong{font-weight:600; color:#fff}
         ["Compatibility note", d.note ? esc(d.note) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>']
       ];
     } else {
-      answer = UNKNOWN + " We have no manufacturer-verified pod platform for the " + b.name + " " + d.device + ", so no pod can be stated as fitting it."
+      answer = UNKNOWN + " We have no manufacturer-verified pod platform for the " + b.name + " " + d.device + ", so no specific pod or cartridge SKU can be confirmed as fitting it."
         + (d.note ? " " + d.note : "");
       answerRows = [
         ["Device", esc(b.name + " " + d.device)],
@@ -4442,7 +4442,7 @@ strong{font-weight:600; color:#fff}
         ["Compatibility note", d.note ? esc(d.note) : '<span class="fr-missing">' + esc(UNKNOWN) + '</span>']
       ];
     } else {
-      answer = UNKNOWN + " We have no manufacturer-verified pod platform for the " + b.name + " " + d.device + ", so nothing can be stated as compatible with it."
+      answer = UNKNOWN + " We have no manufacturer-verified pod platform for the " + b.name + " " + d.device + ", so no specific pod or cartridge SKU can be confirmed as compatible with it."
         + (d.note ? " " + d.note : "");
       answerRows = [
         ["Device", esc(b.name + " " + d.device)],
