@@ -152,8 +152,8 @@ test.describe('PodLookup basket and responsive regression', () => {
     expect(sitemap.headers()['content-type']).toMatch(/xml/);
     const xml = await sitemap.text();
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-    expect(locs.length).toBe(115);
-    expect(new Set(locs).size).toBe(115);
+    expect(locs.length).toBe(123);
+    expect(new Set(locs).size).toBe(123);
   });
 
   test('OXVA XLIM C has a separate cartridge-and-coil compatibility system', async ({ page }) => {
@@ -206,8 +206,8 @@ test.describe('PodLookup SEO publication regression', () => {
     const entries = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(match => match[1]);
     const urls = entries.map(entry => entry.match(/<loc>(.*?)<\/loc>/)?.[1]);
 
-    expect(entries).toHaveLength(115);
-    expect(new Set(urls).size).toBe(115);
+    expect(entries).toHaveLength(123);
+    expect(new Set(urls).size).toBe(123);
     expect(entries.every(entry => /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(entry))).toBe(true);
   });
 
@@ -279,5 +279,52 @@ test.describe('PodLookup information-first homepage copy', () => {
     await expect(page.locator('#ecoGrid')).not.toContainText('Shop XROS');
     await expect(page.locator('#guideGrid')).toContainText('XROS and XLIM platform records');
     await expect(page.locator('#guideGrid')).not.toContainText('running cost');
+  });
+});
+
+ 
+test.describe('PodLookup crawlable technical guide routes', () => {
+  test('guide index and every technical guide resolve as canonical pages', async ({ page }) => {
+    const ids = [
+      'which-pod',
+      'xros-guide',
+      'xros-vs-xlim',
+      'pods-work',
+      'caliburn-pods',
+      'xlim-pods',
+      'cross-platform-resistance'
+    ];
+
+    const indexResponse = await page.goto('/?p=guides');
+    expect(indexResponse?.ok()).toBeTruthy();
+    await expect(page.locator('#geoView h1')).toHaveText('Pod compatibility and component guides');
+    await expect(page.locator('#geoView a[href*="?p=guides/"]')).toHaveCount(ids.length);
+
+    for (const id of ids) {
+      const route = '/?p=guides/' + id;
+      const response = await page.goto(route);
+      expect(response?.ok(), route + ' should load successfully').toBeTruthy();
+      const heading = page.locator('#geoView h1');
+      await expect(heading).toBeVisible();
+      await expect(heading).not.toBeEmpty();
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp('\\?p=guides/' + id + '$'));
+      await expect(page.locator('meta[name="description"]')).not.toHaveAttribute('content', '');
+      await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+      await expect.poll(() => page.locator('#geo-schema').evaluate(el => el.textContent)).toContain('TechArticle');
+      await expect(page.locator('#geoView a[data-geo][href*="?p=guides/"]').first()).toBeVisible();
+    }
+  });
+});
+
+test.describe('PodLookup demo privacy and launch-list clarity', () => {
+  test('does not present an inactive email signup or retain locally entered addresses', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('#notifyForm')).toHaveCount(0);
+    await expect(page.locator('#launchListBtn')).toHaveCount(0);
+    await expect(page.locator('footer')).toContainText('does not collect email addresses or send launch notifications');
+    await expect(page.locator('#cartDrawer')).toContainText('email notifications are not active');
+    await page.evaluate(() => localStorage.setItem('podlookup-notify', 'demo@example.com'));
+    await page.reload();
+    expect(await page.evaluate(() => localStorage.getItem('podlookup-notify'))).toBeNull();
   });
 });
