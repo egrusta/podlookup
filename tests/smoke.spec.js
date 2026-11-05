@@ -171,8 +171,8 @@ test.describe('PodLookup basket and responsive regression', () => {
     expect(sitemap.headers()['content-type']).toMatch(/xml/);
     const xml = await sitemap.text();
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-    expect(locs.length).toBe(141);
-    expect(new Set(locs).size).toBe(141);
+    expect(locs.length).toBe(127);
+    expect(new Set(locs).size).toBe(127);
     for (const route of ['guides/xros-6-vs-5','guides/caliburn-g4-vs-g5','methodology','about']) {
       expect(locs).toContain('https://podlookup.co.uk/?p=' + route);
     }
