@@ -5,7 +5,12 @@ const assert = require("node:assert/strict");
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const pageErrors = [];
+  const consoleIssues = [];
   page.on("pageerror", error => pageErrors.push(error.message));
+  page.on("console", msg => {
+    if (["error", "warning"].includes(msg.type()))
+      consoleIssues.push({ type: msg.type(), text: msg.text() });
+  });
 
   try {
     await page.goto(process.env.BASE_URL || "http://127.0.0.1:4173/", { waitUntil: "domcontentloaded" });
@@ -117,8 +122,48 @@ const assert = require("node:assert/strict");
     await page.locator("#cartClose").click();
     assert.equal(await page.locator("#cartDrawer").evaluate(el => el.hidden), true);
 
+    // Audit the current reference routes in a real browser. Do not suppress
+    // data-integrity diagnostics: errors and warnings must be fixed at source.
+    const baseUrl = process.env.BASE_URL || "http://127.0.0.1:4173/";
+    for (const route of [
+      "/",
+      "/?p=platforms/caliburn-a2-pods",
+      "/?p=platforms/caliburn-gpp-pods",
+      "/?p=devices/oxva/xlim-c",
+      "/?p=guides/which-pod",
+      "/?p=guides/xlim-pods"
+    ]) {
+      await page.goto(new URL(route, baseUrl).toString(), { waitUntil: "domcontentloaded" });
+      await page.locator("main").waitFor({ state: "visible" });
+      await page.waitForTimeout(250);
+    }
+
+    await page.goto(new URL("/?p=devices/oxva/xlim-c", baseUrl).toString(), { waitUntil: "domcontentloaded" });
+    await page.waitForFunction(() => {
+      const view = document.querySelector("#geoView");
+      return view && !view.hidden && view.textContent.includes("Replaceable coil resistance options");
+    });
+    const xlimCText = (await page.locator("#geoView").textContent() || "").replace(/\s+/g, "");
+    // Python's local http.server omits a charset header, so Chromium may
+    // decode the Ω glyph as mojibake in this test-only environment. Verify
+    // the exact numeric resistance values; production preview is UTF-8.
+    for (const resistance of ["0.6", "0.8", "1.2"])
+      assert.ok(xlimCText.includes(resistance), "XLIM C must show replaceable coil resistance " + resistance + "; page text: " + xlimCText.slice(-1200));
+
+    await page.goto(new URL("/?p=guides/xlim-pods", baseUrl).toString(), { waitUntil: "domcontentloaded" });
+    await page.locator("#geoView").waitFor({ state: "visible" });
+    const xlimGuideLinks = await page.locator("#geoView a[href]").evaluateAll(links => links.map(a => a.getAttribute("href") || ""));
+    assert.ok(!xlimGuideLinks.some(href => href.includes("/undefined")), "XLIM guide must not contain undefined links");
+    assert.ok(xlimGuideLinks.some(href => /devices\/oxva\/xlim-c$/.test(href)), "XLIM guide must link to the separate XLIM C device page");
+
+    await page.goto(new URL("/?p=platforms/xlim-pods", baseUrl).toString(), { waitUntil: "domcontentloaded" });
+    await page.locator("#geoView").waitFor({ state: "visible" });
+    const standardXlimLinks = await page.locator("#geoView a[href]").evaluateAll(links => links.map(a => a.getAttribute("href") || ""));
+    assert.ok(!standardXlimLinks.some(href => /(?:devices|compatibility)\/oxva\/xlim-c$/.test(href)), "standard XLIM Pods must not list XLIM C as a compatible device");
+
     assert.deepEqual(pageErrors, [], "page must not emit uncaught JavaScript errors");
-    console.log("PASS: basket open/close, Escape, overlay, add, quantity, clear, persistence, mobile layout/menu, desktop basket.");
+    assert.deepEqual(consoleIssues, [], "reference routes must not emit console errors or warnings");
+    console.log("PASS: basket/mobile/desktop regression, XLIM C data and links, and clean reference-route console diagnostics.");
   } finally {
     await browser.close();
   }

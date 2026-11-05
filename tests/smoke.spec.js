@@ -328,3 +328,38 @@ test.describe('PodLookup demo privacy and launch-list clarity', () => {
     expect(await page.evaluate(() => localStorage.getItem('podlookup-notify'))).toBeNull();
   });
 });
+
+
+test.describe('PodLookup current production browser diagnostics', () => {
+  test('home, platform and guide routes emit no console errors, warnings or uncaught page errors', async ({ page }) => {
+    const messages = [];
+    page.on('console', msg => {
+      if (['error', 'warning'].includes(msg.type())) messages.push({ type: msg.type(), text: msg.text() });
+    });
+    page.on('pageerror', error => messages.push({ type: 'pageerror', text: error.message }));
+
+    for (const route of [
+      '/',
+      '/?p=platforms/caliburn-a2-pods',
+      '/?p=platforms/caliburn-gpp-pods',
+      '/?p=devices/oxva/xlim-c',
+      '/?p=guides',
+      '/?p=guides/which-pod'
+    ]) {
+      await page.goto(route);
+      await page.locator('main').waitFor({ state: 'visible' });
+    }
+
+    await page.goto('/?p=devices/oxva/xlim-c');
+    await expect(page.locator('#geoView')).toContainText('Replaceable coil resistance options');
+    await expect(page.locator('#geoView')).toContainText('0.6Ω');
+    await expect(page.locator('#geoView')).toContainText('0.8Ω');
+    await expect(page.locator('#geoView')).toContainText('1.2Ω');
+
+    await page.goto('/?p=guides/xlim-pods');
+    await expect(page.locator('#geoView a[href*="/undefined"]')).toHaveCount(0);
+    await expect(page.locator('#geoView a[href$="devices/oxva/xlim-c"]')).toBeVisible();
+
+    expect(messages, messages.map(m => '[' + m.type + '] ' + m.text).join('\\n')).toEqual([]);
+  });
+});
