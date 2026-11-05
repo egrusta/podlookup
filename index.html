@@ -1330,7 +1330,7 @@ strong{font-weight:600; color:#fff}
             <tr data-ns-platform="Xlim Pods">
               <th scope="row"><a href="?p=platforms/xlim-pods">Xlim Pods</a></th>
               <td><a href="?p=brands/oxva">OXVA</a></td>
-              <td><a href="?p=devices/oxva/xlim-pro">Xlim Pro</a>, <a href="?p=devices/oxva/xlim-pro-2">Xlim Pro 2</a>, <a href="?p=devices/oxva/xlim-se">Xlim SE</a>, <a href="?p=devices/oxva/xlim-sq-pro">Xlim SQ Pro</a>, <a href="?p=devices/oxva/xlim-classic">Xlim Classic</a>, <a href="?p=devices/oxva/xlim-go">Xlim GO</a>, <a href="?p=devices/oxva/xlim-se-2">Xlim SE 2</a>, <a href="?p=devices/oxva/xlim-sq">Xlim SQ</a>, <a href="?p=devices/oxva/xlim-crystal">Xlim Crystal</a>, <a href="?p=devices/oxva/xlim-pod">Xlim POD</a> and <a href="?p=devices/oxva/xlim-c">Xlim C</a></td>
+              <td><a href="?p=devices/oxva/xlim-pro">Xlim Pro</a>, <a href="?p=devices/oxva/xlim-pro-2">Xlim Pro 2</a>, <a href="?p=devices/oxva/xlim-se">Xlim SE</a>, <a href="?p=devices/oxva/xlim-sq-pro">Xlim SQ Pro</a>, <a href="?p=devices/oxva/xlim-classic">Xlim Classic</a>, <a href="?p=devices/oxva/xlim-go">Xlim GO</a>, <a href="?p=devices/oxva/xlim-se-2">Xlim SE 2</a>, <a href="?p=devices/oxva/xlim-sq">Xlim SQ</a>, <a href="?p=devices/oxva/xlim-crystal">Xlim Crystal</a>, <a href="?p=devices/oxva/xlim-pod">Xlim POD</a></td>
               <td>0.4Ω, 0.6Ω, 0.8Ω, 1.2Ω</td>
               <td>OXVA XLIM Top Fill Cartridge and OXVA XLIM V2 Cartridge</td>
             </tr>
@@ -1868,7 +1868,7 @@ strong{font-weight:600; color:#fff}
     },
     {
       id: "xros-vs-xlim", kicker: "Platform reference", title: "XROS and XLIM platform records",
-      summary: "A factual overview of the Vaporesso XROS and OXVA XLIM device groups and the pod platforms recorded for them. This page does not rank or recommend either system.",
+      summary: "A factual overview of the Vaporesso XROS and OXVA XLIM device groups and the pod platforms recorded for them, without expressing a preference.",
       body: '<h4>Vaporesso XROS</h4>'
         + '<p>The XROS 3, XROS 4, XROS 4 Mini, XROS 5, XROS 5 Mini, XROS 6, XROS 6 Mini and XROS PRO 2 are recorded on the XROS Pods platform.</p>'
         + '<h4>OXVA XLIM</h4>'
@@ -2396,8 +2396,8 @@ strong{font-weight:600; color:#fff}
     links.push(geoLink(geoHref("platforms/" + slug(XLIM_GUIDE_PLATFORM)), XLIM_GUIDE_PLATFORM + " pod platform", "The standard XLIM devices that use this platform", "data-geo"));
     var xlimC = MASTER.devices.filter(function(d){ return d.brand === "OXVA" && d.device === "Xlim C"; })[0];
     if (xlimC){
-      links.push(geoLink(geoHref("devices/oxva/" + xlimC.slug), "OXVA Xlim C device information", "Separate cartridge-and-coil system", "data-geo"));
-      links.push(geoLink(geoHref("compatibility/oxva/" + xlimC.slug), "What is OXVA Xlim C compatible with?", "Its own cartridge and replaceable coils", "data-geo"));
+      links.push(geoLink(geoHref("devices/oxva/" + slug(xlimC.device)), "OXVA Xlim C device information", "Separate cartridge-and-coil system", "data-geo"));
+      links.push(geoLink(geoHref("compatibility/oxva/" + slug(xlimC.device)), "What is OXVA Xlim C compatible with?", "Its own cartridge and replaceable coils", "data-geo"));
       links.push(geoLink(geoHref("platforms/" + slug(xlimC.platformKey)), "Xlim C Cartridge & Coil System", "The separate XLIM C system", "data-geo"));
     }
     links.push(geoLink(geoHref("brands/oxva"), "OXVA brand information", "All OXVA devices, platforms and guides", "data-geo"));
@@ -5200,8 +5200,11 @@ strong{font-weight:600; color:#fff}
       var brand = findBrandBySlug(d.brandSlug);
       if (!brand) return;
       var text = devicePodsFitBlock(d, brand).replace(/<[^>]*>/g, " ").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
-      if (text.indexOf("Which pods fit the " + d.brand + " " + d.device + "?") === -1)
-        err("Device page '" + d.brand + " " + d.device + "' has no 'Which pods fit…?' direct answer.");
+      var deviceQuestion = d.platformKey === "Xlim C Cartridge & Coil System"
+        ? "Which cartridge and coils fit the OXVA Xlim C?"
+        : "Which pods fit the " + d.brand + " " + d.device + "?";
+      if (text.indexOf(deviceQuestion) === -1)
+        err("Device page '" + d.brand + " " + d.device + "' has no model-specific direct answer.");
       if (md.platformStatus === "VERIFIED"){
         if (text.indexOf(md.platform) === -1)
           err("Device page '" + d.brand + " " + d.device + "' direct answer omits its verified pod platform.");
@@ -5241,8 +5244,9 @@ strong{font-weight:600; color:#fff}
         if (text.indexOf(o) === -1)
           err("Platform page '" + p.key + "' direct answer omits pod resistance " + o + ".");
       });
+      var allowedPlatformOhms = podOhms.concat(mp.coilOhms || []);
       ohmsIn(text).forEach(function(o){
-        if (podOhms.indexOf(o) === -1)
+        if (allowedPlatformOhms.indexOf(o) === -1)
           err("Platform page '" + p.key + "' states resistance " + o + ", which the dataset does not list for this platform.");
       });
     });
@@ -5282,8 +5286,8 @@ strong{font-weight:600; color:#fff}
       ok();
       var data = brandPageData(b);
       var text = data.html.replace(/<[^>]*>/g, " ").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
-      if (text.indexOf("What does " + b.name + " make, and which pod platforms are relevant?") === -1)
-        err("Brand page '" + b.name + "' has no 'What does … make …?' direct answer.");
+      if (text.indexOf("What does " + b.name + " make, and which pod or cartridge systems are relevant?") === -1)
+        err("Brand page '" + b.name + "' has no brand-specific direct answer.");
       b.devices.forEach(function(d){
         if (text.indexOf(b.name + " " + d.device) === -1)
           err("Brand page '" + b.name + "' direct answer omits its device '" + d.device + "'.");
@@ -6255,7 +6259,7 @@ strong{font-weight:600; color:#fff}
         var row = whichPodCompatRows().filter(function(r){ return clean(r[0]) === d.brand + " " + d.device; })[0];
         surfaces["which-pod guide"] = row ? row.join(" ") : "";
         Object.keys(surfaces).forEach(function(name){
-          var hay = surfaces[name];
+          var hay = clean(surfaces[name]);
           if (d.platformKey){
             if (hay.indexOf(d.platformKey) === -1)
               err("Device '" + d.brand + " " + d.device + "' / platform '" + d.platformKey + "' is missing from the " + name + ".");
@@ -6339,7 +6343,16 @@ strong{font-weight:600; color:#fff}
         var podsText = cells[3] ? cells[3].textContent.trim() : "";
         var mpods = MASTER_PODS_BY_PLATFORM[md.platformKey] || [];
         var expected = mpods.length ? listText(mpods.map(function(x){ return x.name; })) : UNKNOWN;
-        if (podsText !== expected) err("noscript device row '" + k + "' recorded pods '" + podsText + "' ≠ dataset '" + expected + "'.");
+        var coilRecords = MASTER_COILS_BY_PLATFORM[md.platformKey] || [];
+        if (coilRecords.length){
+          var coilNames = coilRecords.map(function(x){ return String(x.name || "").replace(/^OXVA /, ""); });
+          var coilOhms = coilRecords.reduce(function(all, x){
+            (x.ohms || []).forEach(function(o){ if (all.indexOf(o) === -1) all.push(o); });
+            return all;
+          }, []);
+          expected += "; replaceable " + listText(coilNames) + (coilOhms.length ? " (" + listText(coilOhms) + ")" : "");
+        }
+        if (podsText !== expected) err("noscript device row '" + k + "' recorded pods/cartridges '" + podsText + "' ≠ dataset '" + expected + "'.");
       });
       var nsPlatRows = nsRoot ? nsRoot.querySelectorAll("[data-ns-platform]") : [];
       if (!nsPlatRows.length) err("The crawlable noscript platform table is missing.");
