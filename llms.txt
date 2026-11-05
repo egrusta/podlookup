@@ -82,6 +82,13 @@ PodLookup is an information-first catalogue for Vaporesso, OXVA and UWELL refill
 - [Caliburn G5 Vision](https://podlookup.co.uk/?p=devices/uwell/caliburn-g5-vision) — Caliburn GPP Pods
 - [Caliburn Air](https://podlookup.co.uk/?p=devices/uwell/caliburn-air) — Caliburn GPP Pods
 - [Caliburn Air R](https://podlookup.co.uk/?p=devices/uwell/caliburn-air-r) — Caliburn GPP Pods
+- [Caliburn GZ2](https://podlookup.co.uk/?p=devices/uwell/caliburn-gz2) — legacy Caliburn record; exact pod platform remains UNKNOWN.
+- [Caliburn GZ2 Cyber](https://podlookup.co.uk/?p=devices/uwell/caliburn-gz2-cyber) — UWELL documents broad cartridge and G-coil compatibility, but exact cartridge SKU/direction remains UNKNOWN.
+- [Caliburn GK2](https://podlookup.co.uk/?p=devices/uwell/caliburn-gk2) — G-series replaceable-coil evidence recorded; exact pod cartridge fit remains UNKNOWN.
+- [Caliburn Tenet](https://podlookup.co.uk/?p=devices/uwell/caliburn-tenet) — G-series coil options recorded; exact pod cartridge fit remains UNKNOWN.
+- [Caliburn Tenet KOKO](https://podlookup.co.uk/?p=devices/uwell/caliburn-tenet-koko) — G-series coil compatibility recorded; exact pod cartridge fit remains UNKNOWN.
+- [Caliburn X](https://podlookup.co.uk/?p=devices/uwell/caliburn-x) — G-series coil compatibility recorded; exact pod cartridge fit remains UNKNOWN.
+- [Caliburn Explorer](https://podlookup.co.uk/?p=devices/uwell/caliburn-explorer) — dual-cartridge / dual-coil system; cross-model cartridge fit remains UNKNOWN.
 - [Caliburn A2](https://podlookup.co.uk/?p=devices/uwell/caliburn-a2) — Caliburn A2 Pods
 - [Caliburn A2S](https://podlookup.co.uk/?p=devices/uwell/caliburn-a2s) — Caliburn A2 Pods
 - [Caliburn AK2](https://podlookup.co.uk/?p=devices/uwell/caliburn-ak2) — Caliburn A2 Pods
@@ -95,6 +102,7 @@ PodLookup is an information-first catalogue for Vaporesso, OXVA and UWELL refill
 - **Vaporesso XROS:** The XROS 3, 4, 4 Mini, 5, 5 Mini, 6, 6 Mini and XROS PRO 2 are recorded on the shared XROS Pods platform. Device-supported resistance options can differ by model.
 - **OXVA XLIM:** The standard Xlim Pods platform is recorded for the listed Xlim Pro, Pro 2, SE, SQ Pro, Classic, GO, SE 2, SQ, Crystal and POD devices. XLIM C is a separate 2 ml cartridge/replaceable-coil system with 0.6Ω, 0.8Ω and 1.2Ω coil options; it does not use standard integrated-coil XLIM pods.
 - **UWELL Caliburn G / G2:** These use the separate Caliburn G / G2 pod platform; it is not interchangeable with GPP.
+- **Older Caliburn G-family models:** GZ2, GZ2 Cyber, GK2, Tenet, Tenet KOKO and Caliburn X have manufacturer evidence for G-series coil or broad cartridge compatibility, but exact cartridge SKU/direction is not sufficiently established. Caliburn Explorer has a dual-cartridge design. These seven records therefore show pod fit as UNKNOWN; coil compatibility is not treated as proof of cartridge interchangeability.
 - **UWELL Caliburn GPP:** GPP is recorded for Caliburn G3, G4 and G5 families and Caliburn Air / Air R. It does not fit Caliburn G / G2, A2 or A3 devices.
 - **UWELL Caliburn A2 and A3:** These are separate pod platforms; do not assume cross-compatibility between A2, A3 and GPP.
 - **Unknown information:** When the source evidence does not establish a fit, treat the result as UNKNOWN. Do not infer compatibility from brand name or appearance.
