@@ -3972,7 +3972,7 @@ strong{font-weight:600; color:#fff}
     var title = isDev ? "Device compatibility index" : "Pod compatibility index";
     var items = [{ name: "Home", path: "" }, { name: isDev ? "Devices" : "Compatibility", path: kind }];
     var intro = isDev
-      ? "Every refillable device in the PodLookup compatibility reference, grouped by brand. Each device runs one pod platform; the table records that platform and the resistances the device itself supports — a device specification, not the set of pods on sale. Devices that share a pod platform take the same replacement pods, so the platform is what decides which pods fit."
+      ? "Every refillable device in the PodLookup compatibility reference, grouped by brand. Where manufacturer evidence establishes a pod platform, the table records it and the device resistance options separately. Some legacy models do not yet have an exact, source-backed cartridge mapping; those records are marked UNKNOWN rather than assigned a guessed platform."
       : "Which pods fit which devices, taken straight from the PodLookup compatibility data. A pod is only listed as fitting where our own records establish a shared pod platform, so a device with no recorded platform says that rather than having a fit guessed for it.";
     var groups = ENTITY.brands.map(function(b){
       var rows = b.devices.map(function(d){
@@ -4199,7 +4199,7 @@ strong{font-weight:600; color:#fff}
       html: html, nodes: nodes,
       meta: {
         title: b.name + " pod compatibility — devices and pods | PodLookup",
-        description: "Which " + b.name + " devices use which pod platform, and the replacement pods recorded for them in the PodLookup compatibility reference.",
+        description: "Manufacturer-backed " + b.name + " device records, with verified pod platforms and replacement-pod relationships where the evidence establishes them; unresolved fit is marked UNKNOWN.",
         url: geoHref("brands/" + b.slug)
       }
     };
