@@ -143,6 +143,20 @@
 - The A3, A3S, AK3 and AZ3 family relationship does not prove that every pod variant or refill orientation fits every one of the four devices. Use the exact model-page statements above.
 - Product-page kit contents are not a complete replacement-pod catalogue and may differ by market.
 
+### A2 / A2S / AK2 model-specific pod resistance correction
+
+**Official UWELL sources checked 5 November 2026**
+- CALIBURN A2: https://www.myuwell.com/caliburn/caliburn-a2 — the specification lists the 0.9Ω FeCrAl UN2 Meshed-H coil / refillable pod.
+- CALIBURN A2S: https://www.myuwell.com/caliburn/caliburn-a2s — the page specifies its own 1.2Ω side-refilling pod and explicitly states compatibility with the 0.9Ω CALIBURN A2 refillable pod.
+- CALIBURN AK2: https://www.myuwell.com/products/pod-system/caliburn-ak2.html — the page explicitly says it shares the CALIBURN A2 pod cartridge and lists a 0.9Ω coil specification.
+
+**Implementation rule**
+- A2: record 0.9Ω only for its device-specific pod resistance.
+- A2S: record both 0.9Ω (shared A2 pod) and 1.2Ω (its own side-refill pod).
+- AK2: record 0.9Ω only; its manufacturer page establishes the shared A2 cartridge, not the A2S 1.2Ω side-refill cartridge.
+- The A2 platform-level list may still contain both 0.9Ω and 1.2Ω because those variants exist within the wider family. Individual device pages must show only the variants established for that exact model.
+- Do not let a shared platform-level resistance list override a model-specific compatibility restriction.
+
 ## Safe implementation decisions
 
 - Do not merge these older G/G2 coil-family models into the newer GPP cartridge platform.
