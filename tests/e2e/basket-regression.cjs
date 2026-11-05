@@ -143,7 +143,7 @@ const assert = require("node:assert/strict");
       const view = document.querySelector("#geoView");
       return view && !view.hidden && view.textContent.includes("Replaceable coil resistance options");
     });
-    const xlimCText = (await page.locator("#geoView").textContent() || "").replace(/\\s+/g, "");
+    const xlimCText = (await page.locator("#geoView").textContent() || "").replace(/\s+/g, "");
     // Python's local http.server omits a charset header, so Chromium may
     // decode the Ω glyph as mojibake in this test-only environment. Verify
     // the exact numeric resistance values; production preview is UTF-8.
