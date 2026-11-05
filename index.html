@@ -4581,21 +4581,37 @@ showGeo(crumbsFor(items)+'<p class="geo-kicker">PodLookup information</p><h1>'+e
       + '</div>';
   }
   function deviceContentTemplateHtml(d,b){
-  var ohms=d.ohms||[];
-  var text=ohms.length ? "Recorded resistance options: "+ohms.join(", ")+". Use only the values listed for this model." : "No device resistance range is recorded here, so PodLookup does not invent one.";
-  var platform=d.platformKey||"UNKNOWN";
-  var notFit=platform==="UNKNOWN" ? "The pod platform is UNKNOWN for this model. PodLookup does not claim a cross-model fit until evidence establishes one." : "The recorded compatibility boundary is the "+platform+" platform. A different platform is not treated as compatible merely because the brand or shape looks similar.";
-  var practical=d.platformKey==="Xlim C Cartridge & Coil System" ? "Keep the dedicated XLIM C cartridge-and-coil parts within that system; do not mix them with standard XLIM integrated-coil pods." : "Store refillable pods upright when practical, wipe contacts if condensation appears, and replace a pod when it is no longer performing normally.";
-  return '<div class="geo-block"><h2>What this device is</h2><p>'+esc(b.name+" "+d.device+" is recorded in the "+(d.family||"device")+" family. Its recorded pod system is "+platform+".")+'</p></div>'
-    +'<div class="geo-block"><h2>Which resistance options are recorded?</h2><p>'+esc(text+" Lower resistance is generally associated with a warmer, airier draw; higher resistance is generally associated with a tighter draw. Match any resistance to the exact values recorded for the device.")+'</p></div>'
+  var ohms=d.ohms||[], podOhms=d.podOhms||[], coils=d.coilOhms||[];
+  var platform=d.platformKey||"UNKNOWN", family=d.family||"device";
+  var resistanceSentence=ohms.length
+    ? "The "+b.name+" "+d.device+" record lists "+ohms.join(", ")+" as device-supported resistance options."
+    : "The "+b.name+" "+d.device+" record has no device resistance range recorded, so PodLookup does not invent one.";
+  var podSentence=podOhms.length
+    ? "The associated pod record lists "+podOhms.join(", ")+" as available pod resistance options."
+    : "No separate pod resistance range is recorded for this model.";
+  var coilSentence=coils.length ? " Replaceable-coil records list "+coils.join(", ")+"." : "";
+  var styleSentence=ohms.length
+    ? "In general, lower resistance tends toward a warmer, airier draw, while higher resistance tends toward a tighter draw; those general descriptions do not override the model's recorded resistance range."
+    : "Resistance guidance is not supplied here because the model record does not establish a range.";
+  var notFit=platform==="UNKNOWN"
+    ? "The pod platform is UNKNOWN for this "+family+" record. A pod from another model is not treated as compatible until supporting evidence establishes the fit."
+    : "The recorded compatibility boundary is the "+platform+" platform. A different platform is not treated as compatible merely because the device looks similar or comes from the same brand.";
+  var practical=platform==="Xlim C Cartridge & Coil System"
+    ? "The XLIM C is recorded as a dedicated cartridge-and-coil system. Keep its cartridge and replaceable coils within that system rather than mixing them with standard XLIM integrated-coil pods."
+    : "For routine pod care, keep contacts clean and store refillable pods upright when practical. If condensation or flooding continues after cleaning, replace the pod before assuming the device itself is incompatible.";
+  var fitAnswer=platform==="UNKNOWN"
+    ? "The pod platform is currently UNKNOWN, so PodLookup does not guess a compatible pod."
+    : "This model is recorded on the "+platform+" platform. Use its compatibility page for the exact pod records.";
+  return '<div class="geo-block"><h2>What this device is</h2><p>'+esc(b.name+" "+d.device+" is part of the "+family+" family. "+fitAnswer+" This page separates model-specific records from assumptions about similarly named devices.")+'</p></div>'
+    +'<div class="geo-block"><h2>Which resistance options are recorded?</h2><p>'+esc(resistanceSentence+" "+podSentence+coilSentence+" "+styleSentence)+'</p></div>'
     +'<div class="geo-block"><h2>What does not fit?</h2><p>'+esc(notFit)+'</p></div>'
     +'<div class="geo-block"><h2>Device-specific questions</h2><div class="geo-links">'
-    +'<div><strong>'+esc("Which pods fit the "+b.name+" "+d.device+"?")+'</strong><p>'+esc(platform==="UNKNOWN" ? "The pod platform is currently UNKNOWN, so PodLookup does not guess a compatible pod." : "The recorded platform is "+platform+". Use the compatibility page for the exact pod records.")+'</p></div>'
-    +'<div><strong>'+esc("Which resistance should I use in the "+b.name+" "+d.device+"?")+'</strong><p>'+esc(text)+'</p></div>'
+    +'<div><strong>'+esc("Which pods fit the "+b.name+" "+d.device+"?")+'</strong><p>'+esc(fitAnswer)+'</p></div>'
+    +'<div><strong>'+esc("Which resistance should I use in the "+b.name+" "+d.device+"?")+'</strong><p>'+esc(resistanceSentence+" "+styleSentence)+'</p></div>'
     +'<div><strong>'+esc("How should I store or troubleshoot pods for the "+b.name+" "+d.device+"?")+'</strong><p>'+esc(practical)+'</p></div>'
     +'</div></div>';
 }
-  function deviceFaqSchemaNodes(d,b){
+function deviceFaqSchemaNodes(d,b){
   var platform=d.platformKey||"UNKNOWN";
   var resistances=(d.ohms||[]).length ? "Use only the resistance options recorded for this device: "+d.ohms.join(", ")+".":"No device resistance range is recorded here, so PodLookup does not invent one.";
   var practical=d.platformKey==="Xlim C Cartridge & Coil System" ? "Keep the dedicated XLIM C cartridge-and-coil parts within that system; do not mix them with standard XLIM integrated-coil pods." : "Store refillable pods upright when practical, wipe contacts if condensation appears, and replace a pod when it is no longer performing normally.";
