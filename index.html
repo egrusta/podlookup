@@ -1528,6 +1528,8 @@ strong{font-weight:600; color:#fff}
       <a href="#footer" data-info="contact">Contact</a>
       <a href="#footer" data-info="privacy">Privacy</a>
       <a href="#footer" data-info="terms">Terms</a>
+      <a href="?p=methodology" data-geo>How we verify compatibility</a>
+      <a href="?p=about" data-geo>About PodLookup</a>
     </div>
   </div>
   <div class="wrap footer-legal">
@@ -1941,6 +1943,10 @@ strong{font-weight:600; color:#fff}
       a: "No. PodLookup is a front-end product research prototype. Nothing is sold, no payments are taken and no orders are placed. All prices, ratings and delivery information are illustrative demonstration data." },
     { q: "Do you sell nicotine products?",
       a: "No. This prototype has no nicotine products, no checkout and no age verification. A production version would need full UK age verification and regulatory compliance before any transaction." },
+    { q: "Do XROS 5 pods fit the XROS 6?", a: "Yes. Both are recorded on the XROS Pods platform. Device-supported resistance options can differ by model." },
+    { q: "Are all XROS pods compatible with all XROS devices?", a: "All XROS devices recorded in the PodLookup reference share the XROS Pods platform, but supported resistance options vary by model. Check the exact device record." },
+    { q: "Which XROS devices take the 0.4Ω pod?", a: "The current reference records 0.4Ω support for XROS 6, XROS 6 Mini, XROS 5, XROS 5 Mini, XROS 4 and XROS 4 Mini. XROS 3 is not recorded with 0.4Ω support." },
+    { q: "Do G4 pods fit the G5?", a: "Not verified. PodLookup does not currently have enough official model-by-model evidence to claim that G4 and G5 cartridges are interchangeable." },
     { q: "How do I know which device I have?",
       a: "Check the exact model name printed on the body. UWELL's G3, G4, G5, Air and Air R devices use GPP; A2/A2S/AK2, A3/A3S/AK3/AZ3 and G/G2 use separate platforms. The original Caliburn has its own 2 ml refillable pod; resistance and cross-model fit remain UNKNOWN." }
   ];
@@ -3711,12 +3717,16 @@ strong{font-weight:600; color:#fff}
   }
 
   /* ---- route parsing (?p=<path>) ---- */
-  var GEO_HEADS = { devices: 1, compatibility: 1, brands: 1, platforms: 1, guides: 1 };
+  var GEO_HEADS = { devices: 1, compatibility: 1, brands: 1, platforms: 1, guides: 1, methodology: 1, about: 1 };
   function parseGeoPath(raw){
     if (raw === null || raw === undefined || raw === "") return null;
     var parts = String(raw).split("/").filter(function(s){ return s.length > 0; });
     if (!parts.length || parts.length > 3 || !GEO_HEADS[parts[0]]) return null;
     var head = parts[0];
+    if (head === "methodology" || head === "about"){
+      if (parts.length === 1) return { type: "info", id: head, path: raw };
+      return null;
+    }
     if (head === "guides"){
       if (parts.length === 1) return { type: "guides" };
       if (parts.length === 2){
