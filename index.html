@@ -4303,6 +4303,12 @@ strong{font-weight:600; color:#fff}
       + '<div class="geo-block"><h2>Devices that use ' + esc(p.key) + '</h2>'
         + tableHtml(["Device", "Device family", "Device resistance options", "Replaceable coil options", "Compatibility"], rows) + '</div>'
       + '<div class="geo-block"><h2>' + esc(p.key) + (platformType === "cartridge-and-coil system" ? ' replacement cartridge and coils' : ' replacement pods') + '</h2>' + prods + '</div>'
+      + (p.key === "XROS Pods" ? '<div class="geo-block geo-fit"><h2>Are all XROS pods compatible?</h2>'
+        + geoAnswer("Direct answer", "Yes for every XROS device recorded here: XROS 6, XROS 6 Mini, XROS 5, XROS 5 Mini, XROS 4, XROS 4 Mini and XROS 3 share the XROS Pods platform. Device-supported resistance options can differ by model.")
+        + '<h3>Questions answered</h3><p><strong>Do XROS 5 pods fit XROS 6?</strong> Yes. Both are recorded on the same XROS Pods platform.</p>'
+        + '<p><strong>Which XROS devices take 0.4Ω?</strong> XROS 6, XROS 6 Mini, XROS 5, XROS 5 Mini, XROS 4 and XROS 4 Mini are recorded with 0.4Ω support. XROS 3 is not.</p>'
+        + '<p><strong>Does resistance alone prove compatibility?</strong> No. Exact platform and model evidence establish fit.</p>'
+        + '<div class="geo-links">' + geoLink(geoHref("guides/xros-6-vs-5"), "XROS 6 vs XROS 5", "Same pod platform, model-specific resistance records", "data-geo") + '</div></div>' : "")
       + podDevicesBlockHtml(p)
       + relatedPlatformsBlockHtml(p)
       + brandsBlockHtml(p.devices)
@@ -4697,6 +4703,7 @@ strong{font-weight:600; color:#fff}
       "author": { "@type": "Organization", "name": "PodLookup" },
       "publisher": { "@type": "Organization", "name": "PodLookup" }, "inLanguage": "en-GB"
     }];
+    if (g.faqs && g.faqs.length) nodes.push({ "@context":"https://schema.org", "@type":"FAQPage", "mainEntity":g.faqs.map(function(f){ return { "@type":"Question", "name":f.q, "acceptedAnswer":{ "@type":"Answer", "text":f.a } }; }) });
     showGeo(html, { title: g.title + " | PodLookup", description: g.summary, url: geoHref(path) }, nodes);
   }
 
