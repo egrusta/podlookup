@@ -358,7 +358,7 @@ test.describe('PodLookup current production browser diagnostics', () => {
 
     await page.goto('/?p=guides/xlim-pods');
     await expect(page.locator('#geoView a[href*="/undefined"]')).toHaveCount(0);
-    await expect(page.locator('#geoView a[href*="devices/oxva/xlim-c"]')).toBeVisible();
+    await expect(page.locator('#geoView a[href$="devices/oxva/xlim-c"]')).toBeVisible();
 
     expect(messages, messages.map(m => '[' + m.type + '] ' + m.text).join('\\n')).toEqual([]);
   });
