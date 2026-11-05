@@ -152,8 +152,8 @@ test.describe('PodLookup basket and responsive regression', () => {
     expect(sitemap.headers()['content-type']).toMatch(/xml/);
     const xml = await sitemap.text();
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-    expect(locs.length).toBe(115);
-    expect(new Set(locs).size).toBe(115);
+    expect(locs.length).toBe(123);
+    expect(new Set(locs).size).toBe(123);
   });
 
   test('OXVA XLIM C has a separate cartridge-and-coil compatibility system', async ({ page }) => {
@@ -206,8 +206,8 @@ test.describe('PodLookup SEO publication regression', () => {
     const entries = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(match => match[1]);
     const urls = entries.map(entry => entry.match(/<loc>(.*?)<\/loc>/)?.[1]);
 
-    expect(entries).toHaveLength(115);
-    expect(new Set(urls).size).toBe(115);
+    expect(entries).toHaveLength(123);
+    expect(new Set(urls).size).toBe(123);
     expect(entries.every(entry => /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(entry))).toBe(true);
   });
 
