@@ -37,6 +37,15 @@ No current, verified daily unique-visitor baseline is available. Historical Clou
 
 **Measurement readiness check — 5 November 2026:** the current production homepage and repository source were checked for GA4, Google Tag Manager, Cloudflare Web Analytics and Zaraz scripts. No client-side analytics beacon was detected. This does not rule out Cloudflare edge-level request analytics in the dashboard; those figures are a different measurement source and have not yet been verified.
 
+**Release and live crawl spot-check — 5 November 2026:**
+- GitHub Actions browser-regression workflow for commit `c0b314ca02185b12e595a5cf1b7342bce5548ce9` completed successfully.
+- Cloudflare Pages reported a successful deployment for the same commit.
+- A live production fetch returned HTTP 200 for the homepage, `/robots.txt`, `/sitemap.xml`, `/llms.txt`, and the XROS 6 device route. The XROS 6 route returned a model-specific page title.
+- The production sitemap contains **123 unique URLs**: 50 device detail routes plus the device index, 50 compatibility detail routes plus the compatibility index, eight platform detail routes plus the platform index, seven guide articles plus the guides index, three brand routes, and the homepage.
+- The live homepage clearly labels the storefront as a demo and says no orders are placed.
+- The live scraper did not expose response `Content-Type` headers. The repository's Playwright smoke test does check that `robots.txt` is served as `text/plain` and the sitemap as XML in its test server; production MIME headers still need a direct header-level check.
+- These checks establish release and crawl readiness, not search-engine indexing or visitor growth. No Search Console or Cloudflare Web Analytics visitor metrics have been verified.
+
 Use a consistent reporting definition:
 
 - **Primary visitor measure:** Cloudflare Web Analytics unique visitors per day, once enabled and verified. Treat this as the best available browser-measured proxy for real visitors, not an exact count of identifiable people.
@@ -70,7 +79,7 @@ Official setup references:
 ### Days 4–7 — Crawlable information architecture
 
 1. Verify all canonical device, compatibility, brand and platform routes.
-2. Publish the seven technical guides as distinct, crawlable routes with unique titles, descriptions, canonical URLs, breadcrumbs and relevant structured data.
+2. Publish the seven technical guide articles plus the guides index (eight guide routes total in the current sitemap) as distinct, crawlable routes with unique titles, descriptions, canonical URLs, breadcrumbs and relevant structured data.
 3. Link guide pages from the homepage, device pages, platform pages and reference hub.
 4. Include every intended indexable route in the XML sitemap and the AI discovery file.
 5. Keep unknown or invalid routes out of the index; preserve the existing noindex/404 behavior.
