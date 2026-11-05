@@ -1,4 +1,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PodLookup — UK pod compatibility reference</title>
+<meta name="description" content="Check which refillable pods fit your device with PodLookup's UK-focused compatibility reference.">
+<link rel="canonical" href="https://podlookup.co.uk/">
 <script>
 /* Ensure the hosted fragment sets a real mobile layout viewport and document language. */
 (function () {
@@ -4502,6 +4505,21 @@ strong{font-weight:600; color:#fff}
       + tableHtml(["Replacement pod", "Compatible devices", "Pod resistances available"], rows)
       + '</div>';
   }
+  function deviceContentTemplateHtml(d,b){
+  var ohms=d.ohms||[];
+  var text=ohms.length ? "Recorded resistance options: "+ohms.join(", ")+". Use only the values listed for this model." : "No device resistance range is recorded here, so PodLookup does not invent one.";
+  var platform=d.platformKey||"UNKNOWN";
+  var notFit=platform==="UNKNOWN" ? "The pod platform is UNKNOWN for this model. PodLookup does not claim a cross-model fit until evidence establishes one." : "The recorded compatibility boundary is the "+platform+" platform. A different platform is not treated as compatible merely because the brand or shape looks similar.";
+  var practical=d.platformKey==="Xlim C Cartridge & Coil System" ? "Keep the dedicated XLIM C cartridge-and-coil parts within that system; do not mix them with standard XLIM integrated-coil pods." : "Store refillable pods upright when practical, wipe contacts if condensation appears, and replace a pod when it is no longer performing normally.";
+  return '<div class="geo-block"><h2>What this device is</h2><p>'+esc(b.name+" "+d.device+" is recorded in the "+(d.family||"device")+" family. Its recorded pod system is "+platform+".")+'</p></div>'
+    +'<div class="geo-block"><h2>Which resistance options are recorded?</h2><p>'+esc(text+" Lower resistance is generally associated with a warmer, airier draw; higher resistance is generally associated with a tighter draw. Match any resistance to the exact values recorded for the device.")+'</p></div>'
+    +'<div class="geo-block"><h2>What does not fit?</h2><p>'+esc(notFit)+'</p></div>'
+    +'<div class="geo-block"><h2>Device-specific questions</h2><div class="geo-links">'
+    +'<div><strong>'+esc("Which pods fit the "+b.name+" "+d.device+"?")+'</strong><p>'+esc(platform==="UNKNOWN" ? "The pod platform is currently UNKNOWN, so PodLookup does not guess a compatible pod." : "The recorded platform is "+platform+". Use the compatibility page for the exact pod records.")+'</p></div>'
+    +'<div><strong>'+esc("Which resistance should I use in the "+b.name+" "+d.device+"?")+'</strong><p>'+esc(text)+'</p></div>'
+    +'<div><strong>'+esc("How should I store or troubleshoot pods for the "+b.name+" "+d.device+"?")+'</strong><p>'+esc(practical)+'</p></div>'
+    +'</div></div>';
+}
   function renderGeoEntity(route){
     var b = route.brand, d = route.device, isDev = route.kind === "devices";
     var path = (isDev ? "devices/" : "compatibility/") + b.slug + "/" + d.slug;
@@ -4592,6 +4610,7 @@ strong{font-weight:600; color:#fff}
       + '<h1>' + esc(h1) + '</h1>'
       + '<p class="geo-note" style="margin:0 0 22px">' + esc(lede) + '</p>'
       + (isDev ? fitBlock : compatBlock)
+      + (isDev ? deviceContentTemplateHtml(d, b) : "")
       + resistanceBlockHtml(d, b)
       + alternativesBlockHtml(d, b, isDev)
       + troubleshootingBlockHtml(d, b)
@@ -4601,10 +4620,19 @@ strong{font-weight:600; color:#fff}
       + siblingsBlock
       + guidesBlock
       + faqBlockHtml()
+      + (isDev && d.family === "XROS" && (d.device === "XROS 5" || d.device === "XROS 6")
+        ? '<div class="geo-block"><h2>Compare XROS 6 and XROS 5</h2><div class="geo-links">'
+          + geoLink(geoHref("guides/xros-6-vs-5"), "Vaporesso XROS 6 vs XROS 5", "Shared XROS Pods platform and model-specific records", 'data-geo data-guide="xros-6-vs-5"')
+          + '</div></div>' : "")
       + finderCtaBlockHtml()
       + '<div class="geo-block"><h2>Related information pages</h2><div class="geo-links">' + links.join("") + '</div></div>';
 
     var nodes = [breadcrumbSchema(items)];
+    if (isDev) nodes.push({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"Which pods fit the "+b.name+" "+d.device+"?","acceptedAnswer":{"@type":"Answer","text":d.platformKey?"The recorded platform is "+d.platformKey+". Use the compatibility page for the exact pod records.":"The pod platform is currently UNKNOWN, so PodLookup does not guess a compatible pod."}},
+      {"@type":"Question","name":"Which resistance should I use in the "+b.name+" "+d.device+"?","acceptedAnswer":{"@type":"Answer","text":(d.ohms||[]).length?"Use only the resistance options recorded for this device: "+d.ohms.join(", ")+".":"No device resistance range is recorded here, so PodLookup does not invent one."}},
+      {"@type":"Question","name":"How should I store or troubleshoot pods for the "+b.name+" "+d.device+"?","acceptedAnswer":{"@type":"Answer","text":d.platformKey==="Xlim C Cartridge & Coil System"?"Keep the dedicated XLIM C cartridge-and-coil parts within that system; do not mix them with standard XLIM integrated-coil pods.":"Store refillable pods upright when practical, wipe contacts if condensation appears, and replace a pod when it is no longer performing normally."}}
+    ]);
     if (prod) nodes.push(productNode(prod));
     if (pods.length){
       nodes.push({
