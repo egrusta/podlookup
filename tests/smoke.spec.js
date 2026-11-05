@@ -129,6 +129,25 @@ test.describe('PodLookup basket and responsive regression', () => {
     expect(descriptions.every(Boolean)).toBe(true);
   });
 
+  test('Caliburn A2 pod resistance stays model-specific', async ({ page }) => {
+    for (const [route, expected, forbidden] of [
+      ['devices/uwell/caliburn-a2', '0.9Ω', '1.2Ω'],
+      ['devices/uwell/caliburn-a2s', '0.9Ω', null],
+      ['devices/uwell/caliburn-ak2', '0.9Ω', '1.2Ω']
+    ]) {
+      await page.goto('/?p=' + route);
+      const podRows = await page.locator('#geoView .geo-table tr')
+        .filter({ hasText: 'Pod resistances available' }).allTextContents();
+      expect(podRows.join(' ')).toContain(expected);
+      if (forbidden) expect(podRows.join(' ')).not.toContain(forbidden);
+    }
+
+    await page.goto('/?p=devices/uwell/caliburn-a2s');
+    const a2sPodRows = await page.locator('#geoView .geo-table tr')
+      .filter({ hasText: 'Pod resistances available' }).allTextContents();
+    expect(a2sPodRows.join(' ')).toContain('1.2Ω');
+  });
+
   test('static fallback inventory and SEO files stay complete', async ({ page, request }) => {
     await page.goto('/');
     const fallback = await page.evaluate(() => {
