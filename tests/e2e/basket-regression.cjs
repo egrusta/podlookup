@@ -139,10 +139,13 @@ const assert = require("node:assert/strict");
     }
 
     await page.goto(new URL("/?p=devices/oxva/xlim-c", baseUrl).toString(), { waitUntil: "domcontentloaded" });
-    await page.locator("#geoView").waitFor({ state: "visible" });
-    const xlimCText = await page.locator("#geoView").innerText();
+    await page.waitForFunction(() => {
+      const view = document.querySelector("#geoView");
+      return view && !view.hidden && view.textContent.includes("Replaceable coil resistance options");
+    });
+    const xlimCText = (await page.locator("#geoView").textContent() || "").replace(/\\s+/g, "");
     for (const resistance of ["0.6Ω", "0.8Ω", "1.2Ω"])
-      assert.ok(xlimCText.includes(resistance), "XLIM C must show replaceable coil resistance " + resistance);
+      assert.ok(xlimCText.includes(resistance), "XLIM C must show replaceable coil resistance " + resistance + "; page text: " + xlimCText.slice(-1200));
 
     await page.goto(new URL("/?p=guides/xlim-pods", baseUrl).toString(), { waitUntil: "domcontentloaded" });
     await page.locator("#geoView").waitFor({ state: "visible" });
