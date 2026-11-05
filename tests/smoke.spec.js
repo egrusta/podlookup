@@ -158,6 +158,12 @@ test.describe('PodLookup basket and responsive regression', () => {
         await expect(page.locator('main')).toContainText(resistance);
     }
 
+    await page.goto('/?p=guides/caliburn-pods');
+    for (const slug of ['caliburn-gz2', 'caliburn-gz2-cyber', 'caliburn-gk2', 'caliburn-tenet', 'caliburn-tenet-koko', 'caliburn-x', 'caliburn-explorer']) {
+      await expect(page.locator('#geoView a[href$="devices/uwell/' + slug + '"]')).toBeVisible();
+      await expect(page.locator('#geoView a[href$="compatibility/uwell/' + slug + '"]')).toBeVisible();
+    }
+
     await page.goto('/?p=compatibility/uwell/caliburn-gz2');
     await expect(page.locator('main')).toContainText('no manufacturer-verified pod platform');
     await expect(page.locator('main')).toContainText('UNKNOWN');
