@@ -1848,6 +1848,7 @@ strong{font-weight:600; color:#fff}
       pods: d.platform || "",
       ohms: d.ohms ? d.ohms.slice() : [],
       podOhms: d.podOhms ? d.podOhms.slice() : [],
+      coilOhms: d.coilOhms ? d.coilOhms.slice() : [],
       note: d.note
     };
   });
@@ -3629,7 +3630,7 @@ strong{font-weight:600; color:#fff}
           family: e.family, pods: e.pods, platformKey: pkey, platformSlug: pslug,
           platformStatus: md.platformStatus || (pkey ? "VERIFIED" : "UNKNOWN"),
           ohms: e.ohms || [], ohmsStatus: md.ohmsStatus || ((e.ohms && e.ohms.length) ? "VERIFIED" : "UNKNOWN"),
-          podOhms: e.podOhms || [], note: e.note || "",
+          podOhms: e.podOhms || [], coilOhms: e.coilOhms || [], note: e.note || "",
           product: deviceProduct(bname, dname),
           podsProducts: compatiblePods(dname)
         };
@@ -5212,6 +5213,10 @@ strong{font-weight:600; color:#fff}
           if (text.indexOf(o) === -1)
             err("Device page '" + d.brand + " " + d.device + "' direct answer omits pod resistance " + o + ".");
         });
+        (md.coilOhms || []).forEach(function(o){
+          if (text.indexOf(o) === -1)
+            err("Device page '" + d.brand + " " + d.device + "' direct answer omits replaceable-coil resistance " + o + ".");
+        });
         d.podsProducts.forEach(function(x){
           if (text.indexOf(x.name) === -1)
             err("Device page '" + d.brand + " " + d.device + "' direct answer omits compatible pod product '" + x.name + "'.");
@@ -5267,6 +5272,10 @@ strong{font-weight:600; color:#fff}
         md.podOhms.forEach(function(o){
           if (text.indexOf(o) === -1)
             err("Compatibility page '" + d.brand + " " + d.device + "' direct answer omits pod resistance " + o + ".");
+        });
+        (md.coilOhms || []).forEach(function(o){
+          if (text.indexOf(o) === -1)
+            err("Compatibility page '" + d.brand + " " + d.device + "' direct answer omits replaceable-coil resistance " + o + ".");
         });
         d.podsProducts.forEach(function(x){
           if (text.indexOf(x.name) === -1)
