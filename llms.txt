@@ -146,3 +146,11 @@ PodLookup is an information-first catalogue for Vaporesso, OXVA and UWELL refill
 - Methodology: https://podlookup.co.uk/?p=methodology — how official-source evidence, platform/device separation and UNKNOWN status are handled.
 - About PodLookup: https://podlookup.co.uk/?p=about — independent UK-focused compatibility reference scope and ownership statement.
 - XROS platform: https://podlookup.co.uk/?p=platforms/xros-pods — includes cross-compatibility questions for recorded XROS devices.
+
+- [Caliburn GZ2](https://podlookup.co.uk/?p=devices/uwell/caliburn-gz2) — pod platform compatibility is currently unavailable; documented coil evidence is kept separate.
+- [Caliburn GZ2 Cyber](https://podlookup.co.uk/?p=devices/uwell/caliburn-gz2-cyber) — pod platform compatibility is currently unavailable; documented coil evidence is kept separate.
+- [Caliburn GK2](https://podlookup.co.uk/?p=devices/uwell/caliburn-gk2) — pod platform compatibility is currently unavailable; documented coil evidence is kept separate.
+- [Caliburn Tenet](https://podlookup.co.uk/?p=devices/uwell/caliburn-tenet) — pod platform compatibility is currently unavailable; documented coil evidence is kept separate.
+- [Caliburn Tenet KOKO](https://podlookup.co.uk/?p=devices/uwell/caliburn-tenet-koko) — pod platform compatibility is currently unavailable; documented coil evidence is kept separate.
+- [Caliburn X](https://podlookup.co.uk/?p=devices/uwell/caliburn-x) — pod platform compatibility is currently unavailable; documented coil evidence is kept separate.
+- [Caliburn Explorer](https://podlookup.co.uk/?p=devices/uwell/caliburn-explorer) — pod platform compatibility is currently unavailable; documented coil evidence is kept separate.
