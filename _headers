@@ -3,7 +3,7 @@
   CSP is intentionally not added here because PodLookup currently relies on
   inline scripts/styles and a restrictive CSP would break the storefront.
 */
-/
+/*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
