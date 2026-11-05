@@ -107,12 +107,50 @@
 - Kit-included cartridges, optional replacement variants and regional / TPD capacity variants are separate facts. Do not infer the UK kit contents from a global product page.
 - The platform page says its three-type overview is "as of 2025" and mentions further 2026 cartridges; do not treat that older overview as a complete current SKU catalogue.
 
+### CALIBURN A2 and A3 cartridge families
+
+**A2 family — official sources**
+- CALIBURN A2: https://www.myuwell.com/caliburn/caliburn-a2
+- CALIBURN A2 user manual: https://files.myuwell.com/blob/product-download/Calibrun%20A2%20User%20Manual-20210810145024.pdf
+- CALIBURN A2S: https://www.myuwell.com/caliburn/caliburn-a2s
+- CALIBURN AK2: https://www.myuwell.com/products/pod-system/caliburn-ak2.html
+- CALIBURN AK2 user manual: https://files.myuwell.com/blob/product-download/User%20Manual%20AK2%28All%20languages%29-20220924171319.pdf
+
+**A2 facts supported**
+- The A2 product page and user manual specify the 0.9Ω CALIBURN A2 refillable pod.
+- UWELL explicitly states that A2S is compatible with the 0.9Ω CALIBURN A2 pod. The A2S page also lists its own 1.2Ω side-refill pod.
+- UWELL's AK2 product page says A2 and AK2 can share the A2 pod cartridge; the AK2 manual specifies the 0.9Ω A2 pod.
+- The A2S 1.2Ω side-refill pod is not listed as an A2 or AK2 option in those manufacturer sources. Keep that option model-specific.
+
+**A3 family — official sources**
+- CALIBURN A3: https://www.myuwell.com/caliburn/caliburn-a3
+- CALIBURN A3S: https://www.myuwell.com/caliburn/uwell-caliburn-a3s
+- CALIBURN AK3: https://www.myuwell.com/products/pod-system/caliburn-ak3.html
+- CALIBURN AZ3: https://www.myuwell.com/caliburn/caliburn-az3
+- UWELL A3 launch article: https://www.myuwell.com/news/new-products/uwell-launches-caliburn-a3-pod-system
+- UWELL A3S launch article: https://www.myuwell.com/news/new-products/uwell-launches-caliburn-a3s-pod-sytem
+
+**A3 facts supported**
+- The A3 product page specifies a 1.0Ω CALIBURN A3 refillable pod.
+- The A3S product page explicitly says A3S is compatible with the A3 pod and lists a 0.8Ω A3S pod (pre-installed) and a 1.0Ω A3 pod (spare).
+- The AK3 product page specifies a 1.0Ω CALIBURN A3 refillable pod.
+- The AZ3 product page's wide-compatibility panel lists A3, A3S, AK3 and AZ3 together, and its pod specifications list 0.8Ω and 1.0Ω A3 refillable pod options.
+- UWELL's AZ3 launch material also refers to AZ3 as the AZ3 (Grace) device. Treat Grace as a naming/marketing alias only where the model record supports it.
+
+**Facts deliberately not inferred**
+- The A2S 1.2Ω side-refill pod is not automatically compatible with A2 or AK2 merely because all three use the A2 family.
+- The A3 platform-level 0.8Ω and 1.0Ω options are not automatically device-supported resistance values for every A3-family model. Keep the per-device `ohms` field UNKNOWN unless that model's own manufacturer evidence lists the value.
+- The A3, A3S, AK3 and AZ3 family relationship does not prove that every pod variant or refill orientation fits every one of the four devices. Use the exact model-page statements above.
+- Product-page kit contents are not a complete replacement-pod catalogue and may differ by market.
+
 ## Safe implementation decisions
 
 - Do not merge these older G/G2 coil-family models into the newer GPP cartridge platform.
 - Keep G-series replaceable-coil options distinct from integrated-coil cartridge resistance.
 - Do not infer a universal G/G2 cartridge SKU from coil compatibility alone.
 - For G3/G4/G5, preserve the distinction between previous GPP, upgraded GPP, GPP Alpha and G3-series cartridge wording until the exact cartridge SKU and compatibility direction are established.
+- Keep the A2 0.9Ω pod evidence separate from the A2S 1.2Ω side-refill option; do not propagate the 1.2Ω option to A2 or AK2.
+- For A3-family devices, preserve model-specific 0.8Ω / 1.0Ω evidence; platform-level availability is not proof that every resistance fits every device.
 - Treat Caliburn Explorer as a separate dual-cartridge design unless a manufacturer source establishes a shared cartridge SKU.
 - Before adding a model to the live MASTER dataset, record the exact manufacturer source URL, the supported compatibility direction, coil options and any unresolved fields.
 - If the model's exact cartridge mapping remains unclear, it may be listed as a device with pod compatibility UNKNOWN rather than assigning a guessed platform.
@@ -132,3 +170,4 @@
 |---|---|---|
 | 5 November 2026 | UWELL G/G2 family | Manufacturer pages confirm G-series coil support for several omitted devices; exact cartridge interchangeability remains a separate question and is not inferred. |
 | 5 November 2026 | UWELL GPP G3/G4/G5 family | Added official GPP platform and model-page evidence; kept cartridge-generation and SKU direction distinctions explicit. |
+| 5 November 2026 | UWELL A2/A3 families | Added official A2/A2S/AK2 and A3/A3S/AK3/AZ3 evidence, preserving model-specific resistance distinctions. |
