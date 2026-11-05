@@ -4549,6 +4549,16 @@ showGeo(crumbsFor(items)+'<p class="geo-kicker">PodLookup information</p><h1>'+e
     +'<div><strong>'+esc("How should I store or troubleshoot pods for the "+b.name+" "+d.device+"?")+'</strong><p>'+esc(practical)+'</p></div>'
     +'</div></div>';
 }
+  function deviceFaqSchemaNodes(d,b){
+  var platform=d.platformKey||"UNKNOWN";
+  var resistances=(d.ohms||[]).length ? "Use only the resistance options recorded for this device: "+d.ohms.join(", ")+".":"No device resistance range is recorded here, so PodLookup does not invent one.";
+  var practical=d.platformKey==="Xlim C Cartridge & Coil System" ? "Keep the dedicated XLIM C cartridge-and-coil parts within that system; do not mix them with standard XLIM integrated-coil pods." : "Store refillable pods upright when practical, wipe contacts if condensation appears, and replace a pod when it is no longer performing normally.";
+  return [{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"Which pods fit the "+b.name+" "+d.device+"?","acceptedAnswer":{"@type":"Answer","text":platform==="UNKNOWN" ? "The pod platform is currently UNKNOWN, so PodLookup does not guess a compatible pod." : "The recorded platform is "+platform+". Use the compatibility page for the exact pod records."}},
+    {"@type":"Question","name":"Which resistance should I use in the "+b.name+" "+d.device+"?","acceptedAnswer":{"@type":"Answer","text":resistances}},
+    {"@type":"Question","name":"How should I store or troubleshoot pods for the "+b.name+" "+d.device+"?","acceptedAnswer":{"@type":"Answer","text":practical}}
+  ]}];
+}
   function renderGeoEntity(route){
     var b = route.brand, d = route.device, isDev = route.kind === "devices";
     var path = (isDev ? "devices/" : "compatibility/") + b.slug + "/" + d.slug;
@@ -4657,11 +4667,7 @@ showGeo(crumbsFor(items)+'<p class="geo-kicker">PodLookup information</p><h1>'+e
       + '<div class="geo-block"><h2>Related information pages</h2><div class="geo-links">' + links.join("") + '</div></div>';
 
     var nodes = [breadcrumbSchema(items)];
-    if (isDev) nodes.push({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-      {"@type":"Question","name":"Which pods fit the "+b.name+" "+d.device+"?","acceptedAnswer":{"@type":"Answer","text":d.platformKey?"The recorded platform is "+d.platformKey+". Use the compatibility page for the exact pod records.":"The pod platform is currently UNKNOWN, so PodLookup does not guess a compatible pod."}},
-      {"@type":"Question","name":"Which resistance should I use in the "+b.name+" "+d.device+"?","acceptedAnswer":{"@type":"Answer","text":(d.ohms||[]).length?"Use only the resistance options recorded for this device: "+d.ohms.join(", ")+".":"No device resistance range is recorded here, so PodLookup does not invent one."}},
-      {"@type":"Question","name":"How should I store or troubleshoot pods for the "+b.name+" "+d.device+"?","acceptedAnswer":{"@type":"Answer","text":d.platformKey==="Xlim C Cartridge & Coil System"?"Keep the dedicated XLIM C cartridge-and-coil parts within that system; do not mix them with standard XLIM integrated-coil pods.":"Store refillable pods upright when practical, wipe contacts if condensation appears, and replace a pod when it is no longer performing normally."}}
-    ]);
+    if (isDev) nodes = nodes.concat(deviceFaqSchemaNodes(d,b));
     if (prod) nodes.push(productNode(prod));
     if (pods.length){
       nodes.push({
