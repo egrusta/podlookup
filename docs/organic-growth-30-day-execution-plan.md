@@ -43,7 +43,7 @@ No current, verified daily unique-visitor baseline is available. Historical Clou
 - A live production fetch returned HTTP 200 for the homepage, `/robots.txt`, `/sitemap.xml`, `/llms.txt`, and the XROS 6 device route. The XROS 6 route returned a model-specific page title.
 - The production sitemap contains **123 unique URLs**: 50 device detail routes plus the device index, 50 compatibility detail routes plus the compatibility index, eight platform detail routes plus the platform index, seven guide articles plus the guides index, three brand routes, and the homepage.
 - The live homepage clearly labels the storefront as a demo and says no orders are placed.
-- The live scraper did not expose response `Content-Type` headers. The repository's Playwright smoke test does check that `robots.txt` is served as `text/plain` and the sitemap as XML in its test server; production MIME headers still need a direct header-level check.
+- A live production scrape with fresh-fetch mode exposed response content types: `/robots.txt` returned `text/plain; charset=utf-8`, `/sitemap.xml` returned `application/xml`, and `/llms.txt` returned `text/plain; charset=utf-8` (all HTTP 200). This closes the earlier production MIME-header verification gap. The route-level guide and device checks also returned HTTP 200 with route-specific metadata and model/guide body content after client rendering; allow sufficient render time when using a crawler, because a short scrape can capture the shared application shell before the route content is hydrated.
 - These checks establish release and crawl readiness, not search-engine indexing or visitor growth. No Search Console or Cloudflare Web Analytics visitor metrics have been verified.
 
 Use a consistent reporting definition:
