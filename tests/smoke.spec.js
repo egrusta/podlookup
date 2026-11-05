@@ -232,6 +232,26 @@ test.describe('PodLookup demo storefront trust copy', () => {
 });
 
 
+test.describe('PodLookup platform overview accuracy', () => {
+  test('shared overview includes the current device generations and separate pod platforms', async ({ page }) => {
+    await page.goto('/');
+    const overview = page.locator('#pod-compatibility');
+    for (const phrase of [
+      'XROS 6',
+      'XROS 6 Mini',
+      'XROS PRO 2',
+      'Xlim C is separate',
+      'Caliburn G / G2 Pods',
+      'GPP',
+      'A2 Pods',
+      'A3 Pods',
+      'original Caliburn'
+    ]) {
+      await expect(overview).toContainText(phrase);
+    }
+  });
+});
+
 test.describe('PodLookup complete device-route coverage', () => {
   test('every device in the reference table has working device and compatibility pages', async ({ page }) => {
     test.setTimeout(120000);
