@@ -1,6 +1,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PodLookup — UK pod compatibility reference</title>
-<meta name="description" content="Check which refillable pods fit your device with PodLookup's UK-focused compatibility reference.">
+<title>PodLookup | XROS, XLIM &amp; Caliburn Pod Compatibility Reference</title>
+<meta name="description" content="UK reference for Vaporesso XROS, OXVA XLIM and UWELL Caliburn pod compatibility. Check exact device models, recorded pod platforms and resistance options; UNKNOWN means evidence is not established.">
 <link rel="canonical" href="https://podlookup.co.uk/">
 <script>
 /* Ensure the hosted fragment sets a real mobile layout viewport and document language. */
@@ -6261,7 +6261,7 @@ function deviceFaqSchemaNodes(d,b){
            Verifies only what this generator controls: that the question-led
            answer content an AI retrieval system needs is present in the
            rendered pages/guides/FAQ; that every internal entity link and every
-           canonical <link> uses one of the four canonical route shapes and
+           canonical <link> uses a supported canonical route shape or special reference route and
            resolves to a real entity; that the visible structured data uses only
            the existing schema types and is internally consistent; that no real
            route is accidentally noindexed; that UNKNOWN stays explicit and is
@@ -6285,6 +6285,7 @@ function deviceFaqSchemaNodes(d,b){
       function classify(path){
         var s = String(path).split("/");
         if (s.length === 1 && (s[0] === "devices" || s[0] === "compatibility" || s[0] === "platforms" || s[0] === "guides")) return { kind: "index" };
+        if (s.length === 1 && (s[0] === "finder" || s[0] === "methodology" || s[0] === "about")) return { kind: "special", page: s[0] };
         if (s[0] === "guides" && s.length === 2) return { kind: "guide", id: s[1] };
         if (s[0] === "devices" && s.length === 3) return { kind: "device", brand: s[1], device: s[2] };
         if (s[0] === "compatibility" && s.length === 3) return { kind: "compat", brand: s[1], device: s[2] };
@@ -6294,6 +6295,7 @@ function deviceFaqSchemaNodes(d,b){
       }
       function resolves(c){
         if (c.kind === "index") return true;
+        if (c.kind === "special") return c.page === "finder" || c.page === "methodology" || c.page === "about";
         if (c.kind === "device" || c.kind === "compat")
           return ENTITY.devices.some(function(d){ return d.brandSlug === c.brand && d.slug === c.device; });
         if (c.kind === "platform") return ENTITY.platforms.some(function(p){ return p.slug === c.slug; });
@@ -6384,7 +6386,7 @@ function deviceFaqSchemaNodes(d,b){
         if (!p || seenPath[p]) return;
         seenPath[p] = 1; linkPaths.push(p);
         var c = classify(p);
-        if (c.kind === "invalid") err("Internal link '?p=" + p + "' does not use one of the four canonical route shapes.");
+        if (c.kind === "invalid") err("Internal link '?p=" + p + "' does not use a supported canonical route shape or special reference route.");
         else if (!resolves(c)) err("Internal link '?p=" + p + "' does not resolve to a real entity.");
       });
       ["index", "device", "compat", "platform", "brand"].forEach(function(k){
