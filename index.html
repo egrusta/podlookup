@@ -2983,7 +2983,7 @@ strong{font-weight:600; color:#fff}
     var deviceMode = $("#finderDeviceMode"), podMode = $("#finderPodMode");
     if (deviceMode) deviceMode.hidden = finderMode !== "device";
     if (podMode) podMode.hidden = finderMode !== "pod";
-    $(".finder-mode [data-fmode]").forEach(function(b){
+    $$(".finder-mode [data-fmode]").forEach(function(b){
       var active = b.getAttribute("data-fmode") === finderMode;
       b.setAttribute("aria-pressed", active ? "true" : "false");
       b.classList.toggle("choice-brand", active);
