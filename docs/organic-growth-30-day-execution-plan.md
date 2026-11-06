@@ -41,7 +41,7 @@ No current, verified daily unique-visitor baseline is available. Historical Clou
 - GitHub Actions browser-regression workflow for commit `c0b314ca02185b12e595a5cf1b7342bce5548ce9` completed successfully.
 - Cloudflare Pages reported a successful deployment for the same commit.
 - A live production fetch returned HTTP 200 for the homepage, `/robots.txt`, `/sitemap.xml`, `/llms.txt`, and the XROS 6 device route. The XROS 6 route returned a model-specific page title.
-- The production sitemap contains **123 unique URLs**: 50 device detail routes plus the device index, 50 compatibility detail routes plus the compatibility index, eight platform detail routes plus the platform index, seven guide articles plus the guides index, three brand routes, and the homepage.
+- The current repository sitemap contains **128 unique URLs**: 50 device detail routes plus the device index, 50 compatibility detail routes plus the compatibility index, eight platform detail routes plus the platform index, nine guide articles plus the guides index, three brand routes, three additional reference pages (Finder, Methodology and About), and the homepage. This is the repository count; production must be checked separately after deployment.
 - The live homepage clearly labels the storefront as a demo and says no orders are placed.
 - A live production scrape with fresh-fetch mode exposed response content types: `/robots.txt` returned `text/plain; charset=utf-8`, `/sitemap.xml` returned `application/xml`, and `/llms.txt` returned `text/plain; charset=utf-8` (all HTTP 200). This closes the earlier production MIME-header verification gap. The route-level guide and device checks also returned HTTP 200 with route-specific metadata and model/guide body content after client rendering; allow sufficient render time when using a crawler, because a short scrape can capture the shared application shell before the route content is hydrated.
 - These checks establish release and crawl readiness, not search-engine indexing or visitor growth. No Search Console or Cloudflare Web Analytics visitor metrics have been verified.
@@ -79,7 +79,7 @@ Official setup references:
 ### Days 4–7 — Crawlable information architecture
 
 1. Verify all canonical device, compatibility, brand and platform routes.
-2. Publish the seven technical guide articles plus the guides index (eight guide routes total in the current sitemap) as distinct, crawlable routes with unique titles, descriptions, canonical URLs, breadcrumbs and relevant structured data.
+2. Publish the nine technical guide articles plus the guides index (ten guide routes total in the current repository sitemap) as distinct, crawlable routes with unique titles, descriptions, canonical URLs, breadcrumbs and relevant structured data.
 3. Link guide pages from the homepage, device pages, platform pages and reference hub.
 4. Include every intended indexable route in the XML sitemap and the AI discovery file.
 5. Keep unknown or invalid routes out of the index; preserve the existing noindex/404 behavior.
