@@ -120,7 +120,7 @@ test.describe('PodLookup basket and responsive regression', () => {
     for (const [route, model] of routes) {
       await page.goto('/?p=' + route);
       titles.push(await page.title());
-      descriptions.push(await page.locator('meta[name="description"]').getAttribute('content'));
+      descriptions.push(await page.locator('meta[data-geo-meta][name="description"]').getAttribute('content'));
       await expect(page.locator('main')).toContainText(model);
     }
 
@@ -234,7 +234,7 @@ test.describe('PodLookup SEO publication regression', () => {
     await page.goto('/?p=__podlookup-regression-unknown-route__');
     await expect(page).toHaveTitle('Information currently unavailable | PodLookup');
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
-    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', 'That device or platform is not in the PodLookup compatibility data.');
+    await expect(page.locator('meta[data-geo-meta][name="description"]')).toHaveAttribute('content', 'That device or platform is not in the PodLookup compatibility data.');
   });
 });
 
@@ -298,7 +298,7 @@ test.describe('PodLookup complete device-route coverage', () => {
         const response = await page.goto('/' + href);
         expect(response?.ok(), href + ' should load successfully').toBeTruthy();
         await expect(page.locator('main'), href + ' should show the correct model').toContainText(route.device);
-        await expect(page.locator('meta[name="description"]')).not.toHaveAttribute('content', '');
+        await expect(page.locator('meta[data-geo-meta][name="description"]')).not.toHaveAttribute('content', '');
         await expect(page.locator('title')).not.toContainText('Information currently unavailable');
       }
     }
@@ -311,7 +311,7 @@ test.describe('PodLookup information-first homepage copy', () => {
     await page.goto('/');
     await expect(page.locator('.hero-copy')).toContainText('UK compatibility reference');
     await expect(page).toHaveTitle('PodLookup | XROS, XLIM & Caliburn Pod Compatibility Reference');
-    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /UK reference for Vaporesso XROS, OXVA XLIM and UWELL Caliburn pod compatibility/);
+    await expect(page.locator('meta[name="description"]:not([data-geo-meta])')).toHaveAttribute('content', /UK reference for Vaporesso XROS, OXVA XLIM and UWELL Caliburn pod compatibility/);
     await expect(page.locator('.trust-row')).toContainText('Evidence status');
     await expect(page.locator('.trust-row')).not.toContainText('proven refillable ecosystems');
     await expect(page.locator('#ecoGrid')).toContainText('View XROS device records');
@@ -348,8 +348,8 @@ test.describe('PodLookup crawlable technical guide routes', () => {
       const heading = page.locator('#geoView h1');
       await expect(heading).toBeVisible();
       await expect(heading).not.toBeEmpty();
-      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp('\\?p=guides/' + id + '$'));
-      await expect(page.locator('meta[name="description"]')).not.toHaveAttribute('content', '');
+      await expect(page.locator('link[rel="canonical"][data-geo-meta]')).toHaveAttribute('href', new RegExp('\\?p=guides/' + id + '$'));
+      await expect(page.locator('meta[data-geo-meta][name="description"]')).not.toHaveAttribute('content', '');
       await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
       await expect.poll(() => page.locator('#geo-schema').evaluate(el => el.textContent)).toContain('TechArticle');
       await expect(page.locator('#geoView a[data-geo][href*="?p=guides/"]').first()).toBeVisible();
