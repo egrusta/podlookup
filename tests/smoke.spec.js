@@ -171,8 +171,8 @@ test.describe('PodLookup basket and responsive regression', () => {
     expect(sitemap.headers()['content-type']).toMatch(/xml/);
     const xml = await sitemap.text();
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-    expect(locs.length).toBe(123);
-    expect(new Set(locs).size).toBe(123);
+    expect(locs.length).toBe(128);
+    expect(new Set(locs).size).toBe(128);
   });
 
   test('OXVA XLIM C has a separate cartridge-and-coil compatibility system', async ({ page }) => {
@@ -225,8 +225,8 @@ test.describe('PodLookup SEO publication regression', () => {
     const entries = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(match => match[1]);
     const urls = entries.map(entry => entry.match(/<loc>(.*?)<\/loc>/)?.[1]);
 
-    expect(entries).toHaveLength(123);
-    expect(new Set(urls).size).toBe(123);
+    expect(entries).toHaveLength(128);
+    expect(new Set(urls).size).toBe(128);
     expect(entries.every(entry => /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(entry))).toBe(true);
   });
 
@@ -331,7 +331,9 @@ test.describe('PodLookup crawlable technical guide routes', () => {
       'pods-work',
       'caliburn-pods',
       'xlim-pods',
-      'cross-platform-resistance'
+      'cross-platform-resistance',
+      'xros-6-vs-5',
+      'caliburn-g4-vs-g5'
     ];
 
     const indexResponse = await page.goto('/?p=guides');
