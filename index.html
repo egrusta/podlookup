@@ -6888,10 +6888,12 @@ function deviceFaqSchemaNodes(d,b){
     injectStructuredData();
     renderRefUpdated();
     setBrandHead();
+    /* Bind critical UI controls before optional audits so a non-critical
+       data-audit exception can never disable the basket or mobile navigation. */
     wireEvents();
     keyArt();
-    auditEntities();
-    window.__masterDatasetAudit();
+    try { auditEntities(); } catch (e) { console.error("[PodLookup] entity audit failed:", e); }
+    try { window.__masterDatasetAudit(); } catch (e) { console.error("[PodLookup] master audit failed:", e); }
     applyGeoFromLocation();
     var y = $("#year");
     if (y) y.textContent = new Date().getFullYear();
