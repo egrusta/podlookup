@@ -2983,7 +2983,7 @@ strong{font-weight:600; color:#fff}
     var deviceMode = $("#finderDeviceMode"), podMode = $("#finderPodMode");
     if (deviceMode) deviceMode.hidden = finderMode !== "device";
     if (podMode) podMode.hidden = finderMode !== "pod";
-    $$$(".finder-mode [data-fmode]").forEach(function(b){
+    $(".finder-mode [data-fmode]").forEach(function(b){
       var active = b.getAttribute("data-fmode") === finderMode;
       b.setAttribute("aria-pressed", active ? "true" : "false");
       b.classList.toggle("choice-brand", active);
@@ -6462,7 +6462,7 @@ function deviceFaqSchemaNodes(d,b){
       setGeoMeta({ title: "probe", description: "probe", url: "", noindex: true });
       if (canonMeta()) err("The not-found view emits a canonical <link>, which it should not.");
       if (!robotsMeta() || !/noindex/i.test(robotsMeta().getAttribute("content") || "")) err("The not-found view does not emit a noindex directive.");
-      $$$("[data-geo-meta]").forEach(function(el){ if (el.parentNode) el.parentNode.removeChild(el); });
+      $("[data-geo-meta]").forEach(function(el){ if (el.parentNode) el.parentNode.removeChild(el); });
       snap.els.forEach(function(o){
         var el = document.createElement(o.tag === "LINK" ? "link" : "meta");
         if (o.name !== null) el.setAttribute("name", o.name);
@@ -6832,7 +6832,7 @@ function deviceFaqSchemaNodes(d,b){
       navToggle.setAttribute("aria-expanded", open ? "true" : "false");
       navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     });
-    $$$(".primary-nav a").forEach(function(a){ a.addEventListener("click", closeNav); });
+    $(".primary-nav a").forEach(function(a){ a.addEventListener("click", closeNav); });
 
     buildNavSpy();
     window.addEventListener("scroll", scheduleActiveNav, { passive: true });
