@@ -1,0 +1,12 @@
+{
+  "name": "podlookup",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "http-server": "^14.1.1"
+  }
+}
