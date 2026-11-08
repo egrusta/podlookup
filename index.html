@@ -3943,13 +3943,16 @@ strong{font-weight:600; color:#fff}
     DEFAULT_DESC = (m && m.getAttribute("content")) || SITE_DESC;
   }
   function metaEl(attr, key, create){
-    var el = document.head.querySelector('meta[' + attr + '="' + key + '"][data-geo-meta]');
+    /* Update the server-rendered default tag instead of creating a second copy.
+       The first tag in the head is the one crawlers commonly encounter first. */
+    var selector = 'meta[' + attr + '="' + key + '"]';
+    var el = document.head.querySelector(selector);
     if (!el && create){
       el = document.createElement("meta");
       el.setAttribute(attr, key);
-      el.setAttribute("data-geo-meta", "1");
       document.head.appendChild(el);
     }
+    if (el) el.setAttribute("data-geo-meta", "1");
     return el;
   }
   function putMeta(attr, key, content){
@@ -3959,14 +3962,15 @@ strong{font-weight:600; color:#fff}
     else if (el.parentNode) el.parentNode.removeChild(el);
   }
   function putCanonical(href){
-    var el = document.head.querySelector('link[rel="canonical"][data-geo-meta]');
+    /* Reuse the canonical emitted by the server-side route metadata. */
+    var el = document.head.querySelector('link[rel="canonical"]');
     if (!href){ if (el && el.parentNode) el.parentNode.removeChild(el); return; }
     if (!el){
       el = document.createElement("link");
       el.setAttribute("rel", "canonical");
-      el.setAttribute("data-geo-meta", "1");
       document.head.appendChild(el);
     }
+    el.setAttribute("data-geo-meta", "1");
     el.setAttribute("href", href);
   }
   function setGeoMeta(meta){
