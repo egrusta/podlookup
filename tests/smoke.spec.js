@@ -348,8 +348,64 @@ test.describe('PodLookup crawlable technical guide routes', () => {
       const heading = page.locator('#geoView h1');
       await expect(heading).toBeVisible();
       await expect(heading).not.toBeEmpty();
-      await expect(page.locator('link[rel="canonical"][data-geo-meta]')).toHaveAttribute('href', new RegExp('\\?p=guides/' + id + '$'));
-      await expect(page.locator('meta[data-geo-meta][name="description"]')).not.toHaveAttribute('content', '');
+      await expect(page.locator('link[rel="canonical"]')).toHaveCount(1);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp('\\?p=guides/' + id + '      await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+      await expect.poll(() => page.locator('#geo-schema').evaluate(el => el.textContent)).toContain('TechArticle');
+      await expect(page.locator('#geoView a[data-geo][href*="?p=guides/"]').first()).toBeVisible();
+    }
+  });
+});
+
+test.describe('PodLookup demo privacy and launch-list clarity', () => {
+  test('does not present an inactive email signup or retain locally entered addresses', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('#notifyForm')).toHaveCount(0);
+    await expect(page.locator('#launchListBtn')).toHaveCount(0);
+    await expect(page.locator('footer')).toContainText('does not collect email addresses or send launch notifications');
+    await expect(page.locator('#cartDrawer')).toContainText('email notifications are not active');
+    await page.evaluate(() => localStorage.setItem('podlookup-notify', 'demo@example.com'));
+    await page.reload();
+    expect(await page.evaluate(() => localStorage.getItem('podlookup-notify'))).toBeNull();
+  });
+});
+
+
+test.describe('PodLookup current production browser diagnostics', () => {
+  test('home, platform and guide routes emit no console errors, warnings or uncaught page errors', async ({ page }) => {
+    const messages = [];
+    page.on('console', msg => {
+      if (['error', 'warning'].includes(msg.type())) messages.push({ type: msg.type(), text: msg.text() });
+    });
+    page.on('pageerror', error => messages.push({ type: 'pageerror', text: error.message }));
+
+    for (const route of [
+      '/',
+      '/?p=platforms/caliburn-a2-pods',
+      '/?p=platforms/caliburn-gpp-pods',
+      '/?p=devices/oxva/xlim-c',
+      '/?p=guides',
+      '/?p=guides/which-pod'
+    ]) {
+      await page.goto(route);
+      await page.locator('main').waitFor({ state: 'visible' });
+    }
+
+    await page.goto('/?p=devices/oxva/xlim-c');
+    await expect(page.locator('#geoView')).toContainText('Replaceable coil resistance options');
+    await expect(page.locator('#geoView')).toContainText('0.6Ω');
+    await expect(page.locator('#geoView')).toContainText('0.8Ω');
+    await expect(page.locator('#geoView')).toContainText('1.2Ω');
+
+    await page.goto('/?p=guides/xlim-pods');
+    await expect(page.locator('#geoView a[href*="/undefined"]')).toHaveCount(0);
+    await expect(page.locator('#geoView a[href$="devices/oxva/xlim-c"]')).toBeVisible();
+
+    expect(messages, messages.map(m => '[' + m.type + '] ' + m.text).join('\\n')).toEqual([]);
+  });
+});
+));
+      await expect(page.locator('meta[name="description"]')).toHaveCount(1);
+      await expect(page.locator('meta[name="description"]')).not.toHaveAttribute('content', '');
       await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
       await expect.poll(() => page.locator('#geo-schema').evaluate(el => el.textContent)).toContain('TechArticle');
       await expect(page.locator('#geoView a[data-geo][href*="?p=guides/"]').first()).toBeVisible();
