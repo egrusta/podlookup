@@ -311,7 +311,7 @@ test.describe('PodLookup information-first homepage copy', () => {
     await page.goto('/');
     await expect(page.locator('.hero-copy')).toContainText('UK compatibility reference');
     await expect(page).toHaveTitle('PodLookup | XROS, XLIM & Caliburn Pod Compatibility Reference');
-    await expect(page.locator('meta[name="description"]:not([data-geo-meta])')).toHaveAttribute('content', /UK reference for Vaporesso XROS, OXVA XLIM and UWELL Caliburn pod compatibility/);
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /UK reference for Vaporesso XROS, OXVA XLIM and UWELL Caliburn pod compatibility/);
     await expect(page.locator('.trust-row')).toContainText('Evidence status');
     await expect(page.locator('.trust-row')).not.toContainText('proven refillable ecosystems');
     await expect(page.locator('#ecoGrid')).toContainText('View XROS device records');
@@ -349,7 +349,7 @@ test.describe('PodLookup crawlable technical guide routes', () => {
       await expect(heading).toBeVisible();
       await expect(heading).not.toBeEmpty();
       await expect(page.locator('link[rel="canonical"]')).toHaveCount(1);
-      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp('\\?p=guides/' + id + '      await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp('\\?p=guides/' + id + '$'));
       await expect.poll(() => page.locator('#geo-schema').evaluate(el => el.textContent)).toContain('TechArticle');
       await expect(page.locator('#geoView a[data-geo][href*="?p=guides/"]').first()).toBeVisible();
     }
