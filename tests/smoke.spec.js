@@ -403,15 +403,6 @@ test.describe('PodLookup current production browser diagnostics', () => {
     expect(messages, messages.map(m => '[' + m.type + '] ' + m.text).join('\\n')).toEqual([]);
   });
 });
-));
-      await expect(page.locator('meta[name="description"]')).toHaveCount(1);
-      await expect(page.locator('meta[name="description"]')).not.toHaveAttribute('content', '');
-      await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
-      await expect.poll(() => page.locator('#geo-schema').evaluate(el => el.textContent)).toContain('TechArticle');
-      await expect(page.locator('#geoView a[data-geo][href*="?p=guides/"]').first()).toBeVisible();
-    }
-  });
-});
 
 test.describe('PodLookup demo privacy and launch-list clarity', () => {
   test('does not present an inactive email signup or retain locally entered addresses', async ({ page }) => {
