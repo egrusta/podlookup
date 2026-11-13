@@ -1006,7 +1006,7 @@ strong{font-weight:600; color:#fff}
   </div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
 <div id="homeView">
 
   <section class="hero" id="top">
@@ -3363,8 +3363,10 @@ strong{font-weight:600; color:#fff}
 
   /* ---- modal ---- */
   function openModal(html){
-    modalOpener = document.activeElement;
+    if ($("#modal").hidden) modalOpener = document.activeElement;
     $("#modalContent").innerHTML = html;
+    var heading = $("#modalContent").querySelector("h1, h2, h3");
+    $("#modal").setAttribute("aria-label", heading ? heading.textContent : "Information");
     $("#modal").hidden = false;
     $("#overlay").hidden = false;
     $("#modal").setAttribute("aria-hidden", "false");
@@ -3372,6 +3374,7 @@ strong{font-weight:600; color:#fff}
     $("#modalClose").focus();
   }
   function closeModal(){
+    if ($("#modal").hidden) return;
     $("#modal").hidden = true;
     $("#modal").setAttribute("aria-hidden", "true");
     if (modalOpener && modalOpener.focus){ try { modalOpener.focus({ preventScroll: true }); } catch (e) { try { modalOpener.focus(); } catch (e2) {} } modalOpener = null; }
@@ -3423,7 +3426,7 @@ strong{font-weight:600; color:#fff}
                 return '<a class="rel-guide" data-geo data-guide="' + esc(g.id) + '" href="' + esc(geoHref("guides/" + g.id)) + '">'
                   + '<span><span class="rg-kicker">' + esc(g.kicker) + '</span><span class="rg-title">' + esc(g.title) + '</span></span>'
                   + '<span aria-hidden="true">&#8594;</span>'
-                + '</button>';
+                + '</a>';
               }).join("") + '</div></section>' : '')
         + '<section class="pd-sec"><p class="pd-note">Prices, stock and availability on this demonstration storefront are illustrative and nothing can be purchased.</p></section>'
       + '</div>'
@@ -3442,9 +3445,9 @@ strong{font-weight:600; color:#fff}
       + guideLinkHtml(g) + '</article>');
   }
   var INFO_PAGES = {
-    delivery: { kicker: "Info", title: "Delivery and returns", body: "<p>Illustrative terms for this demonstration storefront: free UK delivery over \u00A325, dispatch in 1-2 working days, 30-day returns on unopened hardware. No orders are placed and no payments are taken.</p>" },
+    delivery: { kicker: "Info", title: "Delivery and returns", body: "<p>No delivery or returns service is available through this demonstration. No orders are placed, no payments are taken and no products are dispatched. Any displayed delivery details are illustrative, not a service commitment.</p>" },
     contact: { kicker: "Info", title: "Contact", body: "<p>Demonstration storefront \u2014 there is no support desk yet. For a production launch this page would carry a contact form, trading address and UK company details.</p>" },
-    privacy: { kicker: "Info", title: "Privacy", body: "<p>This demo stores your basket and email signup only in your own browser (localStorage). No accounts, no tracking, nothing sent to a server. A production store would add a full UK GDPR privacy notice and cookie controls here.</p>" },
+    privacy: { kicker: "Info", title: "Privacy", body: "<p>This demonstration stores the demo basket in your browser using localStorage. It does not collect email addresses, create customer accounts or accept payments. The former local email-signup entry is removed when the page loads. Loading the website sends requests to its hosting provider; external links lead to websites with their own privacy policies. This description covers the demonstration interface, not a future online shop.</p>" },
     terms: { kicker: "Info", title: "Terms", body: "<p>Demonstration terms: all prices, ratings, stock and delivery details are illustrative. Nothing is sold. A production store would add full UK sales terms, age-verification terms and regulatory notices before any transaction.</p>" }
   };
   function openInfo(id){
@@ -6755,7 +6758,15 @@ function deviceFaqSchemaNodes(d,b){
       if (!geoOpen()) return;
       var a = e.target.closest('a[href^="#"]');
       if (!a || a.hasAttribute("data-geo") || a.hasAttribute("data-guide")) return;
+      /* A skip link targets the current page, not the home view. */
+      if (a.getAttribute("href") === "#main") return;
+      /* Save one home-section history entry without retaining the previous route. */
+      e.preventDefault();
+      var target = a.getAttribute("href");
+      history.pushState({ geo: null }, "", location.pathname + target);
       closeGeo();
+      var section = document.getElementById(target.slice(1));
+      if (section) section.scrollIntoView({ block: "start" });
     });
 
     document.addEventListener("click", function(e){
@@ -6862,7 +6873,20 @@ function deviceFaqSchemaNodes(d,b){
     $("#modalClose").addEventListener("click", closeModal);
     $("#overlay").addEventListener("click", function(){ closeModal(); closeCart(); });
     document.addEventListener("keydown", function(e){
-      if (e.key === "Escape"){ closeModal(); closeCart(); closeNav(); }
+      if (e.key === "Tab" && !$("#modal").hidden){
+        var items = $$("#modal button:not([disabled]), #modal a[href], #modal input:not([disabled]), #modal select:not([disabled]), #modal textarea:not([disabled]), #modal [tabindex]")
+          .filter(function(el){ return el.tabIndex >= 0 && el.getClientRects().length; });
+        var first = items[0], last = items[items.length - 1];
+        if (items.length && (e.shiftKey ? document.activeElement === first : document.activeElement === last)){
+          e.preventDefault();
+          (e.shiftKey ? last : first).focus();
+        }
+      }
+      if (e.key === "Escape"){
+        var menuOpen = $("#siteHeader").classList.contains("nav-open");
+        closeModal(); closeCart(); closeNav();
+        if (menuOpen) $("#navToggle").focus();
+      }
     });
     window.addEventListener("resize", function(){ if (window.innerWidth >= 1020) closeNav(); });
   }
