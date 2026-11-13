@@ -61,5 +61,5 @@ test('unknown route metadata is cleared when returning home', async ({ page }) =
   await page.locator('#siteHeader .brand').click();
   await expect(page).toHaveURL(/\/#top$/);
   await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://podlookup.co.uk/');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new URL('/', page.url()).href);
 });
