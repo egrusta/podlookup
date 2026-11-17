@@ -30,5 +30,13 @@ for (const slug of slugs) {
       'Missing sitemap route: ' + section + '/' + slug);
   assert(llms.includes('?p=devices/uwell/' + slug), 'Missing LLM route: ' + slug);
 }
+
+// Guides must be discoverable from the initial HTML without running JavaScript.
+const guideRoutes = urls.filter(url => url.includes('?p=guides/'));
+for (const url of guideRoutes) {
+  const route = url.split('?p=')[1];
+  assert(html.includes('href="?p=' + route + '"'),
+    'Guide missing crawlable HTML link: ' + route);
+}
 assert.match(html, /"UNKNOWN"/, 'UNKNOWN reference state missing');
 console.log('PASS: 57 unique static devices, 142 unique sitemap URLs, seven legacy Caliburn routes.');
