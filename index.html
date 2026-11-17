@@ -4618,7 +4618,7 @@ showGeo(crumbsFor(items)+'<p class="geo-kicker">PodLookup information</p><h1>'+e
       ];
     } else {
       answer = UNKNOWN + " We have no manufacturer-verified pod platform for the " + b.name + " " + d.device + ", so no pod can be stated as fitting it."
-        + (d.note ? " " + d.note : "");
+        + " Resistance specifications in device notes do not establish pod compatibility.";
       answerRows = [
         ["Device", esc(b.name + " " + d.device)],
         ["Brand", esc(b.name)],
@@ -4676,7 +4676,7 @@ showGeo(crumbsFor(items)+'<p class="geo-kicker">PodLookup information</p><h1>'+e
       ];
     } else {
       answer = UNKNOWN + " We have no manufacturer-verified pod platform for the " + b.name + " " + d.device + ", so nothing can be stated as compatible with it."
-        + (d.note ? " " + d.note : "");
+        + " Resistance specifications in device notes do not establish pod compatibility.";
       answerRows = [
         ["Device", esc(b.name + " " + d.device)],
         ["Brand", esc(b.name)],
