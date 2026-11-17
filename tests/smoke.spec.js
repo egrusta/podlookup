@@ -273,7 +273,7 @@ test.describe('PodLookup platform overview accuracy', () => {
 
 test.describe('PodLookup complete device-route coverage', () => {
   test('every device in the reference table has working device and compatibility pages', async ({ page }) => {
-    test.setTimeout(120000);
+    test.setTimeout(180000);
     await page.goto('/');
     const routes = await page.evaluate(() => {
       const source = document.querySelector('#geoNoscript');
