@@ -63,3 +63,19 @@ test('unknown route metadata is cleared when returning home', async ({ page }) =
   await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new URL('/', page.url()).href);
 });
+
+
+test('document declares language, UTF-8 and standards mode before JavaScript', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  try {
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en-GB');
+    expect(await page.evaluate(() => document.compatMode)).toBe('CSS1Compat');
+    expect(await page.evaluate(() => document.characterSet)).toBe('UTF-8');
+    await expect(page.locator('.skip-link')).toHaveAttribute('href', '#main');
+    await expect(page.locator('#geoNoscript')).toContainText('0.6Ω');
+  } finally {
+    await context.close();
+  }
+});
