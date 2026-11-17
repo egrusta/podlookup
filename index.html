@@ -320,7 +320,11 @@ strong{font-weight:600; color:#fff}
 @media(min-width:720px){ .eco-grid{grid-template-columns:repeat(3,1fr); gap:18px} }
 
 /* ---- finder ---- */
-.finder{display:grid; padding:0; overflow:hidden}
+.finder{display:grid; grid-template-columns:minmax(0,1fr); padding:0; overflow:hidden}
+.finder-steps,.finder-result,.fstep,.fstep > *, .fstep-progress{min-width:0}
+.finder .fstep{grid-template-columns:auto minmax(0,1fr)}
+.finder .fstep-actions{grid-template-columns:minmax(0,1fr)}
+.finder .choice{max-width:100%; overflow-wrap:anywhere}
 .finder-steps{position:relative; display:grid; align-content:start}
 
 .fstep:not(.fstep-actions)::before{
