@@ -104,6 +104,7 @@ test.describe('PodLookup basket and responsive regression', () => {
   });
 
   test('new Caliburn routes expose unique metadata and model-specific content', async ({ page }) => {
+    test.setTimeout(90_000); // Multiple full navigations may exceed the default 30s budget in CI.
     const routes = [
       ['devices/uwell/caliburn-air', 'Caliburn Air'],
       ['compatibility/uwell/caliburn-air-r', 'Caliburn Air R'],
@@ -324,6 +325,7 @@ test.describe('PodLookup information-first homepage copy', () => {
  
 test.describe('PodLookup crawlable technical guide routes', () => {
   test('guide index and every technical guide resolve as canonical pages', async ({ page }) => {
+    test.setTimeout(90_000); // Multiple full navigations may exceed the default 30s budget in CI.
     const ids = [
       'which-pod',
       'xros-guide',
@@ -372,6 +374,7 @@ test.describe('PodLookup demo privacy and launch-list clarity', () => {
 
 test.describe('PodLookup current production browser diagnostics', () => {
   test('home, platform and guide routes emit no console errors, warnings or uncaught page errors', async ({ page }) => {
+    test.setTimeout(90_000); // Multiple full navigations may exceed the default 30s budget in CI.
     const messages = [];
     page.on('console', msg => {
       if (['error', 'warning'].includes(msg.type())) messages.push({ type: msg.type(), text: msg.text() });
