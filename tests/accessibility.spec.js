@@ -74,7 +74,9 @@ test('document declares language, UTF-8 and standards mode before JavaScript', a
     expect(await page.evaluate(() => document.compatMode)).toBe('CSS1Compat');
     expect(await page.evaluate(() => document.characterSet)).toBe('UTF-8');
     await expect(page.locator('.skip-link')).toHaveAttribute('href', '#main');
-    await expect(page.locator('#geoNoscript')).toContainText('0.6Ω');
+    const fallbackRow = page.locator('#geoNoscript tr[data-ns-device]').first();
+    await expect(fallbackRow).toBeVisible();
+    await expect(fallbackRow).toContainText('0.6Ω');
   } finally {
     await context.close();
   }
