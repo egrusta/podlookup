@@ -31,6 +31,17 @@ for (const slug of slugs) {
   assert(llms.includes('?p=devices/uwell/' + slug), 'Missing LLM route: ' + slug);
 }
 
+// Every sitemap route must be reachable from at least one literal static HTML link.
+// Also reject typo links to internal routes that are absent from the sitemap.
+const sitemapRoutes = urls.filter(url => url.startsWith('https://podlookup.co.uk/?p='))
+  .map(url => url.split('?p=')[1]);
+const staticRoutes = [...html.matchAll(/\bhref=["']\??p=([^"'&#]+)["']/g)]
+  .map(match => match[1]);
+for (const route of sitemapRoutes)
+  assert(staticRoutes.includes(route), 'Sitemap route lacks static HTML link: ' + route);
+for (const route of staticRoutes)
+  assert(sitemapRoutes.includes(route), 'Static HTML link missing from sitemap: ' + route);
+
 // Guides must be discoverable from the initial HTML without running JavaScript.
 const guideRoutes = urls.filter(url => url.includes('?p=guides/'));
 for (const url of guideRoutes) {
