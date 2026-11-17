@@ -17,4 +17,4 @@ jobs:
         with:
           node-version: 20
       - name: Validate reference data and crawlable routes
-        run: node scripts/static-integrity.cjs
+        run: npm run test:static
