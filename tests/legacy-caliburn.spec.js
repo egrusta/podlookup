@@ -26,7 +26,7 @@ test('new legacy routes render without asserting a verified pod platform', async
     for (const section of ['devices', 'compatibility']) {
       await page.goto('/?p=' + section + '/uwell/' + slug);
       await expect(page.locator('#geoView')).toBeVisible();
-      await expect(page.locator('#geoView')).toContainText('UNKNOWN');
+      await expect(page.locator('#geoView')).toContainText('Compatibility information currently unavailable.');
     }
   }
 });

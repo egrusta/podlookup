@@ -320,7 +320,11 @@ strong{font-weight:600; color:#fff}
 @media(min-width:720px){ .eco-grid{grid-template-columns:repeat(3,1fr); gap:18px} }
 
 /* ---- finder ---- */
-.finder{display:grid; padding:0; overflow:hidden}
+.finder{display:grid; grid-template-columns:minmax(0,1fr); padding:0; overflow:hidden}
+.finder-steps,.finder-result,.fstep,.fstep > *, .fstep-progress{min-width:0}
+.finder .fstep{grid-template-columns:auto minmax(0,1fr)}
+.finder .fstep-actions{grid-template-columns:minmax(0,1fr)}
+.finder .choice{max-width:100%; overflow-wrap:anywhere}
 .finder-steps{position:relative; display:grid; align-content:start}
 
 .fstep:not(.fstep-actions)::before{
@@ -901,7 +905,10 @@ strong{font-weight:600; color:#fff}
 }
 .geo-block:last-child{margin-bottom:0}
 .geo-note{color:var(--muted); font-size:.88rem; line-height:1.62; margin:0}
-.geo-links{display:grid; gap:8px}
+.geo-links{display:grid; gap:8px; grid-template-columns:minmax(0,1fr)}
+/* The Pod Finder form controls must not impose their intrinsic min-content width on narrow viewports. */
+#geoView .geo-links > label, #geoView .geo-links > select, #geoView .geo-links > button{min-width:0; max-width:100%; box-sizing:border-box}
+#geoView .finder-select, #geoView .finder-btn{width:100%; white-space:normal; overflow-wrap:anywhere}
 .geo-links a{display:flex; align-items:center; justify-content:space-between; gap:14px; background:var(--bg-elev); border:1px solid var(--line); border-radius:var(--radius-sm); padding:13px 15px; font-size:.9rem; font-weight:600; color:var(--txt); transition:border-color .2s ease, background .2s ease, transform .2s ease}
 .geo-links a:hover{border-color:var(--accent-line); background:var(--panel-2); transform:translateX(2px)}
 .geo-links .gl-text{display:grid; gap:2px; min-width:0}
@@ -4618,7 +4625,7 @@ showGeo(crumbsFor(items)+'<p class="geo-kicker">PodLookup information</p><h1>'+e
       ];
     } else {
       answer = UNKNOWN + " We have no manufacturer-verified pod platform for the " + b.name + " " + d.device + ", so no pod can be stated as fitting it."
-        + (d.note ? " " + d.note : "");
+        + " Resistance specifications in device notes do not establish pod compatibility.";
       answerRows = [
         ["Device", esc(b.name + " " + d.device)],
         ["Brand", esc(b.name)],
@@ -4676,7 +4683,7 @@ showGeo(crumbsFor(items)+'<p class="geo-kicker">PodLookup information</p><h1>'+e
       ];
     } else {
       answer = UNKNOWN + " We have no manufacturer-verified pod platform for the " + b.name + " " + d.device + ", so nothing can be stated as compatible with it."
-        + (d.note ? " " + d.note : "");
+        + " Resistance specifications in device notes do not establish pod compatibility.";
       answerRows = [
         ["Device", esc(b.name + " " + d.device)],
         ["Brand", esc(b.name)],
