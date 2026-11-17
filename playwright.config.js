@@ -3,6 +3,7 @@ const { defineConfig, devices } = require('@playwright/test');
 module.exports = defineConfig({
   testDir: './tests',
   fullyParallel: true,
+  workers: process.env.CI ? 2 : undefined, // Avoid overloading the shared local HTTP server in CI.
   reporter: 'list',
   timeout: 30_000,
   expect: { timeout: 5_000 },

@@ -10,6 +10,7 @@ test.use({
 });
 
 test('mobile homepage and finder have no document-level horizontal overflow', async ({ page }) => {
+  test.setTimeout(90_000); // Nine navigations at three mobile widths can exceed 30s on CI.
   for (const width of [320, 360, 390]) {
     await page.setViewportSize({ width, height: 844 });
     for (const route of ['/', '/?p=finder', '/?p=devices/uwell/caliburn-gz2']) {
