@@ -21,6 +21,7 @@ test('legacy Caliburn references have static fallback links, sitemap entries and
 });
 
 test('new legacy routes render without asserting a verified pod platform', async ({ page }) => {
+  test.setTimeout(120_000); // Fourteen navigations exceed the default 30-second test budget on slower CI runners.
   for (const slug of models) {
     for (const section of ['devices', 'compatibility']) {
       await page.goto('/?p=' + section + '/uwell/' + slug);
