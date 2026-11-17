@@ -1,0 +1,39 @@
+name: Informational quality audit
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'scripts/quality-audit.cjs'
+      - '.github/workflows/quality-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install audit tools
+        run: npm install --no-save lighthouse@13.6.0 playwright
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/podlookup-quality-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - name: Measure local and production information pages
+        run: node scripts/quality-audit.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: informational-quality-reports
+          path: quality-reports/
+          retention-days: 14
