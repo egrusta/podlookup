@@ -32,6 +32,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Test query routing
+        run: node --test tests/unit/query-routing.cjs
       - name: Install Playwright
         run: npm install --no-save playwright
       - name: Install Chromium

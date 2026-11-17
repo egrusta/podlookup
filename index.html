@@ -3739,7 +3739,12 @@ strong{font-weight:600; color:#fff}
       var i = kv.indexOf("=");
       var k = i === -1 ? kv : kv.slice(0, i);
       var v = i === -1 ? "" : kv.slice(i + 1);
-      try { out[decodeURIComponent(k)] = decodeURIComponent(v.replace(/\+/g, " ")); } catch (e) {}
+      try { k = decodeURIComponent(k); } catch (e) { return; }
+      /* Keep malformed values so an invalid ?p= reaches the not-found view
+         instead of silently dropping the route and rendering the homepage. */
+      v = v.replace(/\+/g, " ");
+      try { v = decodeURIComponent(v); } catch (e) {}
+      out[k] = v;
     });
     return out;
   }
