@@ -18,14 +18,14 @@ const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x => x[1]);
 assert.equal(urls.length, 142, 'Expected 142 sitemap URLs');
 assert.equal(new Set(urls).size, urls.length, 'Duplicate sitemap URLs');
 // Reject malformed, off-domain, duplicate or future-dated sitemap entries.
-assert.match(xml, /<urlset\\b/, 'Missing sitemap urlset root');
-const entries = [...xml.matchAll(/<url>\\s*<loc>([^<]+)<\\/loc>\\s*<lastmod>([^<]+)<\\/lastmod>\\s*<\\/url>/g)];
+assert.match(xml, /<urlset\b/, 'Missing sitemap urlset root');
+const entries = [...xml.matchAll(/<url>\s*<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>\s*<\/url>/g)];
 assert.equal(entries.length, urls.length, 'Every sitemap URL must have a lastmod date');
 const today = new Date().toISOString().slice(0, 10);
 for (const [, url, lastmod] of entries) {
-  assert(url === 'https://podlookup.co.uk/' || /^https:\/\/podlookup\\.co\\.uk\/\\?p=[a-z0-9/-]+$/.test(url),
+  assert(url === 'https://podlookup.co.uk/' || /^https:\/\/podlookup\.co\.uk\/\?p=[a-z0-9/-]+$/.test(url),
     'Noncanonical sitemap URL: ' + url);
-  assert(/^\\d{4}-\\d{2}-\\d{2}$/.test(lastmod) && !Number.isNaN(Date.parse(lastmod)) &&
+  assert(/^\d{4}-\d{2}-\d{2}$/.test(lastmod) && !Number.isNaN(Date.parse(lastmod)) &&
     new Date(lastmod).toISOString().slice(0, 10) === lastmod && lastmod <= today,
     'Invalid or future sitemap lastmod: ' + url + ' ' + lastmod);
 }
