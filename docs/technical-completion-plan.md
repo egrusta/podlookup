@@ -9,7 +9,7 @@ This consolidates the prior agreed plan; it is not a declaration of launch readi
 | Workstream | Evidence at this review | Remaining acceptance condition |
 | --- | --- | --- |
 | Malformed query routing | PR #58 merged as 8420641a13d3ad51962326a1928d246a5251bd06; both GitHub browser workflows passed; unit regression failed before the fix and passes after it | Production parser confirmed present on 17 November |
-| Document language and encoding | PR #59 adds standards-mode doctype, source-level en-GB and UTF-8; includes JavaScript-disabled browser regression | Both CI suites must pass before merge; confirm production source afterward |
+| Document language and encoding | PR #59 merged as c5d9b8137e01729d9c98a2f39a108e9110c8ef6a; 26 browser tests and the separate mobile/desktop suite passed, including JavaScript-disabled document checks | Production doctype, source language and early UTF-8 confirmed present on 17 November |
 | Navigation, keyboard and mobile | Existing accessibility and browser suites cover information dialogs, focus return, mobile navigation, skip link, home-section history and unknown-route metadata reset | Keep these checks green for every code change |
 | Static assets | Seven referenced local image files exist; inline executable JavaScript passes node --check | Production asset delivery and fresh performance measurements remain unverified |
 | Discovery files | HTTP audit at 2026-11-17T17:52:19Z: robots.txt and llms.txt text/plain; sitemap.xml application/xml; 128 unique entries | Recheck after deployment changes |
@@ -20,7 +20,7 @@ This consolidates the prior agreed plan; it is not a declaration of launch readi
 
 ## Execution order
 
-1. Complete tests and production verification for the bounded routing/document fixes.
+1. Completed: tests and production source verification for the bounded routing/document fixes (#58 and #59). Live browser interaction also confirmed About → Methodology navigation, malformed query not-found rendering, and return to About.
 2. Resolve initial route metadata and missing-query HTTP handling with a reviewed hosting change; preserve data and URL compatibility.
 3. Finish model-level evidence review without expanding claims from family-level compatibility.
 4. Run the full browser suite, verify production assets/headers, and record fresh performance/accessibility results.
