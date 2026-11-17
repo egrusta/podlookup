@@ -26,6 +26,9 @@ jobs:
       - name: Install test dependencies
         run: npm install
 
+      - name: Verify static sitemap and compatibility references
+        run: npm run test:static
+
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
