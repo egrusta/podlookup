@@ -146,3 +146,13 @@ PodLookup is an information-first catalogue for Vaporesso, OXVA and UWELL refill
 - [Caliburn G4 vs G5](https://podlookup.co.uk/?p=guides/caliburn-g4-vs-g5) — verification-in-progress comparison.
 - [Methodology](https://podlookup.co.uk/?p=methodology) — how compatibility evidence is recorded.
 - [About PodLookup](https://podlookup.co.uk/?p=about) — purpose and scope.
+
+## Legacy UWELL Caliburn device records
+
+- [Caliburn GZ2](https://podlookup.co.uk/?p=devices/uwell/caliburn-gz2) — pod cartridge fit UNKNOWN; do not infer fit from coil specifications.
+- [Caliburn GZ2 Cyber](https://podlookup.co.uk/?p=devices/uwell/caliburn-gz2-cyber) — pod cartridge fit UNKNOWN; do not infer fit from coil specifications.
+- [Caliburn GK2](https://podlookup.co.uk/?p=devices/uwell/caliburn-gk2) — pod cartridge fit UNKNOWN; do not infer fit from coil specifications.
+- [Caliburn Tenet](https://podlookup.co.uk/?p=devices/uwell/caliburn-tenet) — pod cartridge fit UNKNOWN; do not infer fit from coil specifications.
+- [Caliburn Tenet KOKO](https://podlookup.co.uk/?p=devices/uwell/caliburn-tenet-koko) — pod cartridge fit UNKNOWN; do not infer fit from coil specifications.
+- [Caliburn X](https://podlookup.co.uk/?p=devices/uwell/caliburn-x) — pod cartridge fit UNKNOWN; do not infer fit from coil specifications.
+- [Caliburn Explorer](https://podlookup.co.uk/?p=devices/uwell/caliburn-explorer) — pod cartridge fit UNKNOWN; do not infer fit from coil specifications.

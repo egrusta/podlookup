@@ -159,7 +159,7 @@ test.describe('PodLookup basket and responsive regression', () => {
         uwell: doc.querySelectorAll('[data-ns-device^="uwell/"]').length
       };
     });
-    expect(fallback).toEqual({ devices: 50, platforms: 8, uwell: 31 });
+    expect(fallback).toEqual({ devices: 57, platforms: 8, uwell: 38 });
 
     const robots = await request.get('/robots.txt');
     expect(robots.ok()).toBeTruthy();
@@ -171,8 +171,8 @@ test.describe('PodLookup basket and responsive regression', () => {
     expect(sitemap.headers()['content-type']).toMatch(/xml/);
     const xml = await sitemap.text();
     const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-    expect(locs.length).toBe(128);
-    expect(new Set(locs).size).toBe(128);
+    expect(locs.length).toBe(142);
+    expect(new Set(locs).size).toBe(142);
   });
 
   test('OXVA XLIM C has a separate cartridge-and-coil compatibility system', async ({ page }) => {
@@ -211,7 +211,7 @@ test.describe('PodLookup SEO publication regression', () => {
 
     const content = await response.text();
     const deviceLinks = [...content.matchAll(/^- \[[^\]]+\]\(https:\/\/podlookup\.co\.uk\/\?p=devices\//gm)];
-    expect(deviceLinks).toHaveLength(50);
+    expect(deviceLinks).toHaveLength(57);
     expect(content).toContain('UNKNOWN means the available evidence does not establish compatibility');
     expect(content).toMatch(/storefront as a demo/i);
     expect(content).toMatch(/no orders are placed/i);
@@ -225,8 +225,8 @@ test.describe('PodLookup SEO publication regression', () => {
     const entries = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(match => match[1]);
     const urls = entries.map(entry => entry.match(/<loc>(.*?)<\/loc>/)?.[1]);
 
-    expect(entries).toHaveLength(128);
-    expect(new Set(urls).size).toBe(128);
+    expect(entries).toHaveLength(142);
+    expect(new Set(urls).size).toBe(142);
     expect(entries.every(entry => /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(entry))).toBe(true);
   });
 
@@ -273,7 +273,7 @@ test.describe('PodLookup platform overview accuracy', () => {
 
 test.describe('PodLookup complete device-route coverage', () => {
   test('every device in the reference table has working device and compatibility pages', async ({ page }) => {
-    test.setTimeout(120000);
+    test.setTimeout(180000);
     await page.goto('/');
     const routes = await page.evaluate(() => {
       const source = document.querySelector('#geoNoscript');
@@ -288,7 +288,7 @@ test.describe('PodLookup complete device-route coverage', () => {
       });
     });
 
-    expect(routes).toHaveLength(50);
+    expect(routes).toHaveLength(57);
     for (const route of routes) {
       expect(route.device).toBeTruthy();
       expect(route.deviceHref).toContain('?p=devices/');
