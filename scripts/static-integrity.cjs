@@ -35,7 +35,7 @@ for (const slug of slugs) {
 // Also reject typo links to internal routes that are absent from the sitemap.
 const sitemapRoutes = urls.filter(url => url.startsWith('https://podlookup.co.uk/?p='))
   .map(url => url.split('?p=')[1]);
-const staticRoutes = [...html.matchAll(/\\bhref=["']\\??p=([^"'&#]+)["']/g)]
+const staticRoutes = [...html.matchAll(/\bhref=["']\??p=([^"'&#]+)["']/g)]
   .map(match => match[1]);
 for (const route of sitemapRoutes)
   assert(staticRoutes.includes(route), 'Sitemap route lacks static HTML link: ' + route);
