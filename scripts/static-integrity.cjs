@@ -7,12 +7,12 @@ const xml = fs.readFileSync('sitemap.xml', 'utf8');
 const llms = fs.readFileSync('llms.txt', 'utf8');
 const robots = fs.readFileSync('robots.txt', 'utf8');
 const headers = fs.readFileSync('_headers', 'utf8');
-assert.match(robots, /^User-agent: \\*$/m, 'Missing default crawler group');
-assert.match(robots, /^Allow: \\/$/m, 'Default crawler access must remain enabled');
-assert.match(robots, /^Sitemap: https:\/\/podlookup\\.co\\.uk\/sitemap\\.xml$/m,
+assert.match(robots, /^User-agent: \*$/m, 'Missing default crawler group');
+assert.match(robots, /^Allow: \/$/m, 'Default crawler access must remain enabled');
+assert.match(robots, /^Sitemap: https:\/\/podlookup\.co\.uk\/sitemap\.xml$/m,
   'robots.txt sitemap must use the canonical production URL');
 for (const path of ['/robots.txt', '/sitemap.xml', '/llms.txt']) {
-  assert(headers.includes(path + '\\n  Content-Type: '),
+  assert(headers.includes(path + '\n  Content-Type: '),
     'Missing explicit text or XML content type for ' + path);
 }
 assert.match(headers, /^  X-Content-Type-Options: nosniff$/m, 'Missing nosniff security header');
