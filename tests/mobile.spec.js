@@ -18,9 +18,10 @@ test('mobile homepage and finder have no document-level horizontal overflow', as
       await expect(page.locator('main')).toBeVisible();
       const size = await page.evaluate(() => ({
         viewport: document.documentElement.clientWidth,
-        document: document.documentElement.scrollWidth
+        document: document.documentElement.scrollWidth,
+        offenders: [...document.querySelectorAll('body *')].map(el => ({el, rect: el.getBoundingClientRect()})).filter(({el,rect}) => rect.right > document.documentElement.clientWidth + 1 && rect.width > 0 && getComputedStyle(el).position !== 'fixed').slice(0,12).map(({el,rect}) => ({tag:el.tagName, id:el.id, className:typeof el.className === 'string' ? el.className.slice(0,100) : '', right:Math.round(rect.right), width:Math.round(rect.width)}))
       }));
-      expect(size.document, route + ' overflows at ' + width + 'px').toBeLessThanOrEqual(size.viewport);
+      expect(size.document, route + ' overflows at ' + width + 'px: ' + JSON.stringify(size.offenders)).toBeLessThanOrEqual(size.viewport);
     }
   }
 });
@@ -47,6 +48,6 @@ test('mobile navigation, basket close, and scroll lock work', async ({ page }) =
 test('legacy Caliburn mobile compatibility page does not invent pod fit', async ({ page }) => {
   await page.goto('/?p=compatibility/uwell/caliburn-gz2');
   await expect(page.locator('#geoView')).toBeVisible();
-  await expect(page.locator('#geoView')).toContainText('UNKNOWN');
+  await expect(page.locator('#geoView')).toContainText('Compatibility information currently unavailable.');
   await expect(page.locator('#geoView')).toContainText('Caliburn GZ2');
 });
