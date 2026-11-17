@@ -178,6 +178,20 @@
 5. Add only the proven relationships to MASTER, routes, static fallback, sitemap, llms.txt and regression tests.
 6. Keep all unresolved cartridge fit values UNKNOWN.
 
+## Legacy model route status
+
+The following older models are now represented by device and compatibility routes in PodLookup, while their pod platform remains UNKNOWN until a manufacturer source identifies the exact cartridge SKU and compatibility direction:
+
+- Caliburn GZ2
+- Caliburn GZ2 Cyber
+- Caliburn GK2
+- Caliburn Tenet
+- Caliburn Tenet KOKO
+- Caliburn X
+- Caliburn Explorer
+
+Where the manufacturer explicitly lists G-series coil resistance options, those are stored separately as replaceable-coil facts. They are not converted into a pod-platform or cartridge-fit claim. The GK2 (Vision) wording appears in UWELL's GZ2 Cyber compatibility panel, but is not added as a separate device record until an exact standalone model identity and source page are established.
+
 ## Review log
 
 | Date | Scope | Result |
