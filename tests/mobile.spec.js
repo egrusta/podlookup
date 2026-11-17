@@ -10,14 +10,17 @@ test.use({
 });
 
 test('mobile homepage and finder have no document-level horizontal overflow', async ({ page }) => {
-  for (const route of ['/', '/?p=finder', '/?p=devices/uwell/caliburn-gz2']) {
-    await page.goto(route);
-    await expect(page.locator('main')).toBeVisible();
-    const size = await page.evaluate(() => ({
-      viewport: document.documentElement.clientWidth,
-      document: document.documentElement.scrollWidth
-    }));
-    expect(size.document, route + ' overflows at 390px').toBeLessThanOrEqual(size.viewport);
+  for (const width of [320, 360, 390]) {
+    await page.setViewportSize({ width, height: 844 });
+    for (const route of ['/', '/?p=finder', '/?p=devices/uwell/caliburn-gz2']) {
+      await page.goto(route);
+      await expect(page.locator('main')).toBeVisible();
+      const size = await page.evaluate(() => ({
+        viewport: document.documentElement.clientWidth,
+        document: document.documentElement.scrollWidth
+      }));
+      expect(size.document, route + ' overflows at ' + width + 'px').toBeLessThanOrEqual(size.viewport);
+    }
   }
 });
 
