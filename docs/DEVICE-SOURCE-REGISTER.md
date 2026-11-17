@@ -105,3 +105,21 @@ This register now contains manufacturer source records for the Vaporesso XROS fa
 | 4 November 2026 | OXVA Xlim C | Added manufacturer source URLs and separated cartridge capacity, replaceable-coil options and UNKNOWN device-resistance status |
 | 5 November 2026 | Vaporesso XROS family | Added official model pages, family compatibility chart and separate resistance-evidence rules |
 | 5 November 2026 | OXVA standard XLIM family | Added official FAQ/model pages and recorded the model-specific 0.4Ω Top Fill restriction |
+
+## Focused recheck — 17 November 2026
+
+Official pages inspected:
+- https://www.vaporesso.com/series-product/xros-series/xros5
+- https://www.vaporesso.com/series-product/xros-series/xros5-mini
+- https://www.myuwell.com/g-pod-platform
+
+Both XROS 5 pages list 1500mAh; the full-size model specifies 3A charging and
+Mini specifies 2A. Both list 0.4, 0.6, 0.8, 1.0 and 1.2Ω. Removed the inaccurate
+Mini note claiming that battery size and body length were the only differences.
+No platform assignment or resistance set changed.
+
+UWELL's GPP page names G5/G4/G3 compatibility and shows several GPP cartridge
+variants. This confirms the platform-level wording only; it does not complete a
+per-model/per-variant review or justify inferring legacy cartridge compatibility.
+Existing UNKNOWN fields remain unchanged. These three checks do not refresh the
+historical check dates for other source entries.
