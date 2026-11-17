@@ -34,7 +34,7 @@ for (const [name, url, desktop] of targets) {
       .map(key => [key, r.audits[key]?.numericValue])),
     findings: Object.entries(r.audits).filter(([,a]) => a.score !== null && a.score < 1)
       .map(([id,a]) => ({ id, title: a.title, score: a.score, displayValue: a.displayValue,
-        details: a.details?.items?.slice(0,5) }))
+        details: Array.isArray(a.details?.items) ? a.details.items.slice(0,5) : undefined }))
   });
 }
 fs.writeFileSync(path.join(dir, 'summary.json'), JSON.stringify(summaries, null, 2));
