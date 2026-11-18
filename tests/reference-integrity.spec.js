@@ -33,3 +33,22 @@ test('XROS 5 Mini record does not claim different battery size as its only diffe
   await expect(page.locator('#podFinderResult')).toContainText('does not imply identical device specifications');
   await expect(page.locator('#podFinderResult')).not.toContainText('only difference is battery size');
 });
+
+test('finder uses model-specific resistance and separate replaceable-coil evidence', async ({ page }) => {
+  await page.goto('/?p=finder');
+  const result = page.locator('#podFinderResult');
+  await page.locator('#podFinderDevice').selectOption('uwell|caliburn-x');
+  await expect(result).toContainText('Recorded platform: UNKNOWN');
+  await expect(result).toContainText('Replaceable coil resistance: 0.8Ω, 1.0Ω, 1.2Ω');
+  await page.locator('#podFinderPlatform').selectOption('xlim-c-cartridge-coil-system');
+  await page.locator('#podFinderResistance').selectOption('0.6Ω');
+  await expect(result.getByRole('link', { name: /OXVA Xlim C/ })).toHaveCount(1);
+  await page.locator('#podFinderPlatform').selectOption('caliburn-a3-pods');
+  await page.locator('#podFinderResistance').selectOption('0.8Ω');
+  await expect(result.getByRole('link', { name: /Caliburn A3S/ })).toHaveCount(1);
+  await expect(result.getByRole('link', { name: /Caliburn AK3/ })).toHaveCount(0);
+  await page.locator('#podFinderDevice').selectOption('uwell|caliburn-g5-koko');
+  await expect(result).toContainText('Device resistance: 0.4Ω, 0.6Ω, 0.9Ω, 1.2Ω');
+  await page.goto('/?p=compatibility/uwell/caliburn-g3-eco');
+  await expect(page.getByRole('link', {name: /Uwell manufacturer source/})).toHaveAttribute('href', 'https://www.myuwell.com/g-pod-platform');
+});

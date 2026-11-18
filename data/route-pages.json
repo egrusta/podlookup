@@ -16,7 +16,7 @@
       "title": "Uwell pod compatibility — devices and pods | PodLookup",
       "description": "Which Uwell devices use which pod platform, and the replacement pods recorded for them in the PodLookup compatibility reference.",
       "heading": "Uwell vape devices",
-      "intro": "PodLookup records 38 Uwell refillable vape devices across the Caliburn family: Uwell Caliburn, Uwell Caliburn G2, Uwell Caliburn G3, Uwell Caliburn GK3, Uwell Caliburn GK3 Tenet, Uwell Caliburn G5 Lite KOKO, Uwell Caliburn G5 Lite, Uwell Caliburn G5 Lite SE, Uwell Caliburn G4 Pro KOKO, Uwell Caliburn G4 Classic, Uwell Caliburn G4 Pro, Uwell Caliburn G4, Uwell Caliburn G4 Mini, Uwell Caliburn G3 Pro KOKO, Uwell Caliburn G3 Lite KOKO, Uwell Caliburn G3 Pro, Uwell Caliburn G3 Lite, Uwell Caliburn G3 ECO, Uwell Caliburn G5 KOKO, Uwell Caliburn G5, Uwell Caliburn G5 Pro, Uwell Caliburn G5 Vision, Uwell Caliburn Air, Uwell Caliburn Air R, Uwell Caliburn GZ2, Uwell Caliburn GZ2 Cyber, Uwell Caliburn GK2, Uwell Caliburn Tenet, Uwell Caliburn Tenet KOKO, Uwell Caliburn X, Uwell Caliburn Explorer, Uwell Caliburn A2, Uwell Caliburn A2S, Uwell Caliburn AK2, Uwell Caliburn A3, Uwell Caliburn A3S, Uwell Caliburn AK3 and Uwell Caliburn AZ3. The pod/cartridge platforms relevant to these devices are Caliburn Original Pods, Caliburn G / G2 Pods, Caliburn GPP Pods, Caliburn A2 Pods and Caliburn A3 Pods. Pod resistances available across those platforms are 0.8Ω, 1.0Ω, 1.2Ω, 0.4Ω, 0.6Ω and 0.9Ω. 2 products are listed on this storefront for Uwell devices. Compatibility information currently unavailable. We have no manufacturer-verified pod platform for Uwell Caliburn GZ2, Uwell Caliburn GZ2 Cyber, Uwell Caliburn GK2, Uwell Caliburn Tenet, Uwell Caliburn Tenet KOKO, Uwell Caliburn X and Uwell Caliburn Explorer, so no pod compatibility is stated for them."
+      "intro": "PodLookup records 38 Uwell refillable vape devices across the Caliburn family: Uwell Caliburn, Uwell Caliburn G2, Uwell Caliburn G3, Uwell Caliburn GK3, Uwell Caliburn GK3 Tenet, Uwell Caliburn G5 Lite KOKO, Uwell Caliburn G5 Lite, Uwell Caliburn G5 Lite SE, Uwell Caliburn G4 Pro KOKO, Uwell Caliburn G4 Classic, Uwell Caliburn G4 Pro, Uwell Caliburn G4, Uwell Caliburn G4 Mini, Uwell Caliburn G3 Pro KOKO, Uwell Caliburn G3 Lite KOKO, Uwell Caliburn G3 Pro, Uwell Caliburn G3 Lite, Uwell Caliburn G3 ECO, Uwell Caliburn G5 KOKO, Uwell Caliburn G5, Uwell Caliburn G5 Pro, Uwell Caliburn G5 Vision, Uwell Caliburn Air, Uwell Caliburn Air R, Uwell Caliburn GZ2, Uwell Caliburn GZ2 Cyber, Uwell Caliburn GK2, Uwell Caliburn Tenet, Uwell Caliburn Tenet KOKO, Uwell Caliburn X, Uwell Caliburn Explorer, Uwell Caliburn A2, Uwell Caliburn A2S, Uwell Caliburn AK2, Uwell Caliburn A3, Uwell Caliburn A3S, Uwell Caliburn AK3 and Uwell Caliburn AZ3. The pod/cartridge platforms relevant to these devices are Caliburn Original Pods, Caliburn G / G2 Pods, Caliburn GPP Pods, Caliburn A2 Pods and Caliburn A3 Pods. Pod resistances available across those platforms are 0.4Ω, 0.6Ω, 0.9Ω, 1.2Ω, 0.8Ω and 1.0Ω. Replaceable coil resistance options recorded are 0.8Ω, 1.0Ω and 1.2Ω. 2 products are listed on this storefront for Uwell devices. Compatibility information currently unavailable. We have no manufacturer-verified pod platform for Uwell Caliburn GZ2, Uwell Caliburn GZ2 Cyber, Uwell Caliburn GK2, Uwell Caliburn Tenet, Uwell Caliburn Tenet KOKO, Uwell Caliburn X and Uwell Caliburn Explorer, so no pod compatibility is stated for them."
     },
     "brands/vaporesso": {
       "title": "Vaporesso pod compatibility — devices and pods | PodLookup",
@@ -124,7 +124,7 @@
       "title": "What is the Uwell Caliburn A3S compatible with? | PodLookup",
       "description": "Uwell Caliburn A3S compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.",
       "heading": "Uwell Caliburn A3S compatibility",
-      "intro": "The Uwell Caliburn A3S is compatible with the standard Caliburn A3 Pods (2 ml) cartridge platform. Pod resistances available for that platform are 0.8Ω and 1.0Ω. No compatible pod product is listed for it on this storefront yet. Other devices recorded on the same Caliburn A3 Pods platform are: Uwell Caliburn A3, Uwell Caliburn AK3 and Uwell Caliburn AZ3. Check the platform's model-specific cartridge notes before choosing a resistance or variant."
+      "intro": "The Uwell Caliburn A3S is compatible with the standard Caliburn A3 Pods (2 ml) cartridge platform. Pod resistances available for that platform are 0.8Ω and 1.0Ω. The device itself supports 0.8Ω and 1.0Ω. No compatible pod product is listed for it on this storefront yet. Other devices recorded on the same Caliburn A3 Pods platform are: Uwell Caliburn A3, Uwell Caliburn AK3 and Uwell Caliburn AZ3. Check the platform's model-specific cartridge notes before choosing a resistance or variant."
     },
     "compatibility/uwell/caliburn-air": {
       "title": "What is the Uwell Caliburn Air compatible with? | PodLookup",
@@ -148,25 +148,25 @@
       "title": "What is the Uwell Caliburn AK3 compatible with? | PodLookup",
       "description": "Uwell Caliburn AK3 compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.",
       "heading": "Uwell Caliburn AK3 compatibility",
-      "intro": "The Uwell Caliburn AK3 is compatible with the standard Caliburn A3 Pods (2 ml) cartridge platform. Pod resistances available for that platform are 0.8Ω and 1.0Ω. No compatible pod product is listed for it on this storefront yet. Other devices recorded on the same Caliburn A3 Pods platform are: Uwell Caliburn A3, Uwell Caliburn A3S and Uwell Caliburn AZ3. Check the platform's model-specific cartridge notes before choosing a resistance or variant."
+      "intro": "The Uwell Caliburn AK3 is compatible with the standard Caliburn A3 Pods (2 ml) cartridge platform. Pod resistances available for that platform are 0.8Ω and 1.0Ω. The device itself supports 1.0Ω. No compatible pod product is listed for it on this storefront yet. Other devices recorded on the same Caliburn A3 Pods platform are: Uwell Caliburn A3, Uwell Caliburn A3S and Uwell Caliburn AZ3. Check the platform's model-specific cartridge notes before choosing a resistance or variant."
     },
     "compatibility/uwell/caliburn-az3": {
       "title": "What is the Uwell Caliburn AZ3 compatible with? | PodLookup",
       "description": "Uwell Caliburn AZ3 compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.",
       "heading": "Uwell Caliburn AZ3 compatibility",
-      "intro": "The Uwell Caliburn AZ3 is compatible with the standard Caliburn A3 Pods (2 ml) cartridge platform. Pod resistances available for that platform are 0.8Ω and 1.0Ω. No compatible pod product is listed for it on this storefront yet. Other devices recorded on the same Caliburn A3 Pods platform are: Uwell Caliburn A3, Uwell Caliburn A3S and Uwell Caliburn AK3. Check the platform's model-specific cartridge notes before choosing a resistance or variant."
+      "intro": "The Uwell Caliburn AZ3 is compatible with the standard Caliburn A3 Pods (2 ml) cartridge platform. Pod resistances available for that platform are 0.8Ω and 1.0Ω. The device itself supports 0.8Ω and 1.0Ω. No compatible pod product is listed for it on this storefront yet. Other devices recorded on the same Caliburn A3 Pods platform are: Uwell Caliburn A3, Uwell Caliburn A3S and Uwell Caliburn AK3. Check the platform's model-specific cartridge notes before choosing a resistance or variant."
     },
     "compatibility/uwell/caliburn-explorer": {
       "title": "What is the Uwell Caliburn Explorer compatible with? | PodLookup",
       "description": "Uwell Caliburn Explorer compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.",
       "heading": "Uwell Caliburn Explorer compatibility",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn Explorer, so nothing can be stated as compatible with it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn Explorer. UWELL lists G 0.8Ω and G2 1.2Ω coils for the dual-channel Explorer. Its dual cartridge has no verified cross-model fit."
     },
     "compatibility/uwell/caliburn-g2": {
       "title": "What is the Uwell Caliburn G2 compatible with? | PodLookup",
       "description": "Uwell Caliburn G2 compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.",
       "heading": "Uwell Caliburn G2 compatibility",
-      "intro": "The Uwell Caliburn G2 is compatible with the standard Caliburn G / G2 Pods (2 ml) cartridge platform. Pod resistances available for that platform are 0.8Ω, 1.0Ω and 1.2Ω. The device itself supports 0.8Ω, 1.0Ω and 1.2Ω. No compatible pod product is listed for it on this storefront yet."
+      "intro": "The 2 ml G2 cartridge uses replaceable coils: 0.8Ω and 1.0Ω Caliburn G coils and the 1.2Ω G2 coil. A shared empty cartridge with the original G is unconfirmed."
     },
     "compatibility/uwell/caliburn-g3": {
       "title": "What is the Uwell Caliburn G3 compatible with? | PodLookup",
@@ -244,7 +244,7 @@
       "title": "What is the Uwell Caliburn G5 KOKO compatible with? | PodLookup",
       "description": "Uwell Caliburn G5 KOKO compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.",
       "heading": "Uwell Caliburn G5 KOKO compatibility",
-      "intro": "The Uwell Caliburn G5 KOKO is compatible with the standard Caliburn GPP Pods (2 ml) cartridge platform. Pod resistances available for that platform are 0.4Ω, 0.6Ω, 0.9Ω and 1.2Ω. One compatible pod product is listed for it on this storefront: Uwell Caliburn GPP Pods. Other devices recorded on the same Caliburn GPP Pods platform are: Uwell Caliburn G3, Uwell Caliburn GK3, Uwell Caliburn GK3 Tenet, Uwell Caliburn G5 Lite KOKO, Uwell Caliburn G5 Lite, Uwell Caliburn G5 Lite SE, Uwell Caliburn G4 Pro KOKO, Uwell Caliburn G4 Classic, Uwell Caliburn G4 Pro, Uwell Caliburn G4, Uwell Caliburn G4 Mini, Uwell Caliburn G3 Pro KOKO, Uwell Caliburn G3 Lite KOKO, Uwell Caliburn G3 Pro, Uwell Caliburn G3 Lite, Uwell Caliburn G3 ECO, Uwell Caliburn G5, Uwell Caliburn G5 Pro, Uwell Caliburn G5 Vision, Uwell Caliburn Air and Uwell Caliburn Air R. Check the platform's model-specific cartridge notes before choosing a resistance or variant."
+      "intro": "The Uwell Caliburn G5 KOKO is compatible with the standard Caliburn GPP Pods (2 ml) cartridge platform. Pod resistances available for that platform are 0.4Ω, 0.6Ω, 0.9Ω and 1.2Ω. The device itself supports 0.4Ω, 0.6Ω, 0.9Ω and 1.2Ω. One compatible pod product is listed for it on this storefront: Uwell Caliburn GPP Pods. Other devices recorded on the same Caliburn GPP Pods platform are: Uwell Caliburn G3, Uwell Caliburn GK3, Uwell Caliburn GK3 Tenet, Uwell Caliburn G5 Lite KOKO, Uwell Caliburn G5 Lite, Uwell Caliburn G5 Lite SE, Uwell Caliburn G4 Pro KOKO, Uwell Caliburn G4 Classic, Uwell Caliburn G4 Pro, Uwell Caliburn G4, Uwell Caliburn G4 Mini, Uwell Caliburn G3 Pro KOKO, Uwell Caliburn G3 Lite KOKO, Uwell Caliburn G3 Pro, Uwell Caliburn G3 Lite, Uwell Caliburn G3 ECO, Uwell Caliburn G5, Uwell Caliburn G5 Pro, Uwell Caliburn G5 Vision, Uwell Caliburn Air and Uwell Caliburn Air R. Check the platform's model-specific cartridge notes before choosing a resistance or variant."
     },
     "compatibility/uwell/caliburn-g5-lite": {
       "title": "What is the Uwell Caliburn G5 Lite compatible with? | PodLookup",
@@ -280,13 +280,13 @@
       "title": "What is the Uwell Caliburn GK2 compatible with? | PodLookup",
       "description": "Uwell Caliburn GK2 compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.",
       "heading": "Uwell Caliburn GK2 compatibility",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn GK2, so nothing can be stated as compatible with it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn GK2. UWELL lists G 0.8Ω and 1.0Ω and G2 1.2Ω replaceable coils. Cross-model empty-cartridge fit remains unconfirmed."
     },
     "compatibility/uwell/caliburn-gk3": {
       "title": "What is the Uwell Caliburn GK3 compatible with? | PodLookup",
       "description": "Uwell Caliburn GK3 compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.",
       "heading": "Uwell Caliburn GK3 compatibility",
-      "intro": "The Uwell Caliburn GK3 is compatible with the standard Caliburn GPP Pods (2 ml) cartridge platform. Pod resistances available for that platform are 0.4Ω, 0.6Ω, 0.9Ω and 1.2Ω. One compatible pod product is listed for it on this storefront: Uwell Caliburn GPP Pods. Other devices recorded on the same Caliburn GPP Pods platform are: Uwell Caliburn G3, Uwell Caliburn GK3 Tenet, Uwell Caliburn G5 Lite KOKO, Uwell Caliburn G5 Lite, Uwell Caliburn G5 Lite SE, Uwell Caliburn G4 Pro KOKO, Uwell Caliburn G4 Classic, Uwell Caliburn G4 Pro, Uwell Caliburn G4, Uwell Caliburn G4 Mini, Uwell Caliburn G3 Pro KOKO, Uwell Caliburn G3 Lite KOKO, Uwell Caliburn G3 Pro, Uwell Caliburn G3 Lite, Uwell Caliburn G3 ECO, Uwell Caliburn G5 KOKO, Uwell Caliburn G5, Uwell Caliburn G5 Pro, Uwell Caliburn G5 Vision, Uwell Caliburn Air and Uwell Caliburn Air R. Check the platform's model-specific cartridge notes before choosing a resistance or variant."
+      "intro": "The Uwell Caliburn GK3 is compatible with the standard Caliburn GPP Pods (2 ml) cartridge platform. Pod resistances available for that platform are 0.4Ω, 0.6Ω, 0.9Ω and 1.2Ω. The device itself supports 0.6Ω, 0.9Ω and 1.2Ω. One compatible pod product is listed for it on this storefront: Uwell Caliburn GPP Pods. Other devices recorded on the same Caliburn GPP Pods platform are: Uwell Caliburn G3, Uwell Caliburn GK3 Tenet, Uwell Caliburn G5 Lite KOKO, Uwell Caliburn G5 Lite, Uwell Caliburn G5 Lite SE, Uwell Caliburn G4 Pro KOKO, Uwell Caliburn G4 Classic, Uwell Caliburn G4 Pro, Uwell Caliburn G4, Uwell Caliburn G4 Mini, Uwell Caliburn G3 Pro KOKO, Uwell Caliburn G3 Lite KOKO, Uwell Caliburn G3 Pro, Uwell Caliburn G3 Lite, Uwell Caliburn G3 ECO, Uwell Caliburn G5 KOKO, Uwell Caliburn G5, Uwell Caliburn G5 Pro, Uwell Caliburn G5 Vision, Uwell Caliburn Air and Uwell Caliburn Air R. Check the platform's model-specific cartridge notes before choosing a resistance or variant."
     },
     "compatibility/uwell/caliburn-gk3-tenet": {
       "title": "What is the Uwell Caliburn GK3 Tenet compatible with? | PodLookup",
@@ -298,31 +298,31 @@
       "title": "What is the Uwell Caliburn GZ2 compatible with? | PodLookup",
       "description": "Uwell Caliburn GZ2 compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.",
       "heading": "Uwell Caliburn GZ2 compatibility",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn GZ2, so nothing can be stated as compatible with it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn GZ2. UWELL lists 0.8Ω and 1.0Ω G coils and the 1.2Ω G2 coil. Its model list does not identify a shared empty-cartridge SKU."
     },
     "compatibility/uwell/caliburn-gz2-cyber": {
       "title": "What is the Uwell Caliburn GZ2 Cyber compatible with? | PodLookup",
       "description": "Uwell Caliburn GZ2 Cyber compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.",
       "heading": "Uwell Caliburn GZ2 Cyber compatibility",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn GZ2 Cyber, so nothing can be stated as compatible with it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn GZ2 Cyber. UWELL lists the 0.8Ω and 1.0Ω G coils and the 1.2Ω G2 coil. The compatibility panel does not establish reciprocal fit for every cartridge."
     },
     "compatibility/uwell/caliburn-tenet": {
       "title": "What is the Uwell Caliburn Tenet compatible with? | PodLookup",
       "description": "Uwell Caliburn Tenet compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.",
       "heading": "Uwell Caliburn Tenet compatibility",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn Tenet, so nothing can be stated as compatible with it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn Tenet. UWELL lists 0.8Ω and 1.2Ω coils and compatibility with the 1.0Ω G coil. A shared empty cartridge across models is unconfirmed."
     },
     "compatibility/uwell/caliburn-tenet-koko": {
       "title": "What is the Uwell Caliburn Tenet KOKO compatible with? | PodLookup",
       "description": "Uwell Caliburn Tenet KOKO compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.",
       "heading": "Uwell Caliburn Tenet KOKO compatibility",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn Tenet KOKO, so nothing can be stated as compatible with it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn Tenet KOKO. UWELL lists 0.8Ω and 1.0Ω G coils and the 1.2Ω G2 coil. A shared empty cartridge across models is unconfirmed."
     },
     "compatibility/uwell/caliburn-x": {
       "title": "What is the Uwell Caliburn X compatible with? | PodLookup",
       "description": "Uwell Caliburn X compatibility: what it is compatible with, the pod platform it shares and the pods recorded as fitting it on the PodLookup compatibility chart.",
       "heading": "Uwell Caliburn X compatibility",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn X, so nothing can be stated as compatible with it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn X. UWELL lists the 0.8Ω Caliburn G coil, 1.2Ω Caliburn G2 coil and optional 1.0Ω Caliburn G coil. Cross-model cartridge fit remains UNKNOWN."
     },
     "compatibility/vaporesso/xros-3": {
       "title": "What is the Vaporesso XROS 3 compatible with? | PodLookup",
@@ -508,13 +508,13 @@
       "title": "Uwell Caliburn Explorer compatible pods — which pods fit | PodLookup",
       "description": "Which pods fit the Uwell Caliburn Explorer: the pod platform it runs, the resistances available and the replacement pods listed in the PodLookup reference.",
       "heading": "Pods for the Uwell Caliburn Explorer",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn Explorer, so no pod can be stated as fitting it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn Explorer. UWELL lists G 0.8Ω and G2 1.2Ω coils for the dual-channel Explorer. Its dual cartridge has no verified cross-model fit."
     },
     "devices/uwell/caliburn-g2": {
       "title": "Uwell Caliburn G2 compatible pods — which pods fit | PodLookup",
       "description": "Which pods fit the Uwell Caliburn G2: the pod platform it runs, the resistances available and the replacement pods listed in the PodLookup reference.",
       "heading": "Pods for the Uwell Caliburn G2",
-      "intro": "Pods that fit the Uwell Caliburn G2 are the standard cartridges built for the Caliburn G / G2 Pods (2 ml) pod platform this device runs. Pod resistances available for that platform are 0.8Ω, 1.0Ω and 1.2Ω. No replacement pod product is listed for this device on this storefront yet."
+      "intro": "The 2 ml G2 cartridge uses replaceable coils: 0.8Ω and 1.0Ω Caliburn G coils and the 1.2Ω G2 coil. A shared empty cartridge with the original G is unconfirmed."
     },
     "devices/uwell/caliburn-g3": {
       "title": "Uwell Caliburn G3 compatible pods — which pods fit | PodLookup",
@@ -628,7 +628,7 @@
       "title": "Uwell Caliburn GK2 compatible pods — which pods fit | PodLookup",
       "description": "Which pods fit the Uwell Caliburn GK2: the pod platform it runs, the resistances available and the replacement pods listed in the PodLookup reference.",
       "heading": "Pods for the Uwell Caliburn GK2",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn GK2, so no pod can be stated as fitting it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn GK2. UWELL lists G 0.8Ω and 1.0Ω and G2 1.2Ω replaceable coils. Cross-model empty-cartridge fit remains unconfirmed."
     },
     "devices/uwell/caliburn-gk3": {
       "title": "Uwell Caliburn GK3 compatible pods — which pods fit | PodLookup",
@@ -646,31 +646,31 @@
       "title": "Uwell Caliburn GZ2 compatible pods — which pods fit | PodLookup",
       "description": "Which pods fit the Uwell Caliburn GZ2: the pod platform it runs, the resistances available and the replacement pods listed in the PodLookup reference.",
       "heading": "Pods for the Uwell Caliburn GZ2",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn GZ2, so no pod can be stated as fitting it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn GZ2. UWELL lists 0.8Ω and 1.0Ω G coils and the 1.2Ω G2 coil. Its model list does not identify a shared empty-cartridge SKU."
     },
     "devices/uwell/caliburn-gz2-cyber": {
       "title": "Uwell Caliburn GZ2 Cyber compatible pods — which pods fit | PodLookup",
       "description": "Which pods fit the Uwell Caliburn GZ2 Cyber: the pod platform it runs, the resistances available and the replacement pods listed in the PodLookup reference.",
       "heading": "Pods for the Uwell Caliburn GZ2 Cyber",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn GZ2 Cyber, so no pod can be stated as fitting it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn GZ2 Cyber. UWELL lists the 0.8Ω and 1.0Ω G coils and the 1.2Ω G2 coil. The compatibility panel does not establish reciprocal fit for every cartridge."
     },
     "devices/uwell/caliburn-tenet": {
       "title": "Uwell Caliburn Tenet compatible pods — which pods fit | PodLookup",
       "description": "Which pods fit the Uwell Caliburn Tenet: the pod platform it runs, the resistances available and the replacement pods listed in the PodLookup reference.",
       "heading": "Pods for the Uwell Caliburn Tenet",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn Tenet, so no pod can be stated as fitting it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn Tenet. UWELL lists 0.8Ω and 1.2Ω coils and compatibility with the 1.0Ω G coil. A shared empty cartridge across models is unconfirmed."
     },
     "devices/uwell/caliburn-tenet-koko": {
       "title": "Uwell Caliburn Tenet KOKO compatible pods — which pods fit | PodLookup",
       "description": "Which pods fit the Uwell Caliburn Tenet KOKO: the pod platform it runs, the resistances available and the replacement pods listed in the PodLookup reference.",
       "heading": "Pods for the Uwell Caliburn Tenet KOKO",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn Tenet KOKO, so no pod can be stated as fitting it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn Tenet KOKO. UWELL lists 0.8Ω and 1.0Ω G coils and the 1.2Ω G2 coil. A shared empty cartridge across models is unconfirmed."
     },
     "devices/uwell/caliburn-x": {
       "title": "Uwell Caliburn X compatible pods — which pods fit | PodLookup",
       "description": "Which pods fit the Uwell Caliburn X: the pod platform it runs, the resistances available and the replacement pods listed in the PodLookup reference.",
       "heading": "Pods for the Uwell Caliburn X",
-      "intro": "Compatibility information currently unavailable. We have no manufacturer-verified pod platform for the Uwell Caliburn X, so no pod can be stated as fitting it. Resistance specifications in device notes do not establish pod compatibility."
+      "intro": "Compatibility information currently unavailable. A shared pod platform is unconfirmed for the Uwell Caliburn X. UWELL lists the 0.8Ω Caliburn G coil, 1.2Ω Caliburn G2 coil and optional 1.0Ω Caliburn G coil. Cross-model cartridge fit remains UNKNOWN."
     },
     "devices/vaporesso/xros-3": {
       "title": "Vaporesso XROS 3 compatible pods — which pods fit | PodLookup",
@@ -740,9 +740,9 @@
     },
     "guides/caliburn-pods": {
       "title": "Which Uwell Caliburn pods fit each device? | PodLookup",
-      "description": "Four recorded Caliburn pod platforms cover GPP, A2, A3 and G / G2 devices — plus the original Caliburn, whose pod fit is not established by an official source.",
+      "description": "Compare the original Caliburn pod, the G2 cartridge and replaceable coils, and the GPP, A2 and A3 cartridge families. Check the exact model and resistance.",
       "heading": "Which Uwell Caliburn pods fit each device?",
-      "intro": "Four recorded Caliburn pod platforms cover GPP, A2, A3 and G / G2 devices — plus the original Caliburn, whose pod fit is not established by an official source."
+      "intro": "Compare the original Caliburn pod, the G2 cartridge and replaceable coils, and the GPP, A2 and A3 cartridge families. Check the exact model and resistance."
     },
     "guides/cross-platform-resistance": {
       "title": "Can XROS pods be used in an XLIM or Caliburn device? | PodLookup",
@@ -814,7 +814,7 @@
       "title": "Which devices use the Caliburn G / G2 Pods pod platform? | PodLookup",
       "description": "The devices recorded on the Caliburn G / G2 Pods pod platform, the pod resistances available for it and the replacement pods that fit them, from the PodLookup compatibility data.",
       "heading": "Caliburn G / G2 Pods pod platform",
-      "intro": "1 Uwell device in the PodLookup data runs the Caliburn G / G2 Pods pod platform: Uwell Caliburn G2. Pod resistances available for this platform are 0.8Ω, 1.0Ω and 1.2Ω. A pod is built for one platform only, so Caliburn G / G2 Pods pods do not fit devices that use a different platform."
+      "intro": "1 Uwell device in the PodLookup data runs the Caliburn G / G2 Pods pod platform: Uwell Caliburn G2. Replaceable coil resistance options for this system are 0.8Ω, 1.0Ω and 1.2Ω. A pod is built for one platform only, so Caliburn G / G2 Pods pods do not fit devices that use a different platform."
     },
     "platforms/caliburn-gpp-pods": {
       "title": "Which devices use the Caliburn GPP Pods pod platform? | PodLookup",

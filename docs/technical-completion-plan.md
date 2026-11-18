@@ -1,32 +1,27 @@
-# PodLookup technical completion plan
+# PodLookup technical release
 
-Updated 17 November 2026. Scope: informational content, accessibility, routing,
-data integrity and deployment verification. Commercial functionality is excluded.
-This consolidates the prior agreed plan; it is not a declaration of launch readiness.
+## Production baseline
 
-## Evidence and remaining work
+The production origin is https://podlookup.co.uk/. The catalogue contains 57 devices and the sitemap contains 142 distinct URLs including the homepage.
 
-| Workstream | Evidence at this review | Remaining acceptance condition |
-| --- | --- | --- |
-| Malformed query routing | PR #58 merged as 8420641a13d3ad51962326a1928d246a5251bd06; both GitHub browser workflows passed; unit regression failed before the fix and passes after it | Production parser confirmed present on 17 November |
-| Document language and encoding | PR #59 merged as c5d9b8137e01729d9c98a2f39a108e9110c8ef6a; 26 browser tests and the separate mobile/desktop suite passed, including JavaScript-disabled document checks | Production doctype, source language and early UTF-8 confirmed present on 17 November |
-| Navigation, keyboard and mobile | Existing accessibility and browser suites cover information dialogs, focus return, mobile navigation, skip link, home-section history and unknown-route metadata reset | Keep these checks green for every code change |
-| Static assets | Seven referenced local image files exist; inline executable JavaScript passes node --check | Production asset delivery and fresh performance measurements remain unverified |
-| Discovery files | HTTP audit at 2026-11-17T17:52:19Z: robots.txt and llms.txt text/plain; sitemap.xml application/xml; 128 unique entries | Recheck after deployment changes |
-| Initial route metadata | Same audit: home, About and Methodology return identical initial HTML with homepage canonical | Resolve initial/rendered metadata consistency while preserving existing URLs; verify browser output and initial responses separately |
-| Missing routes | Physical missing path returns HTTP 404; missing query route returns HTTP 200 and relies on client-side not-found/noindex handling | A true query-route HTTP 404 requires a server-side routing decision; client rendering cannot change an HTTP status |
-| Manufacturer evidence | DEVICE-SOURCE-REGISTER.md and uwell-caliburn-source-audit.md contain historical checks dated 4–5 November; register explicitly leaves model-level review incomplete | Verify remaining exact model/variant claims against official evidence; keep unestablished values UNKNOWN; do not stamp historical checks as fresh |
-| Search Console | No authenticated property or URL Inspection evidence obtained in this review | Inspect indexing, selected canonical and rendered HTML through the actual property; public search is not proof of non-indexing |
+- [Change 77](https://github.com/egrusta/podlookup/pull/77) supplies initial HTML titles, descriptions, canonical links, social tags, headings and introductions for all 141 internal sitemap routes. Four existing family aliases resolve to their established canonicals. Invalid query routes return HTTP 404 and noindex.
+- Production was verified across 157 GET cases covering all 141 routes, aliases, discovery files, the homepage, and invalid URLs. Additional HEAD requests returned 200 for About and 404 for a missing query route. The seven catalogue image files were verified against the site assets.
+- The reverse finder displays manufacturer names for each platform. Desktop and mobile browser regressions include basket closure, keyboard navigation, layout and reference navigation.
+- [Manufacturer register](DEVICE-SOURCE-REGISTER.md) covers all 57 current models. The [UWELL model table](uwell-caliburn-source-audit.md#current-catalogue-by-model) lists evidence and limits for all 38 UWELL entries. Pod fit, replaceable coils and model-specific cartridge resistance are recorded separately.
+- The full catalogue audits run during route generation and regression checks. Browsers can still request the same diagnostic results explicitly without running the checks on every visit.
 
-## Execution order
+## Repeatable checks
 
-1. Completed: tests and production source verification for the bounded routing/document fixes (#58 and #59). Live browser interaction also confirmed About → Methodology navigation, malformed query not-found rendering, and return to About.
-2. Resolve initial route metadata and missing-query HTTP handling with a reviewed hosting change; preserve data and URL compatibility.
-3. Finish model-level evidence review without expanding claims from family-level compatibility.
-4. Run the full browser suite, verify production assets/headers, and record fresh performance/accessibility results.
-5. Obtain actual Search Console evidence and record remaining externally dependent findings.
+| Check | Command or record |
+| --- | --- |
+| Static catalogue and sitemap | `npm run test:static` |
+| Every route and catalogue audit | `npm run check:routes` |
+| Browser regression suite | `npm run test:e2e` |
+| Public HTTP and canonical metadata for every route | `python3 scripts/audit_public_http.py --all-routes` |
+| Mobile and desktop lab performance, accessibility and SEO | The Informational quality audit workflow stores Lighthouse JSON reports, including a mobile run against the public About page. Scores are lab measurements for their stated page and run. |
 
-Do not mark the project as having only commerce left until these acceptance conditions
-are met. Historical PageSpeed claims and earlier assistant summaries are not current
-measurements. Existing open content PRs #53 and #54 must be reconciled with main before
-any merge; their existence is not evidence that their changes are still needed.
+## External verification
+
+Initial HTML and browser checks establish which canonical URLs PodLookup publishes. Indexing, the last Google crawl and Google’s selected canonical require authenticated URL Inspection on the verified domain. There is no authenticated inspection result in this release record.
+
+The public storefront is a demonstration. Supplier fulfilment, payment acceptance, age verification and transaction testing are tracked in the commercial launch workstream.
