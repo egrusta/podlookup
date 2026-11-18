@@ -3,11 +3,15 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "pretest:e2e": "npm run check:routes",
     "test:e2e": "playwright test",
-    "test:static": "node scripts/static-integrity.cjs"
+    "test:static": "node scripts/static-integrity.cjs",
+    "generate:routes": "node scripts/route-pages.cjs",
+    "check:routes": "node scripts/route-pages.cjs --check"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "jsdom": "26.1.0"
   }
 }
