@@ -21,7 +21,8 @@
 | Brand / device | OXVA Xlim C |
 | Pod/cartridge system | Dedicated Xlim C Cartridge & Coil System |
 | Source owner | OXVA (manufacturer) |
-| Official UK product page | https://www.oxva.com/uk/pages/xlimc |
+| Official product page | https://www.oxva.com/pages/xlimc |
+| Additional localized manufacturer specification | https://www.oxva.com/uk/pages/xlimc (Ukrainian localization) |
 | Additional manufacturer source | https://www.oxva.com/pages/xlim_prefilled_cartridge |
 | Checked | 4 November 2026 |
 | Evidence status | Manufacturer page inspected; exact facts below are supported |
@@ -96,7 +97,7 @@
 
 ## Register coverage
 
-This register now contains manufacturer source records for the Vaporesso XROS family, the standard OXVA XLIM cartridge family and the separate OXVA Xlim C cartridge-and-coil system. A separate [UWELL Caliburn source audit](uwell-caliburn-source-audit.md) records A2/A3 cartridge-family evidence, older G/G2 coil evidence and newer GPP G3/G4/G5 platform evidence, while deliberately leaving exact cartridge SKU direction unresolved where the manufacturer does not establish it. The remaining Uwell device and platform records in the embedded MASTER dataset still require model-level source review. Do not interpret a device's presence in the site as proof that every source has been audited. Existing UNKNOWN safeguards remain in force.
+This register now contains manufacturer source records for the Vaporesso XROS family, the standard OXVA XLIM cartridge family and the separate OXVA Xlim C cartridge-and-coil system. A separate [UWELL Caliburn source audit](uwell-caliburn-source-audit.md) records A2/A3 cartridge-family evidence, older G/G2 coil evidence and newer GPP G3/G4/G5 platform evidence, while deliberately leaving exact cartridge SKU direction unresolved where the manufacturer does not establish it. The current catalogue review below supersedes the open model-review item. Unknown part numbers, unlisted variants and regional kit contents remain explicit evidence limits.
 
 ## Review log
 
@@ -123,3 +124,14 @@ variants. This confirms the platform-level wording only; it does not complete a
 per-model/per-variant review or justify inferring legacy cartridge compatibility.
 Existing UNKNOWN fields remain unchanged. These three checks do not refresh the
 historical check dates for other source entries.
+
+
+## Current catalogue evidence
+
+All 57 device records now link to a manufacturer source from both the device and compatibility pages. The scope is the 57 models currently listed.
+
+- **38 UWELL records.** The [model evidence table](uwell-caliburn-source-audit.md#current-catalogue-by-model) identifies the supported claim and source for every listed model. For G3 ECO the primary evidence is UWELL’s platform page explicitly naming the model.
+- **8 Vaporesso records.** Exact model pages were checked for XROS 3, 4, 4 Mini, 5, 5 Mini, 6, 6 Mini and PRO 2. Each record links to its model page. The separate family chart above supplies additional evidence for shared platform fit.
+- **11 OXVA records.** The official FAQ names nine standard XLIM models. The Pro 2 has a separate exact-model source. XLIM C has a dedicated cartridge and three changeable coils, documented on the manufacturer’s model page and localized specification. The Pro 2 page lists a 0.4Ω cartridge. The FAQ separately names five devices for its specific 0.4Ω Top Fill version. The exact-version qualification stays visible in both finder directions.
+
+A model name in a platform list verifies that relationship only. Published examples, laboratory samples and kit components do not establish a complete list of compatible parts.

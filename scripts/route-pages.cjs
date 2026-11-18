@@ -23,6 +23,10 @@ async function main() {
   const { document } = window;
   await new Promise(resolve => window.addEventListener('load', resolve, { once: true }));
 
+  // Keep full-catalogue diagnostics in every build check, off the visitor's startup path.
+  assert.deepEqual(Array.from(window.__geoAudit.errors), [], 'Entity integrity audit');
+  assert.deepEqual(Array.from(window.__masterDatasetAuditResult.errors), [], 'Catalogue integrity audit');
+
   function render(path) {
     window.history.replaceState(null, '', '?p=' + path);
     window.dispatchEvent(new window.PopStateEvent('popstate'));

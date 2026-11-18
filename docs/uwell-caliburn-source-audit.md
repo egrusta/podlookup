@@ -132,7 +132,7 @@
 
 **A3 facts supported**
 - The A3 product page specifies a 1.0Ω CALIBURN A3 refillable pod.
-- The A3S product page explicitly says A3S is compatible with the A3 pod and lists a 0.8Ω A3S pod (pre-installed) and a 1.0Ω A3 pod (spare).
+- The A3S product page explicitly says A3S is compatible with the A3 pod and lists a 0.8Ω A3S pod (pre-installed) and a 1.0Ω A3S pod (spare).
 - The AK3 product page specifies a 1.0Ω CALIBURN A3 refillable pod.
 - The AZ3 product page's wide-compatibility panel lists A3, A3S, AK3 and AZ3 together, and its pod specifications list 0.8Ω and 1.0Ω A3 refillable pod options.
 - UWELL's AZ3 launch material also refers to AZ3 as the AZ3 (Grace) device. Treat Grace as a naming/marketing alias only where the model record supports it.
@@ -199,3 +199,49 @@ Where the manufacturer explicitly lists G-series coil resistance options, those 
 | 5 November 2026 | UWELL G/G2 family | Manufacturer pages confirm G-series coil support for several omitted devices; exact cartridge interchangeability remains a separate question and is not inferred. |
 | 5 November 2026 | UWELL GPP G3/G4/G5 family | Added official GPP platform and model-page evidence; kept cartridge-generation and SKU direction distinctions explicit. |
 | 5 November 2026 | UWELL A2/A3 families | Added official A2/A2S/AK2 and A3/A3S/AK3/AZ3 evidence, preserving model-specific resistance distinctions. |
+
+
+## Current catalogue by model
+
+All 38 UWELL records in the catalogue were reviewed. Each row describes the scope of the linked manufacturer evidence. The [G Pod Platform list](https://www.myuwell.com/g-pod-platform) also names G3 Lite and G3 ECO. Listed kit examples and platform-wide options do not establish an exhaustive device-specific range.
+
+| Model | Confirmed relationship and limits | Manufacturer evidence |
+| --- | --- | --- |
+| Caliburn | The original model uses a dedicated 2 ml refillable pod. This page gives no resistance or cross-model cartridge fit. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn) |
+| Caliburn G2 | The 2 ml G2 cartridge uses replaceable coils: 0.8Ω and 1.0Ω Caliburn G coils and the 1.2Ω G2 coil. A shared empty cartridge with the original G is unconfirmed. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g2) |
+| Caliburn G3 | The specifications list G3 integrated-coil cartridges in 0.6Ω, 0.9Ω and 1.2Ω. UWELL also lists G3 on its G Pod Platform. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g3) |
+| Caliburn GK3 | UWELL lists G3 integrated-coil side-refill cartridges in 0.6Ω, 0.9Ω and 1.2Ω for the GK3. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-gk3) |
+| Caliburn GK3 Tenet | The model page identifies GPP compatibility. UWELL also names GK3 Tenet in the platform list. An exact resistance list is unconfirmed. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-gk3-tenet) |
+| Caliburn G5 Lite KOKO | The model page confirms GPP compatibility and describes the 0.4Ω pod. It does not give a complete model-specific resistance list. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g5-lite-koko) |
+| Caliburn G5 Lite | UWELL presents G5 Lite and Lite SE together, confirms GPP compatibility and describes a 0.4Ω pod. Exact kit contents by market are unconfirmed. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g5-lite-g5-lite-se) |
+| Caliburn G5 Lite SE | UWELL names the SE on its joint G5 Lite page and in its GPP list. The joint page describes a 0.4Ω pod. Individual UK kit contents are unconfirmed. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g5-lite-g5-lite-se) |
+| Caliburn G4 Pro KOKO | UWELL explicitly supports both previous and upgraded GPP cartridges on the G4 Pro KOKO. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g4-pro-koko) |
+| Caliburn G4 Classic | UWELL identifies GPP cartridge compatibility for G4 Classic. The platform list does not identify individual UK kit contents. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g4-classic) |
+| Caliburn G4 Pro | UWELL confirms both previous and upgraded GPP cartridges on G4 Pro. It also confirms upgraded GPP cartridges fit the G3 series. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g4-pro) |
+| Caliburn G4 | UWELL confirms previous and upgraded GPP cartridges on G4 and specifies that upgraded GPP cartridges can also be used on G3-series devices. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g4) |
+| Caliburn G4 Mini | UWELL names the Mini in its joint G4 announcement and confirms GPP compatibility. An exact Mini resistance list is unconfirmed. | [Manufacturer page](https://www.myuwell.com/news/new-products/CALIBURN-G4-miniG4) |
+| Caliburn G3 Pro KOKO | The model page states compatibility with all Caliburn G3 cartridges and describes a 0.4Ω variant. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g3-pro-koko) |
+| Caliburn G3 Lite KOKO | The model page states compatibility with all G3 cartridges and gives a 0.6Ω example. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g3-lite-koko) |
+| Caliburn G3 Pro | The G3 Pro page confirms the full G3 cartridge family and describes a 0.4Ω variant. Regional kit contents are unconfirmed. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g3-pro) |
+| Caliburn G3 Lite | UWELL names G3 Lite in the compatible-device list for the G Pod Platform. An exact resistance list is unconfirmed. | [Model page](https://www.myuwell.com/caliburn/caliburn-g3-lite) · [Named platform listing](https://www.myuwell.com/g-pod-platform) |
+| Caliburn G3 ECO | UWELL explicitly names G3 ECO in its G Pod Platform list. The source establishes the model's platform only. | [Named platform listing](https://www.myuwell.com/g-pod-platform) |
+| Caliburn G5 KOKO | UWELL specifies operating ranges for 0.4Ω, 0.6Ω, 0.9Ω and 1.2Ω cartridges on the G5 KOKO and confirms GPP compatibility. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g5-koko) |
+| Caliburn G5 | The model page identifies GPP Alpha and GPP compatibility. Its laboratory example does not identify all model-specific variants or UK kit contents. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g5) |
+| Caliburn G5 Pro | The model page identifies GPP Alpha and GPP compatibility. An exhaustive model-specific resistance list is unconfirmed. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g5-pro) |
+| Caliburn G5 Vision | The model page identifies GPP Alpha and GPP compatibility. The laboratory example is not a complete resistance list. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-g5-vision) |
+| Caliburn Air | UWELL states that all GPP cartridges are compatible with the Air and identifies GPP Alpha. UK kit contents and exact device resistances are unconfirmed. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-air) |
+| Caliburn Air R | UWELL confirms GPP compatibility and cites a 0.6Ω cartridge in a laboratory test. The test does not specify UK kit contents. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-air-r) |
+| Caliburn GZ2 | UWELL lists 0.8Ω and 1.0Ω G coils and the 1.2Ω G2 coil. Its model list does not identify a shared empty-cartridge SKU. | [Manufacturer page](https://www.myuwell.com/caliburn/uwell-caliburn-gz2) |
+| Caliburn GZ2 Cyber | UWELL lists the 0.8Ω and 1.0Ω G coils and the 1.2Ω G2 coil. The compatibility panel does not establish reciprocal fit for every cartridge. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-gz2-cyber) |
+| Caliburn GK2 | UWELL lists G 0.8Ω and 1.0Ω and G2 1.2Ω replaceable coils. Cross-model empty-cartridge fit remains unconfirmed. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-gk2) |
+| Caliburn Tenet | UWELL lists 0.8Ω and 1.2Ω coils and compatibility with the 1.0Ω G coil. A shared empty cartridge across models is unconfirmed. | [Manufacturer page](https://www.myuwell.com/products/pod-system/caliburn-tenet.html) |
+| Caliburn Tenet KOKO | UWELL lists 0.8Ω and 1.0Ω G coils and the 1.2Ω G2 coil. A shared empty cartridge across models is unconfirmed. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-tenet-koko) |
+| Caliburn X | UWELL lists the 0.8Ω Caliburn G coil, 1.2Ω Caliburn G2 coil and optional 1.0Ω Caliburn G coil. Cross-model cartridge fit remains UNKNOWN. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-x) |
+| Caliburn Explorer | UWELL lists G 0.8Ω and G2 1.2Ω coils for the dual-channel Explorer. Its dual cartridge has no verified cross-model fit. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-explorer) |
+| Caliburn A2 | UWELL specifies the 0.9Ω A2 refillable pod. The A2S 1.2Ω side-refill pod is unconfirmed for this model. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-a2) |
+| Caliburn A2S | UWELL lists the 1.2Ω A2S side-refill pod and explicitly supports the 0.9Ω A2 refillable pod. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-a2s) |
+| Caliburn AK2 | UWELL identifies the shared A2 cartridge and its 0.9Ω specification. A2S 1.2Ω compatibility is unconfirmed for AK2. | [Manufacturer page](https://www.myuwell.com/products/pod-system/caliburn-ak2.html) |
+| Caliburn A3 | UWELL specifies the 1.0Ω A3 refillable pod for A3. The A3 family also contains 0.8Ω variants. Its own specification establishes 1.0Ω. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-a3) |
+| Caliburn A3S | UWELL lists 0.8Ω and 1.0Ω A3S refillable pods and separately states that the A3 pod fits the A3S. | [Manufacturer page](https://www.myuwell.com/caliburn/uwell-caliburn-a3s) |
+| Caliburn AK3 | UWELL specifies the 1.0Ω Caliburn A3 refillable pod for AK3. | [Manufacturer page](https://www.myuwell.com/products/pod-system/caliburn-ak3.html) |
+| Caliburn AZ3 | UWELL lists 0.8Ω and 1.0Ω A3 refillable pods for AZ3. Its compatibility panel names A3, A3S, AK3 and AZ3. | [Manufacturer page](https://www.myuwell.com/caliburn/caliburn-az3) |
