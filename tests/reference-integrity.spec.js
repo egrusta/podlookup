@@ -15,8 +15,13 @@ test('reference finder preserves exact model restrictions in both directions', a
   await page.goto('/?p=finder');
   await page.locator('#podFinderDevice').selectOption('oxva|xlim-pro-2');
   await expect(page.locator('#podFinderResult')).toContainText('does not confirm that particular variant');
+  const options = page.locator('#podFinderPlatform option:not([value=""])');
+  for (const text of await options.allTextContents()) {
+    expect(text).toMatch(/^(Vaporesso|OXVA|Uwell) — \S/);
+  }
   await page.locator('#podFinderPlatform').selectOption('xlim-pods');
   await page.locator('#podFinderResistance').selectOption('0.4Ω');
+  await expect(page.locator('#podFinderResult')).toContainText('OXVA Xlim Pods');
   await expect(page.locator('#podFinderResult')).toContainText('does not verify a particular cartridge variant');
   await expect(page.locator('#podFinderResult')).toContainText('does not confirm that particular variant');
   await expect(page.locator('#geoView')).not.toContainText('same platform means same pods');

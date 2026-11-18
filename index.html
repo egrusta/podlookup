@@ -3786,7 +3786,6 @@ strong{font-weight:600; color:#fff}
   var UNKNOWN = "Compatibility information currently unavailable.";
 
   var ENTITY = { brands: [], devices: [], platforms: [], errors: [], warnings: [] };
-  var DEFAULT_TITLE = "", DEFAULT_DESC = "";
 
   function pageBase(){
     var path = (window.location.pathname || "/").replace(/\/+$/, "");
@@ -3841,7 +3840,7 @@ strong{font-weight:600; color:#fff}
         /* A device with no verified pod platform (e.g. the original Caliburn)
            contributes no platform page — UNKNOWN is not turned into a platform. */
         if (pkey){
-          if (!platforms[pslug]) platforms[pslug] = { key: pkey, slug: pslug, devices: [], podProducts: [] };
+          if (!platforms[pslug]) platforms[pslug] = { key: pkey, slug: pslug, brand: bname, devices: [], podProducts: [] };
           platforms[pslug].devices.push(row);
         }
       });
@@ -4005,11 +4004,14 @@ strong{font-weight:600; color:#fff}
     scheduleActiveNav();
   }
 
-  /* ---- metadata (in-page) — the server-side twin lives in main.pjs $meta.dynamic ---- */
-  function captureMetaDefaults(){
-    DEFAULT_TITLE = document.title && document.title !== "Perchance" ? document.title : SITE_TITLE;
-    var m = document.querySelector('meta[name="description"]');
-    DEFAULT_DESC = (m && m.getAttribute("content")) || SITE_DESC;
+  /* The preview and www hosts share the public canonical. Navigation stays on this origin. */
+  function publicMetaUrl(href){
+    if (!href) return "";
+    var url = new URL(href, location.href);
+    if (url.hostname === "www.podlookup.co.uk" || /(^|\.)podlookup\.pages\.dev$/.test(url.hostname)) {
+      url.host = "podlookup.co.uk";
+    }
+    return url.href;
   }
   function metaEl(attr, key, create){
     /* Update the server-rendered default tag instead of creating a second copy.
@@ -4043,12 +4045,12 @@ strong{font-weight:600; color:#fff}
     el.setAttribute("href", href);
   }
   function setGeoMeta(meta){
-    var title = (meta && meta.title) || DEFAULT_TITLE;
-    var desc = (meta && meta.description) || DEFAULT_DESC;
-    var url = (meta && meta.url) || "";
+    var title = (meta && meta.title) || SITE_TITLE;
+    var desc = (meta && meta.description) || SITE_DESC;
+    var url = publicMetaUrl(meta && meta.url);
     document.title = title;
     putMeta("name", "description", desc);
-    putCanonical(meta ? url : pageBase());
+    putCanonical(meta ? url : publicMetaUrl(pageBase()));
     putMeta("property", "og:title", title);
     putMeta("property", "og:description", desc);
     putMeta("property", "og:url", url);
@@ -6519,11 +6521,11 @@ function deviceFaqSchemaNodes(d,b){
       var noindexRoutes = routeRenderers.filter(function(fn){ return /noindex/i.test(String(fn)); });
       if (noindexRoutes.length !== 1 || noindexRoutes[0] !== renderGeoNotFound)
         err("Exactly one route (the not-found view) may set noindex; found " + noindexRoutes.length + ".");
-      var liveTitle = (document.title && document.title !== "Perchance") ? document.title : DEFAULT_TITLE;
-      if (!SITE_TITLE || liveTitle !== SITE_TITLE) err("The served $meta title does not match its in-page mirror (found \"" + liveTitle + "\").");
-      var descEl0 = document.head.querySelector('meta[name="description"]');
-      var liveDesc = (descEl0 && descEl0.getAttribute("content")) || DEFAULT_DESC;
-      if (!SITE_DESC || liveDesc !== SITE_DESC) err("The served $meta description does not match its in-page mirror.");
+      if (!parseQuery(location.search).p){
+        if (document.title !== SITE_TITLE) err("The homepage title differs from its reference title.");
+        var descEl0 = document.head.querySelector('meta[name="description"]');
+        if (!descEl0 || descEl0.content !== SITE_DESC) err("The homepage description differs from its reference description.");
+      }
       var snap = { title: document.title, els: $$("[data-geo-meta]").map(function(el){
         return { tag: el.tagName, name: el.getAttribute("name"), prop: el.getAttribute("property"), content: el.getAttribute("content"), href: el.getAttribute("href") };
       }) };
@@ -6532,9 +6534,9 @@ function deviceFaqSchemaNodes(d,b){
       var samplePath = ENTITY.brands[0] ? "brands/" + ENTITY.brands[0].slug : "devices";
       setGeoMeta({ title: "probe", description: "probe", url: geoHref(samplePath) });
       if (robotsMeta()) err("A real canonical route emits a robots meta directive (accidental noindex risk).");
-      if (!canonMeta() || canonMeta().getAttribute("href") !== geoHref(samplePath)) err("A real canonical route does not emit its canonical <link>.");
+      if (!canonMeta() || canonMeta().getAttribute("href") !== publicMetaUrl(geoHref(samplePath))) err("A real canonical route does not emit its canonical <link>.");
       setGeoMeta(null);
-      if (!canonMeta() || canonMeta().getAttribute("href") !== pageBase()) err("The home view does not emit its canonical <link> at pageBase().");
+      if (!canonMeta() || canonMeta().getAttribute("href") !== publicMetaUrl(pageBase())) err("The home view does not emit its canonical <link>.");
       setGeoMeta({ title: "probe", description: "probe", url: "", noindex: true });
       if (canonMeta()) err("The not-found view emits a canonical <link>, which it should not.");
       if (!robotsMeta() || !/noindex/i.test(robotsMeta().getAttribute("content") || "")) err("The not-found view does not emit a noindex directive.");
@@ -6970,7 +6972,6 @@ function deviceFaqSchemaNodes(d,b){
     if (podsWorkGuide) podsWorkGuide.body = podsWorkGuideBody();
     var whichPodGuide = GUIDES.filter(function(g){ return g.id === "which-pod"; })[0];
     if (whichPodGuide) whichPodGuide.body = whichPodGuideBody();
-    captureMetaDefaults();
     var heroProduct = PRODUCTS.filter(function(p){ return p.id === "xros-5"; })[0] || PRODUCTS[0];
     $("#heroArt").setAttribute("style", accentVars(heroProduct.accent));
     $("#heroArt").innerHTML = floatArt(heroProduct, true);
